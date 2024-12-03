@@ -5,16 +5,11 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        sans: [
-          "Inter",
-          "ui-sans-serif",
-          "system-ui",
-          "sans-serif",
-          "Apple Color Emoji",
-          "Segoe UI Emoji",
-          "Segoe UI Symbol",
-          "Noto Color Emoji",
-        ],
+        header: ["QuiapoFree"],
+        primary: ["Poppins"],
+      },
+      colors: {
+        background: "#FAEDC8",
       },
     },
   },

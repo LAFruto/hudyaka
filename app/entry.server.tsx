@@ -5,6 +5,7 @@
  */
 
 import { PassThrough } from "node:stream";
+import * as serverSharp from "sharp";
 
 import type { AppLoadContext, EntryContext } from "@remix-run/node";
 import { createReadableStreamFromReadable } from "@remix-run/node";
@@ -138,3 +139,5 @@ function handleBrowserRequest(
     setTimeout(abort, ABORT_DELAY);
   });
 }
+
+export const sharp = serverSharp.default;
