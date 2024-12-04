@@ -5,7 +5,7 @@ interface PatternProps {
 }
 
 export default function Pattern({ flip = false }: PatternProps) {
-  const colors = ["#8B051C", "#F8A95E", "#11439F"];
+  const colors = ["#A30420", "#FF9939", "#1E40AF"];
 
   return (
     <div

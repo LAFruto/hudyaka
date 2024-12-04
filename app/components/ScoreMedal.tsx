@@ -1,17 +1,30 @@
+import { cn } from "~/lib/util";
 import { MedalColor } from "./home/Leaderboard";
 import SerratedBanner from "./ui/SerratedBanner";
 
 interface ScoreMedalProps {
   color: MedalColor;
+  position: string;
 }
 
-const ScoreMedal = ({ color }: ScoreMedalProps) => {
+const ScoreMedal = ({ color, position }: ScoreMedalProps) => {
   return (
     <div className="flex flex-col relative">
-      <div className="w-[100%] aspect-square max-w-[24rem] rounded-full border-4 border-blue-950 bg-white z-10 mx-auto"></div>
+      <div
+        className={cn(
+          "w-[100%] aspect-square max-w-[24rem] rounded-full border-8 bg-white z-10 mx-auto",
+          color == "blue"
+            ? "border-blue-900"
+            : color == "yellow"
+            ? "border-yellow-600"
+            : color == "red"
+            ? "border-red-700"
+            : ""
+        )}
+      ></div>
       <div className="absolute z-20 w-8 h-8 rounded-full bg-red-500 bottom-0 self-center translate-y-3">
         <p className="flex h-full items-center justify-center text-xl font-bold text-white">
-          1
+          {position}
         </p>
       </div>
       <div className="relative w-full self-start ">

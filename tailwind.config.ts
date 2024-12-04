@@ -10,6 +10,10 @@ export default {
       },
       colors: {
         background: "#FAEDC8",
+        yellow: {
+          500: "#FF9000",
+          600: "#FFAC5E",
+        },
       },
     },
   },

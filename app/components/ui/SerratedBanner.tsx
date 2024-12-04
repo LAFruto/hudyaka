@@ -11,7 +11,15 @@ const SerratedBanner = ({ color }: SerratedBannerProps) => {
       <g filter="url(#filterMedal)">
         <path
           d="M4 0H112V180.169L96.1506 130.432L78.3013 182L59.0962 130.432L41.6987 180.169L22.7197 130.432L6 180.169V0Z"
-          fill={cn(color == "red" ? "#A30420" : "#042454")}
+          fill={cn(
+            color == "blue"
+              ? "#042454"
+              : color === "yellow"
+              ? "#FF9000"
+              : color === "red"
+              ? "#A30420"
+              : ""
+          )}
         />
         <path
           d="M4 0H112V180.169L96.1506 130.432L78.3013 182L59.0962 130.432L41.6987 180.169L22.7197 130.432L6 180.169V0Z"

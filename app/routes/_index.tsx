@@ -1,8 +1,10 @@
 import type { MetaFunction } from "@remix-run/node";
 import EventCarousel from "~/components/EventCarousel";
-import HeroCarousel from "~/components/home/HeroCarousel";
+import Hero from "~/components/home/Hero";
 import Leaderboard from "~/components/home/Leaderboard";
 import Footer from "~/components/layout/Footer";
+import SportsCarousel from "~/components/SportsCarousel";
+import Pattern from "~/components/ui/Pattern";
 
 export const meta: MetaFunction = () => {
   return [
@@ -17,10 +19,11 @@ export const meta: MetaFunction = () => {
 
 export default function Index() {
   return (
-    <div className="max-container flex flex-col overflow-hidden">
-      <HeroCarousel />
+    <div className="flex flex-col overflow-hidden">
+      <Hero />
       <Leaderboard />
       <EventCarousel />
+      <SportsCarousel />
       <Footer />
     </div>
   );
