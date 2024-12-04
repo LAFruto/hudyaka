@@ -1,28 +1,28 @@
-import Arrow from "./Arrow";
-import Festival from "./Festival";
-import { Image } from "./Image";
+import Arrow from "../icons/Arrow";
+import Ball from "../icons/Ball";
+import { Image } from "../Image";
 
-const EventCarousel = () => {
+const Sports = () => {
   return (
     <section
-      id="events"
-      className="bg-yellow-500 w-full padding-container mx-auto py-24"
+      id="sports"
+      className="bg-red-800  w-full padding-container mx-auto py-24"
     >
       <div className="max-container padding-container">
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-          <div className="flex flex-col items-center justify-center text-white relative bg-yellow-600 rounded-xl">
-            <div className="w-[100px] h-[100px] sm:w-[160px] sm:h-[160px]">
-              <Festival color="white" />
+          <div className="flex flex-col items-center justify-center rounded-xl bg-red-700 text-white relative">
+            <div className="w-[100px] h-[100px] md:w-[150px] md:h-[150px]">
+              <Ball color="white" />
             </div>
             <div className="flex flex-col items-center justify-center text-white w-full gap-2">
               <p className="font-bold text-3xl sm:text-4xl lg:text-5xl">
-                Events
+                Sports
               </p>
-              <p className="text-base sm:text-lg">Remaining Events: 1</p>
+              <p className="text-base sm:text-lg">Remaining Sports: 1</p>
             </div>
           </div>
 
-          {[...Array(10)].map((_, index) => (
+          {[...Array(7)].map((_, index) => (
             <div
               key={index}
               className="bg-white rounded-xl p-4 aspect-square flex items-center justify-between flex-col"
@@ -58,4 +58,4 @@ const EventCarousel = () => {
   );
 };
 
-export default EventCarousel;
+export default Sports;

@@ -1,6 +1,6 @@
 import { cn } from "~/lib/util";
-import { MedalColor } from "./home/Leaderboard";
-import SerratedBanner from "./ui/SerratedBanner";
+import { MedalColor } from "./Leaderboard";
+import SerratedBanner from "../ui/SerratedBanner";
 
 interface ScoreMedalProps {
   color: MedalColor;

@@ -1,14 +1,12 @@
-"use client";
-
 import { EmblaOptionsType } from "embla-carousel";
 import Autoplay from "embla-carousel-autoplay";
 import Fade from "embla-carousel-fade";
 import useEmblaCarousel from "embla-carousel-react";
 import React, { useCallback, useEffect } from "react";
 import { EVENTS_CAROUSEL } from "~/constants";
-import { DotButton, useDotButton } from "./ui/EmblaCarouselDotButton";
-import { Image } from "./Image";
-import Arrow from "./Arrow";
+import { Image } from "../Image";
+import Arrow from "../icons/Arrow";
+import { DotButton, useDotButton } from "../ui/EmblaCarouselDotButton";
 
 const OPTIONS: EmblaOptionsType = { loop: true };
 const AUTOPLAY_DELAY = 5000;

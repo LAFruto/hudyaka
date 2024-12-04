@@ -1,7 +1,7 @@
 import { cn } from "~/lib/util";
-import ScoreMedal from "../ScoreMedal";
+import ScoreMedal from "./ScoreMedal";
 import TeamScoreCard from "../TeamScoreCard";
-import Medal from "../Medal";
+import Medal from "../icons/Medal";
 
 export type MedalColor = "blue" | "red" | "yellow";
 

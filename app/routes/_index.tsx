@@ -1,10 +1,9 @@
 import type { MetaFunction } from "@remix-run/node";
-import EventCarousel from "~/components/EventCarousel";
+import EventCarousel from "~/components/home/Events";
 import Hero from "~/components/home/Hero";
 import Leaderboard from "~/components/home/Leaderboard";
+import SportsCarousel from "~/components/home/Sports";
 import Footer from "~/components/layout/Footer";
-import SportsCarousel from "~/components/SportsCarousel";
-import Pattern from "~/components/ui/Pattern";
 
 export const meta: MetaFunction = () => {
   return [
