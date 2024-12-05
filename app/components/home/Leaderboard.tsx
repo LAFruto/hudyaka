@@ -16,8 +16,8 @@ const Leaderboard = () => {
             </div>
             <p className="text-4xl font-semibold text-white">Leaderboard</p>
           </div>
-          <div className="grid grid-cols-3 gap-x-[8%] md:gap-x-[10%] md:px-[10%] mt-8 lg:mt-0">
-            {[1, 2, 3].map((position, index) => (
+          <div className="grid grid-cols-4 gap-x-[8%] md:gap-x-[10%] md:px-[10%] mt-8 lg:mt-0">
+            {[1, 2, 3, 4].map((position, index) => (
               <div key={index}>
                 <div className={cn(position % 2 === 1 && "py-10")} />
                 <div key={position}>

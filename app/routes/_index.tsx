@@ -1,9 +1,11 @@
 import type { MetaFunction } from "@remix-run/node";
+import { useLoaderData } from "@remix-run/react";
 import EventCarousel from "~/components/home/Events";
 import Hero from "~/components/home/Hero";
 import Leaderboard from "~/components/home/Leaderboard";
 import SportsCarousel from "~/components/home/Sports";
 import Footer from "~/components/layout/Footer";
+import { getActivitiesByType } from "~/models";
 
 export const meta: MetaFunction = () => {
   return [
@@ -16,13 +18,25 @@ export const meta: MetaFunction = () => {
   ];
 };
 
+export const loader = async () => {
+  const events = await getActivitiesByType("event");
+  const sports = await getActivitiesByType("sport");
+
+  return Response.json({
+    events: events,
+    sports: sports,
+  });
+};
+
 export default function Index() {
+  const { events, sports } = useLoaderData<typeof loader>();
+
   return (
     <div className="flex flex-col overflow-hidden">
       <Hero />
       <Leaderboard />
-      <EventCarousel />
-      <SportsCarousel />
+      <EventCarousel events={events} />
+      <SportsCarousel sports={sports} />
       <Footer />
     </div>
   );

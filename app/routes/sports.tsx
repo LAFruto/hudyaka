@@ -1,7 +1,7 @@
 import { Outlet } from "@remix-run/react";
 import Footer from "~/components/layout/Footer";
 
-export function EventsLayout() {
+export function SportsLayout() {
   return (
     <>
       <Outlet />
