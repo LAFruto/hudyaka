@@ -1,22 +1,22 @@
 import { cn } from "~/lib/util";
-import { MedalColor } from "../home/Leaderboard";
+import { TempTeamRank } from "~/types";
 
 interface SerratedBannerProps {
-  color: MedalColor;
+  team: TempTeamRank;
 }
 
-const SerratedBanner = ({ color }: SerratedBannerProps) => {
+const SerratedBanner = ({ team }: SerratedBannerProps) => {
   return (
     <svg viewBox="2 0 112 200" fill="none" xmlns="http://www.w3.org/2000/svg">
       <g filter="url(#filterMedal)">
         <path
           d="M4 0H112V180.169L96.1506 130.432L78.3013 182L59.0962 130.432L41.6987 180.169L22.7197 130.432L6 180.169V0Z"
           fill={cn(
-            color == "blue"
+            team.rank == 2
               ? "#042454"
-              : color === "yellow"
+              : team.rank === 1
               ? "#FF9000"
-              : color === "red"
+              : team.rank === 3
               ? "#A30420"
               : ""
           )}

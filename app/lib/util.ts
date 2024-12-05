@@ -1,10 +1,108 @@
 import { ClassValue, clsx } from "clsx";
 import { twMerge } from "tailwind-merge";
-import { EventStatus } from "~/types";
+import { EventStatus, TempTeam, TempTeamRank } from "~/types";
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }
+
+export const getPodiumColor = (position: number): string => {
+  switch (position) {
+    case 1:
+      return "border-yellow-600"; // First
+    case 2:
+      return "border-blue-900"; // Second
+    case 3:
+      return "border-red-700"; // Third
+    default:
+      return "border-blue-500"; // Fourth Below...
+  }
+};
+
+export const getListColor = (position: number): string => {
+  switch (position) {
+    case 1:
+      return "bg-yellow-600"; // First
+    case 2:
+      return "bg-blue-900"; // Second
+    case 3:
+      return "bg-red-700"; // Third
+    default:
+      return "bg-blue-500"; // Fourth Below...
+  }
+};
+
+export const attachRanks = (teams: TempTeam[]): TempTeamRank[] => {
+  // First, sort the teams by score in descending order
+  const sortedTeams = [...teams].sort((a, b) => b.score - a.score);
+
+  // Initialize variables
+  let rank = 1;
+  let lastScore: number | null = null;
+  const rankedTeams: TempTeamRank[] = [];
+
+  // Loop through the sorted teams to assign ranks
+  for (let i = 0; i < sortedTeams.length; i++) {
+    const team = sortedTeams[i];
+
+    // If the score is the same as the last team's score, assign the same rank
+    if (team.score === lastScore) {
+      rankedTeams.push({ ...team, rank: rank });
+    } else {
+      // Otherwise, increment the rank and assign it to the team
+      rank = i + 1; // Rank is based on the index + 1 (for 1-based ranking)
+      rankedTeams.push({ ...team, rank: rank });
+    }
+
+    // Update the last score
+    lastScore = team.score;
+  }
+
+  return rankedTeams;
+};
+
+export const getLeaderboardLayout = (
+  teams: TempTeam[]
+): [TempTeamRank[], TempTeamRank[]] => {
+  const rankedTeams = attachRanks(teams);
+  // Sort teams by score in descending order
+  const sortedTeams = [...rankedTeams].sort((a, b) => b.score - a.score);
+
+  const podium: TempTeamRank[] = [];
+  const list: TempTeamRank[] = [];
+
+  let temp: TempTeamRank[] = [];
+  let podiumFull = false; // Flag to indicate if the podium is full
+
+  for (const team of sortedTeams) {
+    if (!podiumFull) {
+      // Accumulate teams with the same score
+      if (temp.length === 0 || team.score === temp[0].score) {
+        temp.push(team);
+      } else {
+        // When score changes, check if we can add the accumulated teams to the podium
+        if (podium.length + temp.length <= 3) {
+          podium.push(...temp);
+        } else {
+          // If adding this group exceeds the podium limit, move the extra teams to the list
+          list.push(...temp);
+          podiumFull = true; // Set the flag to true to indicate that podium is full
+        }
+        temp = [team]; // Start a new group for the next score
+      }
+    } else {
+      list.push(team);
+    }
+  }
+
+  if (temp.length > 0) {
+    list.push(...temp);
+  }
+
+  const sortedList = [...list].sort((a, b) => b.score - a.score);
+
+  return [podium, sortedList];
+};
 
 export function getEventStatus(
   start: Date,

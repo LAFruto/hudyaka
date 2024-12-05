@@ -19,9 +19,6 @@ const Hero = () => {
               />
             </div>
             <div className="flex flex-col gap-4 justify-end ">
-              <span className="md:inline-flex text-white font-bold bg-blue-800 rounded-lg px-4 py-2 text-base sm:text-xl w-full flex justify-center text-center md:text-start md:w-auto text-nowrap">
-                Mapúa MCM Foundation Week • 2024 - 2025
-              </span>
               <div>
                 <Image
                   src="/hudyaka_text.svg"
@@ -31,6 +28,9 @@ const Hero = () => {
                   className="object-contain overflow-hidden"
                 />
               </div>
+              <span className="md:inline-flex text-white font-bold bg-blue-800 rounded-tr-3xl rounded-bl-3xl px-4 py-2 text-base sm:text-xl w-full flex justify-center text-center md:text-start md:w-auto text-nowrap">
+                MAPÚA MCM FOUNDATION WEEK
+              </span>
             </div>
           </div>
           <div className="rounded-3xl bg-red-500 h-[30vh] md:h-3/4">

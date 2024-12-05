@@ -46,3 +46,17 @@ export type Person = {
 export type EventStatus =
   | { type: "upcoming" | "ongoing" | "finished"; message: string }
   | { type: "countdown"; timeUntilStart: number };
+
+// TEMP
+export type TempTeam = {
+  teamNumber: number;
+  teamName: string;
+  score: number;
+};
+
+export type TempTeamRank= TempTeam & {
+  rank: number;
+};
+
+// POLISH
+export type MedalColor = "blue" | "yellow" | "red" | "light-blue";

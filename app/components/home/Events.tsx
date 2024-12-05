@@ -69,11 +69,11 @@ const Events = ({ events }: EventsProps) => {
                     />
                   ) : eventStatus.type === "upcoming" ||
                     eventStatus.type === "ongoing" ? (
-                    <div className="flex justify-center text-center self-center px-4 lg:px-6 py-2 w-full text-blue-800 border  md:text-lg font-semibold rounded-full cursor-pointer group">
+                    <div className="flex justify-center text-center self-center px-4 lg:px-6 py-1 w-full text-blue-800 border md:text-lg truncate text-nowrap font-semibold rounded-full cursor-pointer group">
                       {eventStatus.message}
                     </div>
                   ) : (
-                    <div className="flex items-center justify-between px-4 lg:px-6 py-2 w-full text-white bg-blue-800  md:text-lg font-semibold rounded-full cursor-pointer group">
+                    <div className="flex items-center justify-between px-4 lg:px-6 py-1.5 w-full text-white bg-blue-800  md:text-lg truncate text-nowrap font-semibold rounded-full cursor-pointer group">
                       <div className="h-4 sm:h-6 overflow-hidden mr-2">
                         <div className="transform transition-transform duration-300 ease-in-out group-hover:-translate-y-1/2">
                           <p className="text-xs text-nowrap sm:text-base h-4 sm:h-6">

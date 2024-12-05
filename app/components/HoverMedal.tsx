@@ -5,7 +5,7 @@ import Medal from "./icons/Medal";
 
 export default function HoverMedal() {
   const [isHovered, setIsHovered] = useState(false);
-
+  
   return (
     <div
       className="relative inline-flex items-center justify-center w-10 h-10 p-2 rounded-full bg-red-700 overflow-hidden transition-all duration-300 ease-in-out cursor-default hover:w-32"
