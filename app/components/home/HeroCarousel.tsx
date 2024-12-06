@@ -64,7 +64,7 @@ const HeroCarousel = ({ activities }: HeroCarouselProps) => {
     .filter((item) => item.status.type === "finished")
     .slice(-2);
 
-  const HERO_CAROUSEL = [...ongoing, ...countdown, ...finished];
+  const HERO_CAROUSEL = [...countdown, ...ongoing, ...finished];
 
   return (
     <div className="relative overflow-hidden h-full">
@@ -73,7 +73,7 @@ const HeroCarousel = ({ activities }: HeroCarouselProps) => {
           {HERO_CAROUSEL.map(({ event, status }, index) => {
             return (
               <Link
-                to="/"
+                to={event.url}
                 className="relative flex-[0_0_100%] min-w-0 h-full overflow-hidden rounded-3xl group"
                 key={index}
               >
@@ -109,15 +109,38 @@ const HeroCarousel = ({ activities }: HeroCarouselProps) => {
                       </div>
                       <div className="self-start lg:self-end  ease-in-out duration-300 transition-all">
                         {status.type === "ongoing" ? (
-                          <p className="inline-flex w-full justify-center rounded-lg items-center gap-2 text-white lg:px-4 py-1.5 text-lg md:text-4xl font-bold">
-                            {status.message}
+                          <p className="inline-flex w-full justify-center rounded-lg items-center gap-2 text-white lg:px-4 py-1.5">
+                            <div className="h-6 md:h-10 overflow-hidden mr-2">
+                              <div className="transform transition-transform duration-300 ease-in-out group-hover:-translate-y-1/2">
+                                <p className="text-lg md:text-4xl font-bold md:leading-9 ">
+                                  {status.message}
+                                </p>
+                                <p className="text-lg md:text-4xl font-bold md:leading-10 md:py-2">
+                                  {status.message}
+                                </p>
+                              </div>
+                            </div>
                           </p>
                         ) : status.type === "countdown" ? (
-                          <p className="inline-flex w-full justify-center rounded-lg items-center gap-2 text-white lg:px-4 py-1.5 text-lg md:text-4xl font-bold">
-                            <CountdownTimer
-                              currentTime={currentTime}
-                              timeUntilStart={status.timeUntilStart}
-                            />
+                          <p className="inline-flex w-full justify-center rounded-lg items-center gap-2 text-white lg:px-4 py-1.5">
+                            <div className="h-6 md:h-10 overflow-hidden mr-2">
+                              <div className="transform transition-transform duration-300 ease-in-out group-hover:-translate-y-1/2">
+                                <p className="text-lg md:text-4xl font-bold ">
+                                  <CountdownTimer
+                                    timeUntilStart={status.timeUntilStart}
+                                    currentTime={currentTime}
+                                    className="md:leading-9"
+                                  />
+                                </p>
+                                <p className="text-lg md:text-4xl font-bold ">
+                                  <CountdownTimer
+                                    timeUntilStart={status.timeUntilStart}
+                                    currentTime={currentTime}
+                                    className="md:leading-10 py-2"
+                                  />
+                                </p>
+                              </div>
+                            </div>
                           </p>
                         ) : (
                           <p className="inline-flex w-full justify-center rounded-lg items-center gap-2 text-white lg:px-4 py-1.5">

@@ -18,7 +18,7 @@ const ActivityBadge = ({ type }: ActivityBadgeProps) => {
       <div className="w-6 h-6 mr-2">
         {type === "event" ? <Festival color="white" /> : <Ball color="white" />}
       </div>
-      <p className="font-bold  text-sm sm:text-lg">Event</p>
+      <p className="font-bold text-sm sm:text-lg capitalize">{type}</p>
     </div>
   );
 };

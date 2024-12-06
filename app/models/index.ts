@@ -124,8 +124,8 @@ export function getFakeLeaderboardById() {
   {
     name: "Spoken Poetry",
     type: "event",
-    image: "/activities/tawag-ng-tanghalan.png",
-    banner: "/banner/tawag-ng-tanghalan.png",
+    image: "/activities/spoken-poetry.png",
+    banner: "/banner/spoken-poetry.png",
     url: "/a/spoken-poetry",
     startDate: new Date(new Date("12/11/24").setHours(9, 0, 0, 0)),
     endDate: new Date(new Date("12/11/24").setHours(12, 0, 0, 0)),
@@ -165,6 +165,18 @@ export function getFakeLeaderboardById() {
     isOverall: true,
     isScored: false,
   },
+  {
+    name: "Petsyonista",
+    type: "event",
+    image: "/activities/petsyonista.png",
+    banner: "/banner/petsyonista.png",
+    url: "/a/petsyonista",
+    startDate: new Date(new Date("12/12/24").setHours(9, 0, 0, 0)),
+    endDate: new Date(new Date("12/12/24").setHours(9, 0, 0, 0)),
+    isOverall: false,
+    isScored: false,
+  },
+
   ////////////////////////
   // NO SCHEDULES YET
   {

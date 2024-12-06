@@ -4,12 +4,23 @@ import { Image } from "../Image";
 import Arrow from "../icons/Arrow";
 import ActivityBadge from "./ActivityBadge";
 import { Link } from "@remix-run/react";
+import { getEventStatus } from "~/lib/util";
+import { CountdownTimer } from "../CountdownTimer";
+import { useCurrentTime } from "~/hooks/useCurrentTime";
 
 interface ActivityBannerProps {
   activity: ActivityRecord;
 }
 
 const ActivityBanner = ({ activity }: ActivityBannerProps) => {
+  const currentTime = useCurrentTime();
+
+  const status = getEventStatus(
+    new Date(activity.startDate),
+    new Date(activity.endDate),
+    activity.isScored
+  );
+
   return (
     <section className="max-container padding-container py-[4%] md:py-[2%]">
       <div className="relative min-h-[300px] p-6">
@@ -45,15 +56,36 @@ const ActivityBanner = ({ activity }: ActivityBannerProps) => {
             </span>
           </div>
         </div>
-        <div className="w-full h-[200px] relative rounded-3xl overflow-hidden mt-4 mb-4 sm:mb-0">
-          <Image
-            src={activity.image}
-            height={1024}
-            width={1024}
-            aria-label="API"
-            className="object-contain h-full w-full overflow-hidden"
-          />
+        <div className="flex flex-col">
+          <div className="w-full h-[200px] relative rounded-3xl overflow-hidden mt-4 mb-4 sm:mb-0">
+            <Image
+              src={activity.image}
+              height={1024}
+              width={1024}
+              aria-label="API"
+              className="object-contain h-full w-full overflow-hidden"
+            />
+          </div>
+          <div className="z-20">
+            {status.type === "ongoing" ? (
+              <p className="inline-flex w-full justify-center rounded-lg items-center gap-2 text-white lg:px-4 py-1.5 text-lg md:text-xl font-semibold mt-4">
+                {status.message}
+              </p>
+            ) : status.type === "countdown" ? (
+              <p className="inline-flex w-full justify-center rounded-lg items-center gap-2 text-white lg:px-4 py-1.5 text-lg md:text-xl font-semibold mt-4">
+                <CountdownTimer
+                  currentTime={currentTime}
+                  timeUntilStart={status.timeUntilStart}
+                />
+              </p>
+            ) : (
+              <p className="inline-flex w-full justify-center rounded-lg items-center gap-2 text-white lg:px-4 py-1.5 text-lg md:text-xl font-semibold mt-4">
+                {status.message}
+              </p>
+            )}
+          </div>
         </div>
+
         <div className="hidden sm:inline-flex h-[100px] relative rounded-3xl overflow-hidden mt-4 ">
           <Image
             src="/hudyaka.svg"

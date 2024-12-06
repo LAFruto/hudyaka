@@ -44,10 +44,7 @@ const Events = ({ events }: EventsProps) => {
                   to={url}
                   key={index}
                   className={cn(
-                    "bg-white rounded-xl p-4 aspect-square flex items-center justify-between flex-col transition-all duration-300 ease-in-out relative overflow-hidden group",
-                    eventStatus.type !== "finished"
-                      ? "pointer-events-none"
-                      : "wipe-up"
+                    "bg-white rounded-xl p-4 aspect-square flex items-center justify-between flex-col transition-all duration-300 ease-in-out relative overflow-hidden group wipe-up"
                   )}
                 >
                   <span className="self-end absolute pointer-events-auto">
@@ -57,15 +54,44 @@ const Events = ({ events }: EventsProps) => {
                     <Image src={image} height={1024} width={1024} />
                   </div>
                   {eventStatus.type === "countdown" ? (
-                    <CountdownTimer
-                      timeUntilStart={eventStatus.timeUntilStart}
-                      currentTime={currentTime}
-                      className="flex justify-center text-center self-center px-4 text-nowrap lg:px-6 py-1 w-full text-blue-800 border md:text-lg font-semibold rounded-full cursor-pointer group"
-                    />
+                    <div className="flex justify-center text-center self-center px-4 lg:px-6 py-1 w-full text-blue-800 border md:text-lg truncate text-nowrap font-semibold rounded-full cursor-pointer group">
+                      <div className="h-4 sm:h-6 overflow-hidden mr-2">
+                        <div className="transform transition-transform duration-300 ease-in-out group-hover:-translate-y-1/2">
+                          <p className="text-xs text-nowrap sm:text-base h-4 sm:h-6">
+                            <CountdownTimer
+                              timeUntilStart={eventStatus.timeUntilStart}
+                              currentTime={currentTime}
+                            />
+                          </p>
+                          <p className="text-xs text-nowrap sm:text-base h-4 sm:h-6">
+                            <CountdownTimer
+                              timeUntilStart={eventStatus.timeUntilStart}
+                              currentTime={currentTime}
+                            />
+                          </p>
+                        </div>
+                      </div>
+                    </div>
                   ) : eventStatus.type === "upcoming" ||
                     eventStatus.type === "ongoing" ? (
-                    <div className="flex justify-center text-center self-center px-4 lg:px-6 py-1 w-full text-blue-800 border md:text-lg truncate text-nowrap font-semibold rounded-full cursor-pointer group">
-                      {eventStatus.message}
+                    <div
+                      className={cn(
+                        "flex justify-center text-center self-center px-4 lg:px-6 py-1.5 w-full border  md:text-lg truncate text-nowrap font-semibold rounded-full cursor-pointer group",
+                        eventStatus.type == "ongoing"
+                          ? "ongoing text-white"
+                          : "text-blue-800"
+                      )}
+                    >
+                      <div className="h-4 sm:h-6 overflow-hidden mr-2">
+                        <div className="transform transition-transform duration-300 ease-in-out group-hover:-translate-y-1/2">
+                          <p className="text-xs text-nowrap sm:text-base h-4 sm:h-6">
+                            {eventStatus.message}
+                          </p>
+                          <p className="text-xs text-nowrap sm:text-base h-4 sm:h-6">
+                            {eventStatus.message}
+                          </p>
+                        </div>
+                      </div>
                     </div>
                   ) : (
                     <div className="flex items-center justify-between px-4 lg:px-6 py-1.5 w-full text-white bg-blue-800  md:text-lg truncate text-nowrap font-semibold rounded-full cursor-pointer group">
