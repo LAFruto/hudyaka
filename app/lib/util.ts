@@ -66,15 +66,13 @@ export const getLeaderboardLayout = (
 ): [TempTeamRank[], TempTeamRank[]] => {
   const rankedTeams = attachRanks(teams);
   // Sort teams by score in descending order
-  const sortedTeams = [...rankedTeams].sort((a, b) => b.score - a.score);
-
   const podium: TempTeamRank[] = [];
   const list: TempTeamRank[] = [];
 
   let temp: TempTeamRank[] = [];
   let podiumFull = false; // Flag to indicate if the podium is full
 
-  for (const team of sortedTeams) {
+  for (const team of rankedTeams) {
     if (!podiumFull) {
       // Accumulate teams with the same score
       if (temp.length === 0 || team.score === temp[0].score) {
@@ -157,4 +155,8 @@ export function getEventStatus(
     type: "finished",
     message: "Results are out!",
   };
+}
+
+export function getHeroCarousel() {
+  return;
 }

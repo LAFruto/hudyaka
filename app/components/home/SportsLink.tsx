@@ -1,12 +1,20 @@
 import { Link } from "@remix-run/react";
 import Arrow from "../icons/Arrow";
 import Ball from "../icons/Ball";
+import { cn } from "~/lib/util";
 
-const SportsLink = () => {
+interface SportsLinkProps {
+  className?: string;
+}
+
+const SportsLink = ({ className }: SportsLinkProps) => {
   return (
     <Link
-      to="#sports"
-      className="flex flex-col justify-between gap-8 rounded-3xl bg-red-600 h-full md:h-2/4 p-6 group cursor-pointer hover:opacity-90 transition-all"
+      to="/#sports"
+      className={cn(
+        "flex flex-col justify-between gap-8 rounded-3xl bg-red-600 h-full p-6 group cursor-pointer hover:opacity-90 transition-all",
+        className
+      )}
     >
       <div className="flex-shrink-0 max-w-[100px] p-5 rounded-2xl bg-white">
         <Ball color="red" />
@@ -25,7 +33,7 @@ const SportsLink = () => {
           </div>
           <p className="text-xs md:text-base">View sports results!</p>
         </div>
-        <div className="w-[30px] h-[30px]">
+        <div className="w-[30px] h-[30px] mb-1">
           <Arrow className="group-hover:translate-y-1 group-hover:translate-x-1 transition-all" />
         </div>
       </div>

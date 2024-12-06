@@ -1,11 +1,11 @@
 import { Outlet } from "@remix-run/react";
 import Footer from "~/components/layout/Footer";
 
-export function EventsLayout() {
+export default function EventsLayout() {
   return (
-    <>
+    <main>
       <Outlet />
       <Footer />
-    </>
+    </main>
   );
 }

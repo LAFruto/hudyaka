@@ -5,6 +5,7 @@ export type ActivityMutation = {
   name: string;
   type: ActivityType;
   image: string; // Image path in assets ex. /activities/cosplay.png, /activities/battle-of-the-bands.png
+  banner: string; // for hero swiper
   url: string; // URL route ex. /cosplay, /battle-of-the-bands
   startDate: Date; // Start date and time
   endDate: Date; // End date and time
@@ -54,7 +55,7 @@ export type TempTeam = {
   score: number;
 };
 
-export type TempTeamRank= TempTeam & {
+export type TempTeamRank = TempTeam & {
   rank: number;
 };
 

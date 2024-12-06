@@ -1,12 +1,20 @@
 import { Link } from "@remix-run/react";
 import Arrow from "../icons/Arrow";
 import Festival from "../icons/Festival";
+import { cn } from "~/lib/util";
 
-const EventsLink = () => {
+interface EventsLinkProps {
+  className?: string;
+}
+
+const EventsLink = ({ className }: EventsLinkProps) => {
   return (
     <Link
-      to="#events"
-      className="flex flex-col justify-between gap-8  rounded-3xl bg-yellow-500 md:h-3/4 p-6 group cursor-pointer transition-all hover:opacity-90"
+      to="/#events"
+      className={cn(
+        "flex flex-col justify-between gap-8 rounded-3xl bg-yellow-500 p-6 group cursor-pointer transition-all hover:opacity-90",
+        className
+      )}
     >
       <div className="flex-shrink-0 max-w-[100px] p-3 rounded-2xl bg-white">
         <Festival color="yellow" />
@@ -25,7 +33,7 @@ const EventsLink = () => {
           </div>
           <p className="text-xs md:text-base">View event results!</p>
         </div>
-        <div className="w-[30px] h-[30px]">
+        <div className="w-[30px] h-[30px] mb-1">
           <Arrow className="group-hover:translate-y-1 group-hover:translate-x-1 transition-all" />
         </div>
       </div>

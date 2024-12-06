@@ -32,12 +32,12 @@ export default function Index() {
   const { events, sports } = useLoaderData<typeof loader>();
 
   return (
-    <div className="flex flex-col overflow-hidden">
-      <Hero />
+    <>
+      <Hero activities={[...events, ...sports]} />
       <Leaderboard />
       <EventCarousel events={events} />
       <SportsCarousel sports={sports} />
       <Footer />
-    </div>
+    </>
   );
 }

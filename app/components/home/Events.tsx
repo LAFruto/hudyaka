@@ -7,7 +7,6 @@ import Arrow from "../icons/Arrow";
 import Festival from "../icons/Festival";
 import { Image } from "../Image";
 import { useCurrentTime } from "~/hooks/useCurrentTime";
-
 interface EventsProps {
   events: ActivityRecord[];
 }
@@ -26,12 +25,7 @@ const Events = ({ events }: EventsProps) => {
             <div className="w-[100px] h-[100px] sm:w-[160px] sm:h-[160px]">
               <Festival color="white" />
             </div>
-            <div className="flex flex-col items-center justify-center text-white w-full gap-2">
-              <p className="font-bold text-3xl sm:text-4xl lg:text-5xl">
-                Events
-              </p>
-              <p className="text-base sm:text-lg">Remaining Events: 1</p>
-            </div>
+            <p className="font-bold text-3xl sm:text-4xl lg:text-5xl">Events</p>
           </div>
 
           {events.map(
@@ -66,6 +60,7 @@ const Events = ({ events }: EventsProps) => {
                     <CountdownTimer
                       timeUntilStart={eventStatus.timeUntilStart}
                       currentTime={currentTime}
+                      className="flex justify-center text-center self-center px-4 text-nowrap lg:px-6 py-1 w-full text-blue-800 border md:text-lg font-semibold rounded-full cursor-pointer group"
                     />
                   ) : eventStatus.type === "upcoming" ||
                     eventStatus.type === "ongoing" ? (

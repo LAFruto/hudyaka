@@ -26,12 +26,7 @@ const Sports = ({ sports }: SportsProps) => {
             <div className="w-[100px] h-[100px] md:w-[150px] md:h-[150px]">
               <Ball color="white" />
             </div>
-            <div className="flex flex-col items-center justify-center text-white w-full gap-2">
-              <p className="font-bold text-3xl sm:text-4xl lg:text-5xl">
-                Sports
-              </p>
-              <p className="text-base sm:text-lg">Remaining Sports: 1</p>
-            </div>
+            <p className="font-bold text-3xl sm:text-4xl lg:text-5xl">Sports</p>
           </div>
 
           {sports.map(
@@ -66,6 +61,7 @@ const Sports = ({ sports }: SportsProps) => {
                     <CountdownTimer
                       timeUntilStart={eventStatus.timeUntilStart}
                       currentTime={currentTime}
+                      className="flex justify-center text-center self-center px-4 text-nowrap lg:px-6 py-1 w-full text-blue-800 border md:text-lg font-semibold rounded-full cursor-pointer group"
                     />
                   ) : eventStatus.type === "upcoming" ||
                     eventStatus.type === "ongoing" ? (

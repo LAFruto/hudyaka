@@ -1,7 +1,7 @@
 import { cn, getLeaderboardLayout } from "~/lib/util";
 import TeamScoreCard from "../TeamScoreCard";
 import Medal from "../icons/Medal";
-import ScoreMedal from "./ScoreMedal";
+import ScoreMedal from "../home/ScoreMedal";
 
 type Team = {
   teamNumber: number;
@@ -19,13 +19,13 @@ const teams: Team[] = [
   { teamNumber: 7, teamName: "Emerald Hunters", score: 93 },
 ];
 
-const Leaderboard = () => {
+const ActivityLeaderboard = () => {
   const [podiumTeams, listTeams] = getLeaderboardLayout(teams);
 
   return (
-    <section className="max-container padding-container flex flex-col w-full lg:grid lg:grid-cols-3 pt-24 pb-40">
-      <div className="col-span-2 h-full mb-4">
-        <div className="flex lg:inline-flex  justify-center lg:max-x-0 lg:w-auto lg:flex-shrink-0 gap-4 text-lg font-semibold bg-red-800 rounded-lg px-6 py-4">
+    <section className="max-container padding-container flex flex-col w-full py-4">
+      <div className="h-full mb-0 lg:mb-48 xl:mb-64">
+        <div className="mb-4 flex lg:inline-flex  justify-center lg:max-x-0 lg:w-auto lg:flex-shrink-0 gap-4 text-lg font-semibold bg-red-800 rounded-lg px-6 py-4">
           <div className="w-[40px] h-[40px]">
             <Medal />
           </div>
@@ -35,7 +35,7 @@ const Leaderboard = () => {
           className={cn(
             " mt-8 lg:mt-0 hidden lg:grid",
             podiumTeams.length !== 2
-              ? "grid-cols-3  gap-x-[10%] px-[6%]"
+              ? "grid-cols-3  gap-x-[10%] px-[20%]"
               : "grid-cols-2  gap-x-[10%] px-[24%]"
           )}
         >
@@ -67,7 +67,7 @@ const Leaderboard = () => {
           <TeamScoreCard key={index} team={team} />
         ))}
       </div>
-      <div className="hidden flex-col gap-4 lg:mt-10 lg:flex">
+      <div className="hidden flex-col gap-4 lg:mt-10 lg:flex lg:px-[20%]">
         {listTeams.map((team, index) => (
           <TeamScoreCard key={index} team={team} />
         ))}
@@ -76,4 +76,4 @@ const Leaderboard = () => {
   );
 };
 
-export default Leaderboard;
+export default ActivityLeaderboard;

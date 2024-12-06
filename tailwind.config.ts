@@ -9,11 +9,14 @@ export default {
         primary: ["Poppins"],
       },
       colors: {
-        background: "#FAEDC8",
+        background: "#F2D9B0",
         yellow: {
           500: "#FF9000",
           600: "#FFAC5E",
         },
+      },
+      rotate: {
+        "135": "135deg",
       },
     },
   },

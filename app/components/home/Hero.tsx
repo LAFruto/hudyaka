@@ -1,17 +1,22 @@
+import { ActivityRecord } from "~/types";
 import { Image } from "../Image";
 import EventsLink from "./EventsLink";
 import HeroCarousel from "./HeroCarousel";
 import SportsLink from "./SportsLink";
 
-const Hero = () => {
+interface HeroProps {
+  activities: ActivityRecord[];
+}
+
+const Hero = ({ activities }: HeroProps) => {
   return (
     <section className="max-container padding-container py-[4%] md:py-[2%] h-screen">
       <div className="grid-cols-1 grid md:grid-cols-3 lg:grid-cols-4 gap-4 h-full">
         <div className="md:col-span-2 lg:col-span-3 flex flex-col gap-4 ">
-          <div className="flex md:h-2/4">
+          <div className="flex md:h-2/5">
             <div className="flex-shrink-0 lg:flex self-end hidden md:w-32 lg:w-40 h-auto">
               <Image
-                src="/hudyak.svg"
+                src="/hudyaka_figure.svg"
                 alt="Hudyaka logo"
                 width={512}
                 height={512}
@@ -33,13 +38,13 @@ const Hero = () => {
               </span>
             </div>
           </div>
-          <div className="rounded-3xl bg-red-500 h-[30vh] md:h-3/4">
-            <HeroCarousel />
+          <div className="rounded-3xl bg-red-500 md:h-3/5 h-[30vh]">
+            <HeroCarousel activities={activities} />
           </div>
         </div>
         <div className="grid grid-cols-2 h-full md:flex flex-col gap-4">
-          <SportsLink />
-          <EventsLink />
+          <SportsLink className="md:h-2/5" />
+          <EventsLink className="md:h-3/5" />
         </div>
       </div>
     </section>
