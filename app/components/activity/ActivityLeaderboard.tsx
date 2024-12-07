@@ -2,21 +2,51 @@ import { cn, getLeaderboardLayout } from "~/lib/util";
 import TeamScoreCard from "../TeamScoreCard";
 import Medal from "../icons/Medal";
 import ScoreMedal from "../home/ScoreMedal";
+import { TempTeam } from "~/types";
 
-type Team = {
-  teamNumber: number;
-  teamName: string;
-  score: number;
-};
-
-const teams: Team[] = [
-  { teamNumber: 1, teamName: "Lightning Bolts", score: 120 },
-  { teamNumber: 2, teamName: "Thunder Strikers", score: 130 },
-  { teamNumber: 3, teamName: "Steel Titans", score: 140 },
-  { teamNumber: 4, teamName: "Crimson Warriors", score: 100 },
-  { teamNumber: 5, teamName: "Golden Eagles", score: 95 },
-  { teamNumber: 6, teamName: "Shadow Panthers", score: 94 },
-  { teamNumber: 7, teamName: "Emerald Hunters", score: 93 },
+const teams: TempTeam[] = [
+  {
+    teamNumber: 1,
+    teamName: "kadayawan",
+    image: "/teams/kadayawan.png",
+    score: 120,
+  },
+  {
+    teamNumber: 2,
+    teamName: "pinagbenga",
+    image: "/teams/pinagbenga.png",
+    score: 130,
+  },
+  {
+    teamNumber: 3,
+    teamName: "pintados",
+    image: "/teams/pintados.png",
+    score: 140,
+  },
+  {
+    teamNumber: 4,
+    teamName: "sinulog",
+    image: "/teams/sinulog.png",
+    score: 100,
+  },
+  {
+    teamNumber: 5,
+    teamName: "ati-atihan",
+    image: "/teams/ati-atihan.png",
+    score: 95,
+  },
+  {
+    teamNumber: 6,
+    teamName: "masskara",
+    image: "/teams/masskara.png",
+    score: 94,
+  },
+  {
+    teamNumber: 7,
+    teamName: "dinagyang",
+    image: "/teams/dinagyang.png",
+    score: 93,
+  },
 ];
 
 const ActivityLeaderboard = () => {
