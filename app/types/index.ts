@@ -52,6 +52,7 @@ export type EventStatus =
 export type TempTeam = {
   teamNumber: number;
   teamName: string;
+  image: string;
   score: number;
 };
 
