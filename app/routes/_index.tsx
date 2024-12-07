@@ -22,10 +22,10 @@ export const loader = async () => {
   const events = await getActivitiesByType("event");
   const sports = await getActivitiesByType("sport");
 
-  return Response.json({
+  return {
     events: events,
     sports: sports,
-  });
+  };
 };
 
 export default function Index() {

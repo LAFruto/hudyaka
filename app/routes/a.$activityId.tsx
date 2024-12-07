@@ -12,7 +12,7 @@ export const loader = async ({ params }: LoaderFunctionArgs) => {
   if (!event) {
     throw new Response("Not Found", { status: 404 });
   }
-  return Response.json({ event });
+  return { event };
 };
 
 const Event = () => {
