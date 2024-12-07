@@ -38,7 +38,7 @@ const Hero = ({ activities }: HeroProps) => {
               </span>
             </div>
           </div>
-          <div className="rounded-3xl bg-red-500 md:h-3/5 h-[30vh]">
+          <div className="rounded-3xl bg-red-500 md:h-3/5 h-[40vh]">
             <HeroCarousel activities={activities} />
           </div>
         </div>

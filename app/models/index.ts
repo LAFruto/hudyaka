@@ -148,7 +148,7 @@ export function getFakeLeaderboardById() {
     type: "event",
     image: "/activities/indak-mapua.png",
     banner: "/banner/indak-mapua.png",
-    url: "/a/folk-dance",
+    url: "/a/indak-mapua",
     startDate: new Date(new Date("12/11/24").setHours(17, 0, 0, 0)),
     endDate: new Date(new Date("12/11/24").setHours(19, 0, 0, 0)),
     isOverall: true,

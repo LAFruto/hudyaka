@@ -112,7 +112,7 @@ const HeroCarousel = ({ activities }: HeroCarouselProps) => {
                           <p className="inline-flex w-full justify-center rounded-lg items-center gap-2 text-white lg:px-4 py-1.5">
                             <div className="h-6 md:h-10 overflow-hidden mr-2">
                               <div className="transform transition-transform duration-300 ease-in-out group-hover:-translate-y-1/2">
-                                <p className="text-lg md:text-4xl font-bold md:leading-9 ">
+                                <p className="text-lg md:text-4xl font-bold leading-4  md:leading-9 ">
                                   {status.message}
                                 </p>
                                 <p className="text-lg md:text-4xl font-bold md:leading-10 md:py-2">
@@ -129,7 +129,7 @@ const HeroCarousel = ({ activities }: HeroCarouselProps) => {
                                   <CountdownTimer
                                     timeUntilStart={status.timeUntilStart}
                                     currentTime={currentTime}
-                                    className="md:leading-9"
+                                    className="leading-4 md:leading-9"
                                   />
                                 </p>
                                 <p className="text-lg md:text-4xl font-bold ">

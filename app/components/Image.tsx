@@ -13,7 +13,7 @@ export function Image({
   src,
   width,
   height,
-  quality = 75,
+  quality = 100,
   alt,
   fill,
   sizes,

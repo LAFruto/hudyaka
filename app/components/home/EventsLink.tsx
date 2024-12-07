@@ -31,7 +31,9 @@ const EventsLink = ({ className }: EventsLinkProps) => {
               </p>
             </div>
           </div>
-          <p className="text-xs md:text-base">View event results!</p>
+          <p className="text-xs md:text-base text-nowrap">
+            View event results!
+          </p>
         </div>
         <div className="w-[30px] h-[30px] mb-1">
           <Arrow className="group-hover:translate-y-1 group-hover:translate-x-1 transition-all" />
