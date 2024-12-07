@@ -1,0 +1,103 @@
+generator client {
+  provider      = "prisma-client-js"
+  binaryTargets = ["native", "linux-musl-openssl-3.0.x"]
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Activity {
+  id             Int             @id @default(autoincrement())
+  name           String
+  activityTypeId Int
+  activityType   ActivityType    @relation(fields: [activityTypeId], references: [id])
+  activityFrames ActivityFrame[]
+}
+
+model ActivityType {
+  id   Int    @id @default(autoincrement())
+  name String
+
+  // event, sport 
+
+  activities Activity[]
+}
+
+model Cluster {
+  id             Int    @id @default(autoincrement())
+  image          String
+  num            Int?
+  name           String
+  altName        String // KADAYAWAN, MASKARA, ATI-ATIHAN 
+  clusterGroupId Int
+
+  // COLLEGE (CCIS, CHS, CAS, CEA, ATYCB)
+  // SHS (STEM, NON-STEM)
+  // JHS
+  // EMPLOYEE (COLLEGE FACULTY, HS FACULTY, UTILITY, NTP)
+
+  clusterGroup ClusterGroup @relation(fields: [clusterGroupId], references: [id])
+
+  teams Team[]
+}
+
+model ActivityFrame {
+  id         Int @id @default(autoincrement())
+  activityId Int // refer to activityId.name for frontend pathing
+
+  startDateTime DateTime
+  endDateTime   DateTime
+  isOverall     Boolean
+  isScored      Boolean
+
+  activity Activity @relation(fields: [activityId], references: [id])
+
+  teams        Team[]
+  participants Participant[]
+}
+
+model ClusterGroup {
+  id   Int    @id @default(autoincrement())
+  name String
+
+  // COLLEGE, SHS, JHS, EMPLOYEE
+  clusters Cluster[]
+}
+
+model Team {
+  id              Int    @id @default(autoincrement())
+  name            String
+  num             Int?
+  activityFrameId Int
+  clusterId       Int
+
+  activityFrame ActivityFrame @relation(fields: [activityFrameId], references: [id])
+  cluster       Cluster       @relation(fields: [clusterId], references: [id])
+
+  participants Participant[]
+  tallies      Tally[]
+}
+
+model Participant {
+  id              Int    @id @default(autoincrement())
+  name            String
+  altName         String
+  activityFrameId Int
+
+  activityFrame ActivityFrame @relation(fields: [activityFrameId], references: [id])
+  teams         Team[]
+  tallies       Tally[]
+}
+
+model Tally {
+  id            Int    @id @default(autoincrement())
+  teamId        Int?
+  participantId Int?
+  score         Float?
+  rank          Int
+
+  team        Team?        @relation(fields: [teamId], references: [id])
+  participant Participant? @relation(fields: [participantId], references: [id])
+}
