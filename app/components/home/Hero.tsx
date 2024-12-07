@@ -11,7 +11,7 @@ interface HeroProps {
 const Hero = ({ activities }: HeroProps) => {
   return (
     <section className="max-container padding-container py-[4%] md:py-[2%] h-screen z-10">
-      <div className="grid-cols-1 grid md:grid-cols-3 lg:grid-cols-4 gap-4 h-full">
+      <div className="flex flex-col md:grid md:grid-cols-3 lg:grid-cols-4 gap-4 h-full">
         <div className="md:col-span-2 lg:col-span-3 flex flex-col gap-4 ">
           <div className="flex md:h-2/5">
             <div className="flex-shrink-0 lg:flex self-end hidden md:w-32 lg:w-40 h-auto">
@@ -38,11 +38,11 @@ const Hero = ({ activities }: HeroProps) => {
               </span>
             </div>
           </div>
-          <div className="rounded-3xl bg-red-500 md:h-3/5 h-[40vh]">
+          <div className="rounded-3xl bg-red-500 md:h-3/5 h-[40vh] ">
             <HeroCarousel activities={activities} />
           </div>
         </div>
-        <div className="grid grid-cols-2 h-full md:flex flex-col gap-4">
+        <div className="grid grid-cols-2 md:flex flex-col gap-4">
           <SportsLink className="md:h-2/5" />
           <EventsLink className="md:h-3/5" />
         </div>

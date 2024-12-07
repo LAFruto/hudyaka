@@ -86,7 +86,6 @@ const HeroCarousel = ({ activities }: HeroCarouselProps) => {
                     aria-label={event.name}
                     className="object-contain h-full w-full overflow-hidden"
                   />
-                  <div className="absolute inset-0"></div>
                   <div className="flex justify-end p-6">
                     {scrollSnaps.map((_, index) => (
                       <DotButton
@@ -115,7 +114,7 @@ const HeroCarousel = ({ activities }: HeroCarouselProps) => {
                                 <p className="text-lg md:text-4xl font-bold leading-4  md:leading-9 ">
                                   {status.message}
                                 </p>
-                                <p className="text-lg md:text-4xl font-bold md:leading-10 md:py-2">
+                                <p className="text-lg md:text-4xl font-bold md:leading-10 py-2">
                                   {status.message}
                                 </p>
                               </div>
