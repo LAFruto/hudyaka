@@ -8,7 +8,6 @@ import {
 import type { LinksFunction } from "@remix-run/node";
 
 import "./styles/tailwind.css";
-import Pattern from "./components/ui/Pattern";
 
 export const links: LinksFunction = () => [
   { rel: "preconnect", href: "https://fonts.googleapis.com" },
@@ -23,7 +22,7 @@ export const links: LinksFunction = () => [
   },
 ];
 
-export function Layout({ children }: { children: React.ReactNode }) {
+export function App() {
   return (
     <html lang="en">
       <head>
@@ -33,8 +32,8 @@ export function Layout({ children }: { children: React.ReactNode }) {
         <Links />
       </head>
       <body className="bg-background/50 text-blue-950 flex flex-col relative min-h-screen">
-        <Pattern />
-        <div className="relative z-10">{children}</div>
+        {/* <Pattern /> */}
+        <Outlet />
         <ScrollRestoration />
         <Scripts />
       </body>
@@ -42,6 +41,6 @@ export function Layout({ children }: { children: React.ReactNode }) {
   );
 }
 
-export default function App() {
-  return <Outlet />;
-}
+// export default function App() {
+//   return
+// }
