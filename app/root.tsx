@@ -38,7 +38,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
         <div className="relative z-10">{children}</div>
         <ScrollRestoration />
         <Scripts />
-        <Analytics />
+        {/* <Analytics /> */}
       </body>
     </html>
   );
