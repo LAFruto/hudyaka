@@ -9,11 +9,15 @@ import { getActivitiesByType } from "~/models";
 
 export const meta: MetaFunction = () => {
   return [
-    { title: "Hudyaka - Mapúa MCM" },
+    { title: "Hudyaka - Mapúa MCM Website" },
     {
-      name: "Mapúa MCM 9th Foundation",
+      name: "Mapúa MCM 9th Foundation - Website",
       content:
         "Hudyaka Mapúa: Kasadya ug pasalamat sa Padayong Pag-uswag. December 8 - 14, 2024 at Mapúa Malayan Colleges Mindanao",
+    },
+    {
+      property: "og:image",
+      content: "hudyaka-mmcm.vercel.app/social-preview.png",
     },
   ];
 };
