@@ -135,7 +135,7 @@ export function getEventStatus(
 
     return {
       type: "upcoming",
-      message: `Starts on ${start.toLocaleString("en-US", {
+      message: `${start.toLocaleString("en-US", {
         month: "long",
       })} ${start.getDate()}`,
     };
