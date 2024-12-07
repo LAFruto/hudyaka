@@ -22,7 +22,7 @@ const ActivityBanner = ({ activity }: ActivityBannerProps) => {
   );
 
   return (
-    <section className="max-container padding-container py-[4%] md:py-[2%]">
+    <section className="max-container padding-container pt-[4%] md:pt-[2%]">
       <div className="relative min-h-[300px] p-6">
         <Image
           src={activity.banner}

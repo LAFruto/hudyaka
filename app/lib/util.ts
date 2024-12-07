@@ -9,13 +9,13 @@ export function cn(...inputs: ClassValue[]) {
 export const getPodiumColor = (position: number): string => {
   switch (position) {
     case 1:
-      return "border-yellow-600"; // First
+      return "outline-yellow-600"; // First
     case 2:
-      return "border-blue-900"; // Second
+      return "outline-blue-900"; // Second
     case 3:
-      return "border-red-700"; // Third
+      return "outline-red-700"; // Third
     default:
-      return "border-blue-500"; // Fourth Below...
+      return "outline-blue-500"; // Fourth Below...
   }
 };
 
@@ -36,7 +36,6 @@ export const attachRanks = (teams: TempTeam[]): TempTeamRank[] => {
   // First, sort the teams by score in descending order
   const sortedTeams = [...teams].sort((a, b) => b.score - a.score);
 
-  // Initialize variables
   let rank = 1;
   let lastScore: number | null = null;
   const rankedTeams: TempTeamRank[] = [];

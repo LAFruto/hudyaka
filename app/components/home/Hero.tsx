@@ -10,7 +10,7 @@ interface HeroProps {
 
 const Hero = ({ activities }: HeroProps) => {
   return (
-    <section className="max-container padding-container py-[4%] md:py-[2%] h-screen">
+    <section className="max-container padding-container py-[4%] md:py-[2%] h-screen z-10">
       <div className="grid-cols-1 grid md:grid-cols-3 lg:grid-cols-4 gap-4 h-full">
         <div className="md:col-span-2 lg:col-span-3 flex flex-col gap-4 ">
           <div className="flex md:h-2/5">

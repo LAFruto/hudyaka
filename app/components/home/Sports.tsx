@@ -18,7 +18,7 @@ const Sports = ({ sports }: SportsProps) => {
   return (
     <section
       id="sports"
-      className="bg-red-800  w-full padding-container mx-auto py-24"
+      className="bg-red-800  w-full padding-container mx-auto py-12 md:py-24"
     >
       <div className="max-container padding-container">
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
@@ -75,7 +75,14 @@ const Sports = ({ sports }: SportsProps) => {
                     </div>
                   ) : eventStatus.type === "upcoming" ||
                     eventStatus.type === "ongoing" ? (
-                    <div className="flex justify-center text-center self-center text-nowrap  px-4 lg:px-6 py-1.5 w-full text-blue-800 border  md:text-lg font-semibold rounded-full cursor-pointer group">
+                    <div
+                      className={cn(
+                        "flex justify-center text-center self-center px-4 lg:px-6 py-1.5 w-full border  md:text-lg truncate text-nowrap font-semibold rounded-full cursor-pointer group",
+                        eventStatus.type == "ongoing"
+                          ? "ongoing text-white"
+                          : "text-blue-800"
+                      )}
+                    >
                       <div className="h-4 sm:h-6 overflow-hidden mr-2">
                         <div className="transform transition-transform duration-300 ease-in-out group-hover:-translate-y-1/2">
                           <p className="text-xs text-nowrap sm:text-base h-4 sm:h-6">

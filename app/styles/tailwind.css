@@ -3,32 +3,6 @@
 @tailwind utilities;
 
 @layer base {
-  @font-face {
-    font-family: 'Poppins';
-    src: url('/fonts/Poppins-Regular.woff2') format('woff2'),
-        url('/fonts/Poppins-Regular.woff') format('woff');
-    font-weight: normal;
-    font-style: normal;
-    font-display: swap;
-  }
-
-  @font-face {
-    font-family: 'Poppins';
-    src: url('/fonts/Poppins-ExtraBold.woff2') format('woff2'),
-        url('/fonts/Poppins-ExtraBold.woff') format('woff');
-    font-weight: bold;
-    font-style: normal;
-    font-display: swap;
-  }
-
-  @font-face {
-    font-family: 'QuiapoFree';
-    src: url('/fonts/QuiapoFree2-Regular.woff') format('woff');
-    font-weight: normal;
-    font-style: normal;
-    font-display: swap;
-  }
-
   html {
     scroll-behavior: smooth;
     scroll-padding-top: 80px;

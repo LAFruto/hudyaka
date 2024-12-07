@@ -21,7 +21,7 @@ const Event = () => {
   return (
     <>
       <ActivityBanner activity={event} />
-      <ActivityLeaderboard />
+      {event.isScored && <ActivityLeaderboard />}
       <ActivityLinks />
     </>
   );

@@ -17,7 +17,7 @@ const Events = ({ events }: EventsProps) => {
   return (
     <section
       id="events"
-      className="bg-yellow-500 w-full padding-container mx-auto py-24"
+      className="bg-yellow-500 w-full padding-container mx-auto py-12 md:py-24"
     >
       <div className="max-container padding-container">
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">

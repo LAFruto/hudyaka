@@ -12,7 +12,7 @@ const Footer = () => {
           className="h-12"
         >
           <Image
-            src="/api.svg"
+            src="/api.png"
             height={512}
             width={512}
             aria-label="API"
@@ -29,7 +29,7 @@ const Footer = () => {
             src="/mapua.png"
             width={512}
             height={512}
-            aria-label="mapua"
+            aria-label="MAPUA"
             className="object-contain h-full w-full"
           />
         </Link>
