@@ -34,7 +34,7 @@ export const meta: MetaFunction = () => {
     },
     {
       property: "og:image",
-      content: "https://hudyaka-mmcm.vercel.app/social-preview.png",
+      content: "/social-preview.png",
     },
     {
       property: "og:image:width",
