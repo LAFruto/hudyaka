@@ -114,22 +114,40 @@ export function getEventStatus(
     throw new Error("Invalid start or end date provided");
   }
 
+  const oneDayMs = 24 * 60 * 60 * 1000; // Milliseconds in a day
+
+  // Get calendar day differences, ignoring time
+  const daysUntilStart = Math.ceil(
+    (startDate.getTime() - now.getTime()) / oneDayMs
+  );
+
   const timeUntilStart = startDate.getTime() - now.getTime();
   const timeUntilEnd = endDate.getTime() - now.getTime();
 
-  const oneDayMs = 24 * 60 * 60 * 1000; // Milliseconds in a day
+  // Format time range as "4:00 PM - 5:00 PM"
+  const timeRange = `${startDate.toLocaleTimeString("en-US", {
+    hour: "2-digit",
+    minute: "2-digit",
+    hour12: true,
+  })} - ${endDate.toLocaleTimeString("en-US", {
+    hour: "2-digit",
+    minute: "2-digit",
+    hour12: true,
+  })}`;
 
   // Check if the event hasn't started yet
   if (timeUntilStart > 0) {
-    if (timeUntilStart <= oneDayMs) {
+    if (timeUntilStart < oneDayMs) {
       return {
         type: "countdown",
         timeUntilStart,
+        timeRange: timeRange,
       };
-    } else if (timeUntilStart <= 2 * oneDayMs) {
+    } else if (daysUntilStart === 1) {
       return {
         type: "upcoming",
         message: "Starting Tomorrow!",
+        timeRange: timeRange,
       };
     }
 
@@ -138,6 +156,7 @@ export function getEventStatus(
       message: `${start.toLocaleString("en-US", {
         month: "long",
       })} ${start.getDate()}`,
+      timeRange: timeRange,
     };
   }
 
