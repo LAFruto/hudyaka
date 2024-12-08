@@ -1,6 +1,5 @@
 // @ts-expect-error - no types, but it's a tiny function
 import sortBy from "sort-by";
-import invariant from "tiny-invariant";
 import { ActivityRecord, ActivityMutation, ActivityType } from "~/types";
 
 // TODO
@@ -39,14 +38,6 @@ const fakeActivities = {
     const newActivity = { id, ...values };
     fakeActivities.records[id] = newActivity;
     return newActivity;
-  },
-
-  async set(id: string, values: ActivityMutation): Promise<ActivityRecord> {
-    const activity = await fakeActivities.get(id);
-    invariant(activity, `No activity found for ${id}`);
-    const updateActivity = { ...activity, ...values };
-    fakeActivities.records[id] = updateActivity;
-    return updateActivity;
   },
 
   destroyI(id: string): null {
