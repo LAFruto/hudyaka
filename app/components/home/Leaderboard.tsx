@@ -9,43 +9,43 @@ const teams: TempTeam[] = [
     teamNumber: 1,
     teamName: "kadayawan",
     image: "/teams/kadayawan.png",
-    score: 120,
+    score: 7,
   },
   {
     teamNumber: 2,
     teamName: "pinagbenga",
     image: "/teams/pinagbenga.png",
-    score: 130,
+    score: 6,
   },
   {
     teamNumber: 3,
     teamName: "pintados",
     image: "/teams/pintados.png",
-    score: 140,
+    score: 5,
   },
   {
     teamNumber: 4,
     teamName: "sinulog",
     image: "/teams/sinulog.png",
-    score: 100,
+    score: 4,
   },
   {
     teamNumber: 5,
     teamName: "ati-atihan",
     image: "/teams/ati-atihan.png",
-    score: 95,
+    score: 3,
   },
   {
     teamNumber: 6,
     teamName: "masskara",
     image: "/teams/masskara.png",
-    score: 94,
+    score: 2,
   },
   {
     teamNumber: 7,
     teamName: "dinagyang",
     image: "/teams/dinagyang.png",
-    score: 93,
+    score: 1,
   },
 ];
 
@@ -53,7 +53,7 @@ const Leaderboard = () => {
   const [podiumTeams, listTeams] = getLeaderboardLayout(teams);
 
   return (
-    <section className="max-container padding-container flex flex-col w-full lg:grid lg:grid-cols-3 pt-24 pb-40">
+    <section className="max-container padding-container flex flex-col w-full lg:grid lg:grid-cols-3 pt-20 pb-40 lg:pb-64">
       <div className="col-span-2 h-full mb-4">
         <div className="flex lg:inline-flex  justify-center lg:max-x-0 lg:w-auto lg:flex-shrink-0 gap-4 text-lg font-semibold bg-red-800 rounded-lg px-6 py-4">
           <div className="w-[40px] h-[40px]">
@@ -65,7 +65,7 @@ const Leaderboard = () => {
           className={cn(
             " mt-8 lg:mt-0 hidden lg:grid",
             podiumTeams.length !== 2
-              ? "grid-cols-3  gap-x-[10%] px-[6%]"
+              ? "grid-cols-3  gap-x-[10%] md:px-[2%] lg:px-[10%]"
               : "grid-cols-2  gap-x-[10%] px-[24%]"
           )}
         >

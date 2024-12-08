@@ -9,7 +9,7 @@ import { getActivitiesByType } from "~/models";
 
 export const meta: MetaFunction = () => {
   return [
-    { title: "Hudyaka - Mapúa MCM Foundation Week Website" },
+    { title: "Hudyaka - Mapúa MCM Foundation Week" },
     {
       name: "Mapúa MCM 9th Foundation - Website",
       content:
@@ -17,7 +17,7 @@ export const meta: MetaFunction = () => {
     },
     {
       property: "og:title",
-      content: "Hudyaka - Mapúa MCM Foundation Week Website",
+      content: "Hudyaka - Mapúa MCM Foundation Week",
     },
     {
       property: "og:description",
@@ -30,7 +30,7 @@ export const meta: MetaFunction = () => {
     },
     {
       property: "og:url",
-      content: "https://hudyaka-mmcm.vercel.app",
+      content: "https://hudyaka-mmcm.com",
     },
     {
       property: "og:image",
