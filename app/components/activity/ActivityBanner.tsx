@@ -31,7 +31,7 @@ const ActivityBanner = ({ activity }: ActivityBannerProps) => {
           width={1024}
           fill
           aria-label="API"
-          className="object-contain h-full w-full overflow-hidden rounded-3xl"
+          className="object-contain h-full w-full overflow-hidden rounded-3xl brightness-50 bg-slate-900"
         />
         <div className="flex w-full justify-between">
           <Link

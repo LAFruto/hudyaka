@@ -84,7 +84,7 @@ const HeroCarousel = ({ activities }: HeroCarouselProps) => {
                     width={1024}
                     fill
                     aria-label={event.name}
-                    className="object-contain h-full w-full overflow-hidden"
+                    className="object-contain h-full w-full overflow-hidden brightness-90 bg-slate-900"
                   />
                   <div className="flex justify-end p-6">
                     {scrollSnaps.map((_, index) => (
