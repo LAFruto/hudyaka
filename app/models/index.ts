@@ -78,6 +78,17 @@ export function getFakeLeaderboardById() {
 
 [
   {
+    name: "Parade of Festivals",
+    type: "event",
+    image: "/activities/parade-of-festivals.png",
+    banner: "/banner/parade-of-festivals.png",
+    url: "/a/parade-of-festivals",
+    startDate: new Date(new Date("12/8/24").setHours(8, 0, 0, 0)),
+    endDate: new Date(new Date("12/8/24").setHours(9, 0, 0, 0)),
+    isOverall: true,
+    isScored: true,
+  },
+  {
     name: "Laro ng Lahi",
     type: "event",
     image: "/activities/laro-ng-lahi.png",
@@ -144,6 +155,17 @@ export function getFakeLeaderboardById() {
     isScored: false,
   },
   {
+    name: "Kaloka-like with Talent",
+    type: "event",
+    image: "/activities/kaloka-like-with-talent.png",
+    banner: "/banner/kaloka-like-with-talent.png",
+    url: "/a/kaloka-like-with-talent",
+    startDate: new Date(new Date("12/11/24").setHours(15, 0, 0, 0)),
+    endDate: new Date(new Date("12/11/24").setHours(17, 0, 0, 0)),
+    isOverall: true,
+    isScored: false,
+  },
+  {
     name: "Indak Mapua",
     type: "event",
     image: "/activities/indak-mapua.png",
@@ -166,6 +188,17 @@ export function getFakeLeaderboardById() {
     isScored: false,
   },
   {
+    name: "Tawag ng Tanghalan",
+    type: "event",
+    image: "/activities/tawag-ng-tanghalan.png",
+    banner: "/banner/tawag-ng-tanghalan.png",
+    url: "/a/tawag-ng-tanghalan",
+    startDate: new Date(new Date("12/12/24").setHours(9, 0, 0, 0)),
+    endDate: new Date(new Date("12/12/24").setHours(12, 0, 0, 0)),
+    isOverall: true,
+    isScored: false,
+  },
+  {
     name: "Petsyonista",
     type: "event",
     image: "/activities/petsyonista.png",
@@ -176,43 +209,6 @@ export function getFakeLeaderboardById() {
     isOverall: false,
     isScored: false,
   },
-
-  ////////////////////////
-  // NO SCHEDULES YET
-  {
-    name: "Tawag ng Tanghalan",
-    type: "event",
-    image: "/activities/tawag-ng-tanghalan.png",
-    banner: "/banner/tawag-ng-tanghalan.png",
-    url: "/a/tawag-ng-tanghalan",
-    startDate: new Date(new Date("12/7/24").setHours(6, 0, 0, 0)),
-    endDate: new Date(new Date("12/7/24").setHours(10, 0, 0, 0)),
-    isOverall: true,
-    isScored: false,
-  },
-  {
-    name: "Parade of Festivals",
-    type: "event",
-    image: "/activities/parade-of-festivals.png",
-    banner: "/banner/parade-of-festivals.png",
-    url: "/a/parade-of-festivals",
-    startDate: new Date(new Date("12/8/24").setHours(20, 0, 0, 0)),
-    endDate: new Date(new Date("12/8/24").setHours(21, 0, 0, 0)),
-    isOverall: true,
-    isScored: true,
-  },
-  {
-    name: "Kaloka-like with Talent",
-    type: "event",
-    image: "/activities/kaloka-like-with-talent.png",
-    banner: "/banner/kaloka-like-with-talent.png",
-    url: "/a/kaloka-like-with-talent",
-    startDate: new Date(new Date("12/9/24").setHours(12, 0, 0, 0)),
-    endDate: new Date(new Date("12/9/24").setHours(14, 0, 0, 0)),
-    isOverall: true,
-    isScored: false,
-  },
-
   //////////////////////////////////////
   // SPORTS
   //////////////////////////////////////
