@@ -1,7 +1,8 @@
 import { redirect } from "@remix-run/react";
 
-const Test = () => {
+export function loader() {
   return redirect("/");
-};
-
-export default Test;
+}
+export default function () {
+  return null;
+}

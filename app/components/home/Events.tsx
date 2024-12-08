@@ -72,22 +72,38 @@ const Events = ({ events }: EventsProps) => {
                         </div>
                       </div>
                     </div>
-                  ) : eventStatus.type === "upcoming" ||
-                    eventStatus.type === "ongoing" ? (
+                  ) : eventStatus.type === "upcoming" ? (
+                    <div
+                      className={cn(
+                        "flex justify-center text-center self-center px-2 lg:px-6 py-1.5 w-full border  md:text-lg truncate text-nowrap font-semibold rounded-full cursor-pointer group"
+                      )}
+                    >
+                      <div className="h-4 sm:h-6 overflow-hidden mr-2">
+                        <div className="transform transition-transform duration-300 ease-in-out group-hover:-translate-y-1/2">
+                          <p className="text-blue-800 text-xs text-nowrap sm:text-base h-4 sm:h-6">
+                            {eventStatus.message}
+                          </p>
+                          <p className="text-blue-800 text-xs text-nowrap sm:text-base h-4 sm:h-6">
+                            {eventStatus.message}
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                  ) : eventStatus.type === "ongoing" ? (
                     <div
                       className={cn(
                         "flex justify-center text-center self-center px-2 lg:px-6 py-1.5 w-full border  md:text-lg truncate text-nowrap font-semibold rounded-full cursor-pointer group",
                         eventStatus.type == "ongoing"
-                          ? "ongoing text-white"
+                          ? "ongoing "
                           : "text-blue-800"
                       )}
                     >
                       <div className="h-4 sm:h-6 overflow-hidden mr-2">
                         <div className="transform transition-transform duration-300 ease-in-out group-hover:-translate-y-1/2">
-                          <p className="text-xs text-nowrap sm:text-base h-4 sm:h-6">
+                          <p className="text-white text-xs text-nowrap sm:text-base h-4 sm:h-6">
                             {eventStatus.message}
                           </p>
-                          <p className="text-xs text-nowrap sm:text-base h-4 sm:h-6">
+                          <p className="text-white text-xs text-nowrap sm:text-base h-4 sm:h-6">
                             {eventStatus.message}
                           </p>
                         </div>

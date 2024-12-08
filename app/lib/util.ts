@@ -138,6 +138,23 @@ export function getEventStatus(
     hour12: true,
   })}`;
 
+  const months = [
+    "January",
+    "February",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July",
+    "August",
+    "September",
+    "October",
+    "November",
+    "December",
+  ];
+
+  const day = parseInt(start.toISOString().split("T")[0].split("-")[2], 10);
+
   // Check if the event hasn't started yet
   if (timeUntilStart > 0) {
     if (timeUntilStart < oneDayMs) {
@@ -146,21 +163,16 @@ export function getEventStatus(
         timeUntilStart,
         timeRange: timeRange,
       };
-    } else if (daysUntilStart === 1) {
+    } else {
       return {
         type: "upcoming",
-        message: "Starting Tomorrow!",
+        message:
+          daysUntilStart === 1
+            ? "Starting Tomorrow!"
+            : `${months[startDate.getMonth()]} ${day}`,
         timeRange: timeRange,
       };
     }
-
-    return {
-      type: "upcoming",
-      message: `${start.toLocaleString("en-US", {
-        month: "long",
-      })} ${start.getDate()}`,
-      timeRange: timeRange,
-    };
   }
 
   // Check if the event is ongoing
