@@ -36,9 +36,9 @@ export function Layout({ children }: { children: React.ReactNode }) {
       </head>
       <body className="bg-background/50 text-blue-950 flex flex-col relative min-h-screen">
         <Pattern />
-        <div className="relative z-10">{children}</div>
         <Analytics />
         <SpeedInsights />
+        <div className="relative z-10">{children}</div>
         <Scripts />
         <ScrollRestoration />
       </body>
