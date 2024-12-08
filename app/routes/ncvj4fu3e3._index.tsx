@@ -13,7 +13,7 @@ const Ncvj4fu3e3 = () => {
         encType="multipart/form-data"
         className="m-auto flex flex-col gap-4 bg-white rounded-lg shadow p-4 border"
       >
-        <input type="file" name="excel" />
+        <input type="file" name="excel" required/>
         <div className="flex flex-col">
           <label htmlFor="func">Select Activity</label>
 
