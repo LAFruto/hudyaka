@@ -83,10 +83,10 @@ export function getFakeLeaderboardById() {
     image: "/activities/parade-of-festivals.png",
     banner: "/banner/parade-of-festivals.png",
     url: "/a/parade-of-festivals",
-    startDate: new Date(new Date("12/8/24").setHours(8, 0, 0, 0)),
-    endDate: new Date(new Date("12/8/24").setHours(9, 0, 0, 0)),
+    startDate: new Date(new Date("12/9/24").setHours(8, 0, 0, 0)),
+    endDate: new Date(new Date("12/9/24").setHours(11, 0, 0, 0)),
     isOverall: true,
-    isScored: true,
+    isScored: false,
   },
   {
     name: "Laro ng Lahi",

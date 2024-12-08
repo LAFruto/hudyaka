@@ -7,7 +7,7 @@ import { Link } from "@remix-run/react";
 import { getEventStatus } from "~/lib/util";
 import { CountdownTimer } from "../CountdownTimer";
 import { useCurrentTime } from "~/hooks/useCurrentTime";
-import Clock from "../icons/clock";
+import Clock from "../icons/Clock";
 
 interface ActivityBannerProps {
   activity: ActivityRecord;

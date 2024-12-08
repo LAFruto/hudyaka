@@ -35,7 +35,7 @@ const ScoreMedal = ({ team }: ScoreMedalProps) => {
             {team.teamName}
           </p>
           <p className="px-4 sm:mt-2 font-bold text-lg sm:text-xl md:text-2xl bg-white rounded-full text-red-800">
-            {team.score}
+            {/* {team.score} */}0
           </p>
         </div>
         <div className="w-full p-2 absolute -translate-y-1/4">
