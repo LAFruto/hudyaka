@@ -32,7 +32,7 @@ export const CountdownTimer = ({
   }, [timeUntilStart, currentTime]);
 
   if (remainingTime === null) {
-    return <div className={className}>Loading...</div>;
+    return <div className={className}>Starting in 00:00:00</div>;
   }
 
   const hours = Math.floor(remainingTime / (1000 * 60 * 60));
