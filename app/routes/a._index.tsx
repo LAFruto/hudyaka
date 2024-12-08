@@ -1,5 +1,7 @@
+import { redirect } from "@remix-run/react";
+
 const Test = () => {
-  return <div>g</div>;
+  return redirect("/");
 };
 
 export default Test;
