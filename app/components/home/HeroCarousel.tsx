@@ -84,7 +84,7 @@ const HeroCarousel = ({ activities }: HeroCarouselProps) => {
                     width={1024}
                     fill
                     aria-label={event.name}
-                    className="object-contain h-full w-full overflow-hidden"
+                    className="object-contain h-full w-full overflow-hidden brightness-90 bg-slate-900"
                   />
                   <div className="flex justify-end p-6">
                     {scrollSnaps.map((_, index) => (
@@ -108,7 +108,7 @@ const HeroCarousel = ({ activities }: HeroCarouselProps) => {
                       </div>
                       <div className="self-start lg:self-end  ease-in-out duration-300 transition-all">
                         {status.type === "ongoing" ? (
-                          <p className="mt-2 inline-flex w-full justify-center rounded-lg items-center gap-2 text-white lg:px-4 py-1.5">
+                          <div className="mt-2 inline-flex w-full justify-center rounded-lg items-center gap-2 text-white lg:px-4 py-1.5">
                             <div className="h-6 md:h-10 overflow-hidden mr-2">
                               <div className="transform transition-transform duration-300 ease-in-out group-hover:-translate-y-1/2">
                                 <p className="text-lg md:text-4xl font-bold leading-4  md:leading-9 ">
@@ -119,30 +119,30 @@ const HeroCarousel = ({ activities }: HeroCarouselProps) => {
                                 </p>
                               </div>
                             </div>
-                          </p>
+                          </div>
                         ) : status.type === "countdown" ? (
-                          <p className="mt-2 inline-flex w-full justify-center rounded-lg items-center gap-2 text-white lg:px-4 py-1.5">
+                          <div className="mt-2 inline-flex w-full justify-center rounded-lg items-center gap-2 text-white lg:px-4 py-1.5">
                             <div className="h-6 md:h-10 overflow-hidden mr-2">
                               <div className="transform transition-transform duration-300 ease-in-out group-hover:-translate-y-1/2">
-                                <p className="text-lg md:text-4xl font-bold ">
+                                <div className="text-lg md:text-4xl font-bold ">
                                   <CountdownTimer
                                     timeUntilStart={status.timeUntilStart}
                                     currentTime={currentTime}
                                     className="leading-4 md:leading-9"
                                   />
-                                </p>
-                                <p className="text-lg md:text-4xl font-bold ">
+                                </div>
+                                <div className="text-lg md:text-4xl font-bold ">
                                   <CountdownTimer
                                     timeUntilStart={status.timeUntilStart}
                                     currentTime={currentTime}
                                     className="md:leading-10 py-2"
                                   />
-                                </p>
+                                </div>
                               </div>
                             </div>
-                          </p>
+                          </div>
                         ) : (
-                          <p className="mt-2 inline-flex w-full justify-center rounded-lg items-center gap-2 text-white lg:px-4 py-1.5">
+                          <div className="mt-2 inline-flex w-full justify-center rounded-lg items-center gap-2 text-white lg:px-4 py-1.5">
                             <div className="h-5 md:h-10 overflow-hidden mr-2">
                               <div className="transform transition-transform duration-300 ease-in-out group-hover:-translate-y-1/2">
                                 <p className="text-lg md:text-4xl font-bold">
@@ -156,7 +156,7 @@ const HeroCarousel = ({ activities }: HeroCarouselProps) => {
                             <div className="w-[30px] h-[30px] -rotate-45 group-hover:translate-x-2 transform transition-transform duration-300 ease-in-out">
                               <Arrow />
                             </div>
-                          </p>
+                          </div>
                         )}
                       </div>
                     </div>

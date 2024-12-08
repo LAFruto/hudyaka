@@ -9,7 +9,7 @@ import { getActivitiesByType } from "~/models";
 
 export const meta: MetaFunction = () => {
   return [
-    { title: "Hudyaka - Mapúa MCM Foundation Week" },
+    { title: "Hudyaka Mapúa MCM" },
     {
       name: "Mapúa MCM 9th Foundation - Website",
       content:
@@ -17,7 +17,7 @@ export const meta: MetaFunction = () => {
     },
     {
       property: "og:title",
-      content: "Hudyaka",
+      content: "Hudyaka - Mapúa MCM Foundation Week",
     },
     {
       property: "og:description",

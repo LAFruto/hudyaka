@@ -31,12 +31,12 @@ const ActivityBanner = ({ activity }: ActivityBannerProps) => {
           width={1024}
           fill
           aria-label="API"
-          className="object-contain h-full w-full overflow-hidden rounded-3xl"
+          className="object-contain h-full w-full overflow-hidden rounded-3xl brightness-50 bg-slate-900"
         />
         <div className="flex w-full justify-between">
           <Link
             to="/"
-            prefetch="render"
+            prefetch="viewport"
             className="inline-flex w-full rounded-lg items-center gap-2 text-white lg:px-4 py-1.5 group"
           >
             <div className="w-[15px] h-[15px] md:w-[30px] md:h-[30px] rotate-135 mr-2 group-hover:-translate-x-2 transform transition-transform duration-300 ease-in-out">
