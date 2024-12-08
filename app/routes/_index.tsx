@@ -17,7 +17,7 @@ export const meta: MetaFunction = () => {
     },
     {
       property: "og:title",
-      content: "Hudyaka - Mapúa MCM Foundation Week",
+      content: "Hudyaka",
     },
     {
       property: "og:description",

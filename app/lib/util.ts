@@ -1,5 +1,3 @@
-import { addHours } from "date-fns";
-
 import { ClassValue, clsx } from "clsx";
 import { twMerge } from "tailwind-merge";
 import { TIMEZONE_OFFSET } from "~/constants";
@@ -110,7 +108,8 @@ export function getEventStatus(
   isScored: boolean
 ): EventStatus {
   const serverNow = new Date();
-  const phNow = addHours(serverNow, TIMEZONE_OFFSET);
+  const phNow = new Date(serverNow);
+  phNow.setHours(phNow.getHours() + TIMEZONE_OFFSET);
   const startDate = new Date(start);
   const endDate = new Date(end);
 
