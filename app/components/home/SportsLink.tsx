@@ -11,6 +11,7 @@ const SportsLink = ({ className }: SportsLinkProps) => {
   return (
     <Link
       to="/#sports"
+      prefetch="viewport"
       className={cn(
         "flex flex-col justify-between gap-8 rounded-3xl bg-red-600 h-full p-6 group cursor-pointer hover:opacity-90 transition-all",
         className

@@ -57,18 +57,18 @@ const Events = ({ events }: EventsProps) => {
                     <div className="flex justify-center text-center self-center px-2 lg:px-6 py-1 w-full text-blue-800 border md:text-lg truncate text-nowrap font-semibold rounded-full cursor-pointer group">
                       <div className="h-4 sm:h-6 overflow-hidden mr-2">
                         <div className="transform transition-transform duration-300 ease-in-out group-hover:-translate-y-1/2">
-                          <p className="text-xs text-nowrap sm:text-base h-4 sm:h-6">
+                          <div className="text-xs text-nowrap sm:text-base h-4 sm:h-6">
                             <CountdownTimer
                               timeUntilStart={eventStatus.timeUntilStart}
                               currentTime={currentTime}
                             />
-                          </p>
-                          <p className="text-xs text-nowrap sm:text-base h-4 sm:h-6">
+                          </div>
+                          <div className="text-xs text-nowrap sm:text-base h-4 sm:h-6">
                             <CountdownTimer
                               timeUntilStart={eventStatus.timeUntilStart}
                               currentTime={currentTime}
                             />
-                          </p>
+                          </div>
                         </div>
                       </div>
                     </div>

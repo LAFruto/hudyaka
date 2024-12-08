@@ -1,3 +1,5 @@
+import { useEffect, useState } from "react";
+
 interface CountdownTimerProps {
   timeUntilStart: number;
   currentTime: Date;
@@ -9,10 +11,30 @@ export const CountdownTimer = ({
   currentTime,
   className,
 }: CountdownTimerProps) => {
-  const remainingTime = Math.max(
-    0,
-    timeUntilStart - (new Date().getTime() - currentTime.getTime())
-  );
+  const [remainingTime, setRemainingTime] = useState<number | null>(null);
+
+  useEffect(() => {
+    const calculateRemainingTime = () => {
+      const now = new Date();
+      return Math.max(
+        0,
+        timeUntilStart - (now.getTime() - currentTime.getTime())
+      );
+    };
+
+    setRemainingTime(calculateRemainingTime());
+
+    const timer = setInterval(() => {
+      setRemainingTime(calculateRemainingTime());
+    }, 1000);
+
+    return () => clearInterval(timer);
+  }, [timeUntilStart, currentTime]);
+
+  if (remainingTime === null) {
+    return <div className={className}>Loading...</div>;
+  }
+
   const hours = Math.floor(remainingTime / (1000 * 60 * 60));
   const minutes = Math.floor((remainingTime % (1000 * 60 * 60)) / (1000 * 60));
   const seconds = Math.floor((remainingTime % (1000 * 60)) / 1000);
