@@ -2,12 +2,8 @@ import { Form } from "@remix-run/react";
 
 import { useForm } from "react-hook-form";
 
-const ncvj4fu3e3 = () => {
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm();
+const Ncvj4fu3e3 = () => {
+  const { register } = useForm();
 
   return (
     <div className="min-h-[80vh] flex justify-center items-center">
@@ -68,4 +64,4 @@ const ncvj4fu3e3 = () => {
   );
 };
 
-export default ncvj4fu3e3;
+export default Ncvj4fu3e3;

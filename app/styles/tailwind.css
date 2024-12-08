@@ -25,7 +25,7 @@
   /* #region  /**=========== Default Typography =========== */
   h1,
   .h1 {
-    @apply font-header md:text-7xl text-6xl text-center lg:text-start uppercase;
+    @apply md:text-7xl text-6xl text-center lg:text-start uppercase;
   }
 
   h2,

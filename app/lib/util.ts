@@ -189,7 +189,3 @@ export function getEventStatus(
     message: "Results are out!",
   };
 }
-
-export function getHeroCarousel() {
-  return;
-}
