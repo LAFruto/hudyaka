@@ -86,7 +86,7 @@ export function getFakeLeaderboardById() {
     startDate: new Date(new Date("12/9/24").setHours(8, 0, 0, 0)),
     endDate: new Date(new Date("12/9/24").setHours(11, 0, 0, 0)),
     isOverall: true,
-    isScored: false,
+    isScored: true,
   },
   {
     name: "Laro ng Lahi",
@@ -255,7 +255,7 @@ export function getFakeLeaderboardById() {
     startDate: new Date(new Date("12/12/24").setHours(10, 0, 0, 0)),
     endDate: new Date(new Date("12/12/24").setHours(19, 0, 0, 0)),
     isOverall: false,
-    isScored: true,
+    isScored: false,
   },
   {
     name: "Mobile Legends",

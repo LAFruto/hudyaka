@@ -54,7 +54,7 @@ const ActivityLeaderboard = () => {
 
   return (
     <section className="max-container padding-container flex flex-col w-full py-4">
-      <div className="h-full mb-0 lg:mb-48 xl:mb-64">
+      <div className="h-full mb-0 lg:mb-48 xl:mb-80">
         <div className="mb-4 flex lg:inline-flex  justify-center lg:max-x-0 lg:w-auto lg:flex-shrink-0 gap-4 text-lg font-semibold bg-red-800 rounded-lg px-6 py-4">
           <div className="w-[40px] h-[40px]">
             <Medal />
