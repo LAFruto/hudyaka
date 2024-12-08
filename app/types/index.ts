@@ -45,8 +45,10 @@ export type Person = {
 
 // NONE DB
 export type EventStatus =
-  | { type: "upcoming" | "ongoing" | "finished"; message: string }
-  | { type: "countdown"; timeUntilStart: number };
+  | { type: "upcoming"; message: string; timeRange: string }
+  | { type: "countdown"; timeUntilStart: number; timeRange: string }
+  | { type: "ongoing"; message: string }
+  | { type: "finished"; message: string };
 
 // TEMP
 export type TempTeam = {

@@ -30,12 +30,12 @@ const ScoreMedal = ({ team }: ScoreMedalProps) => {
         </p>
       </div>
       <div className="relative w-full self-start ">
-        <div className="absolute mt-9 sm:mt-12 z-10 flex flex-col items-center justify-center w-full h-full">
-          <p className="uppercase px-2 pt-2 font-bold text-lg sm:text-xl text-center rounded-md text-white">
+        <div className="absolute mt-9 sm:mt-16 z-10 flex flex-col items-center justify-center w-full h-full">
+          <p className="uppercase px-2 pt-2 font-bold text-lg text-center rounded-md text-white">
             {team.teamName}
           </p>
           <p className="px-4 sm:mt-2 font-bold text-lg sm:text-xl md:text-2xl bg-white rounded-full text-red-800">
-            {team.score}
+            {/* {team.score} */}0
           </p>
         </div>
         <div className="w-full p-2 absolute -translate-y-1/4">

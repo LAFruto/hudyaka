@@ -32,7 +32,7 @@ const TeamScoreCard = ({ team }: TeamScoreCardProps) => {
         </p>
         <div className="mr-auto rounded-full bg-white mt-4">
           <p className="text-lg md:text-xl px-4 tracking-wider font-bold text-red-700">
-            {team.score}
+            {/* {team.score} */}0
           </p>
         </div>
       </div>

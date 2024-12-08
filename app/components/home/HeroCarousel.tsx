@@ -108,7 +108,7 @@ const HeroCarousel = ({ activities }: HeroCarouselProps) => {
                       </div>
                       <div className="self-start lg:self-end  ease-in-out duration-300 transition-all">
                         {status.type === "ongoing" ? (
-                          <p className="inline-flex w-full justify-center rounded-lg items-center gap-2 text-white lg:px-4 py-1.5">
+                          <p className="mt-2 inline-flex w-full justify-center rounded-lg items-center gap-2 text-white lg:px-4 py-1.5">
                             <div className="h-6 md:h-10 overflow-hidden mr-2">
                               <div className="transform transition-transform duration-300 ease-in-out group-hover:-translate-y-1/2">
                                 <p className="text-lg md:text-4xl font-bold leading-4  md:leading-9 ">
@@ -121,7 +121,7 @@ const HeroCarousel = ({ activities }: HeroCarouselProps) => {
                             </div>
                           </p>
                         ) : status.type === "countdown" ? (
-                          <p className="inline-flex w-full justify-center rounded-lg items-center gap-2 text-white lg:px-4 py-1.5">
+                          <p className="mt-2 inline-flex w-full justify-center rounded-lg items-center gap-2 text-white lg:px-4 py-1.5">
                             <div className="h-6 md:h-10 overflow-hidden mr-2">
                               <div className="transform transition-transform duration-300 ease-in-out group-hover:-translate-y-1/2">
                                 <p className="text-lg md:text-4xl font-bold ">
@@ -142,7 +142,7 @@ const HeroCarousel = ({ activities }: HeroCarouselProps) => {
                             </div>
                           </p>
                         ) : (
-                          <p className="inline-flex w-full justify-center rounded-lg items-center gap-2 text-white lg:px-4 py-1.5">
+                          <p className="mt-2 inline-flex w-full justify-center rounded-lg items-center gap-2 text-white lg:px-4 py-1.5">
                             <div className="h-5 md:h-10 overflow-hidden mr-2">
                               <div className="transform transition-transform duration-300 ease-in-out group-hover:-translate-y-1/2">
                                 <p className="text-lg md:text-4xl font-bold">

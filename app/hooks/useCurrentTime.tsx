@@ -10,6 +10,5 @@ export function useCurrentTime() {
 
     return () => clearInterval(timer);
   }, []);
-
   return currentTime;
 }

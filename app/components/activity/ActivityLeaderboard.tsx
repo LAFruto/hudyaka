@@ -9,43 +9,38 @@ const teams: TempTeam[] = [
     teamNumber: 1,
     teamName: "kadayawan",
     image: "/teams/kadayawan.png",
-    score: 120,
+    score: 1,
   },
-  {
-    teamNumber: 2,
-    teamName: "pinagbenga",
-    image: "/teams/pinagbenga.png",
-    score: 130,
-  },
+
   {
     teamNumber: 3,
     teamName: "pintados",
     image: "/teams/pintados.png",
-    score: 140,
+    score: 3,
   },
   {
     teamNumber: 4,
     teamName: "sinulog",
     image: "/teams/sinulog.png",
-    score: 100,
+    score: 4,
   },
   {
     teamNumber: 5,
     teamName: "ati-atihan",
     image: "/teams/ati-atihan.png",
-    score: 95,
+    score: 5,
   },
   {
     teamNumber: 6,
     teamName: "masskara",
     image: "/teams/masskara.png",
-    score: 94,
+    score: 6,
   },
   {
     teamNumber: 7,
     teamName: "dinagyang",
     image: "/teams/dinagyang.png",
-    score: 93,
+    score: 7,
   },
 ];
 
@@ -54,7 +49,7 @@ const ActivityLeaderboard = () => {
 
   return (
     <section className="max-container padding-container flex flex-col w-full py-4">
-      <div className="h-full mb-0 lg:mb-48 xl:mb-64">
+      <div className="h-full mb-0 lg:mb-48 xl:mb-80">
         <div className="mb-4 flex lg:inline-flex  justify-center lg:max-x-0 lg:w-auto lg:flex-shrink-0 gap-4 text-lg font-semibold bg-red-800 rounded-lg px-6 py-4">
           <div className="w-[40px] h-[40px]">
             <Medal />

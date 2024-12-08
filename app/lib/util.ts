@@ -1,5 +1,6 @@
 import { ClassValue, clsx } from "clsx";
 import { twMerge } from "tailwind-merge";
+import { TIMEZONE_OFFSET } from "~/constants";
 import { EventStatus, TempTeam, TempTeamRank } from "~/types";
 
 export function cn(...inputs: ClassValue[]) {
@@ -106,7 +107,9 @@ export function getEventStatus(
   end: Date,
   isScored: boolean
 ): EventStatus {
-  const now = new Date();
+  const serverNow = new Date();
+  const phNow = new Date(serverNow);
+  phNow.setHours(phNow.getHours() + TIMEZONE_OFFSET);
   const startDate = new Date(start);
   const endDate = new Date(end);
 
@@ -114,22 +117,40 @@ export function getEventStatus(
     throw new Error("Invalid start or end date provided");
   }
 
-  const timeUntilStart = startDate.getTime() - now.getTime();
-  const timeUntilEnd = endDate.getTime() - now.getTime();
-
   const oneDayMs = 24 * 60 * 60 * 1000; // Milliseconds in a day
+
+  // Get calendar day differences, ignoring time
+  const daysUntilStart = Math.ceil(
+    (startDate.getTime() - phNow.getTime()) / oneDayMs
+  );
+
+  const timeUntilStart = startDate.getTime() - phNow.getTime();
+  const timeUntilEnd = endDate.getTime() - phNow.getTime();
+
+  // Format time range as "4:00 PM - 5:00 PM"
+  const timeRange = `${startDate.toLocaleTimeString("en-US", {
+    hour: "2-digit",
+    minute: "2-digit",
+    hour12: true,
+  })} - ${endDate.toLocaleTimeString("en-US", {
+    hour: "2-digit",
+    minute: "2-digit",
+    hour12: true,
+  })}`;
 
   // Check if the event hasn't started yet
   if (timeUntilStart > 0) {
-    if (timeUntilStart <= oneDayMs) {
+    if (timeUntilStart < oneDayMs) {
       return {
         type: "countdown",
         timeUntilStart,
+        timeRange: timeRange,
       };
-    } else if (timeUntilStart <= 2 * oneDayMs) {
+    } else if (daysUntilStart === 1) {
       return {
         type: "upcoming",
         message: "Starting Tomorrow!",
+        timeRange: timeRange,
       };
     }
 
@@ -138,6 +159,7 @@ export function getEventStatus(
       message: `${start.toLocaleString("en-US", {
         month: "long",
       })} ${start.getDate()}`,
+      timeRange: timeRange,
     };
   }
 
