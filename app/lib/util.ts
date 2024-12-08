@@ -1,12 +1,8 @@
+import { addHours } from "date-fns";
+
 import { ClassValue, clsx } from "clsx";
-import {
-  differenceInCalendarDays,
-  differenceInMilliseconds,
-  format,
-} from "date-fns";
-import { toZonedTime } from "date-fns-tz";
 import { twMerge } from "tailwind-merge";
-import { PHT_TIMEZONE } from "~/constants";
+import { TIMEZONE_OFFSET } from "~/constants";
 import { EventStatus, TempTeam, TempTeamRank } from "~/types";
 
 export function cn(...inputs: ClassValue[]) {
@@ -113,10 +109,10 @@ export function getEventStatus(
   end: Date,
   isScored: boolean
 ): EventStatus {
-  const now = new Date();
-  const phtNow = toZonedTime(now, PHT_TIMEZONE);
-  const startDate = toZonedTime(start, PHT_TIMEZONE);
-  const endDate = toZonedTime(end, PHT_TIMEZONE);
+  const serverNow = new Date();
+  const phNow = addHours(serverNow, TIMEZONE_OFFSET);
+  const startDate = new Date(start);
+  const endDate = new Date(end);
 
   if (isNaN(startDate.getTime()) || isNaN(endDate.getTime())) {
     throw new Error("Invalid start or end date provided");
@@ -125,16 +121,23 @@ export function getEventStatus(
   const oneDayMs = 24 * 60 * 60 * 1000; // Milliseconds in a day
 
   // Get calendar day differences, ignoring time
-  const daysUntilStart = differenceInCalendarDays(startDate, phtNow);
+  const daysUntilStart = Math.ceil(
+    (startDate.getTime() - phNow.getTime()) / oneDayMs
+  );
 
-  const timeUntilStart = differenceInMilliseconds(startDate, phtNow);
-  const timeUntilEnd = differenceInMilliseconds(endDate, phtNow);
+  const timeUntilStart = startDate.getTime() - phNow.getTime();
+  const timeUntilEnd = endDate.getTime() - phNow.getTime();
 
   // Format time range as "4:00 PM - 5:00 PM"
-  const timeRange = `${format(startDate, "h:mm a")} - ${format(
-    endDate,
-    "h:mm a"
-  )}`;
+  const timeRange = `${startDate.toLocaleTimeString("en-US", {
+    hour: "2-digit",
+    minute: "2-digit",
+    hour12: true,
+  })} - ${endDate.toLocaleTimeString("en-US", {
+    hour: "2-digit",
+    minute: "2-digit",
+    hour12: true,
+  })}`;
 
   // Check if the event hasn't started yet
   if (timeUntilStart > 0) {
@@ -154,7 +157,9 @@ export function getEventStatus(
 
     return {
       type: "upcoming",
-      message: format(startDate, "MMMM d"),
+      message: `${start.toLocaleString("en-US", {
+        month: "long",
+      })} ${start.getDate()}`,
       timeRange: timeRange,
     };
   }
@@ -172,4 +177,8 @@ export function getEventStatus(
     type: "finished",
     message: "Results are out!",
   };
+}
+
+export function getHeroCarousel() {
+  return;
 }

@@ -37,10 +37,10 @@ export function Layout({ children }: { children: React.ReactNode }) {
       <body className="bg-background/50 text-blue-950 flex flex-col relative min-h-screen">
         <Pattern />
         <div className="relative z-10">{children}</div>
-        <ScrollRestoration />
-        <Scripts />
         <Analytics />
         <SpeedInsights />
+        <Scripts />
+        <ScrollRestoration />
       </body>
     </html>
   );
