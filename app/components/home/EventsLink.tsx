@@ -23,17 +23,17 @@ const EventsLink = ({ className }: EventsLinkProps) => {
       <div className="flex text-white items-end justify-between">
         <div className="flex flex-col leading-tight">
           <div className="h-8 md:h-11 overflow-hidden">
-            <span className="transform transition-transform duration-300 ease-in-out group-hover:-translate-y-1/2">
+            <div className="transform transition-transform duration-300 ease-in-out group-hover:-translate-y-1/2">
               <p className="text-2xl md:text-4xl font-bold h-8 md:h-11">
                 Events
               </p>
               <p className="text-2xl md:text-4xl font-bold h-8 md:h-11">
                 Events
               </p>
-            </span>
+            </div>
           </div>
           <p className="text-xs md:text-base text-nowrap">
-            View event results!
+            View Events results!
           </p>
         </div>
         <span className="w-[30px] h-[30px] mb-1">
