@@ -12,12 +12,6 @@ const teams: TempTeam[] = [
     score: 7,
   },
   {
-    teamNumber: 2,
-    teamName: "pinagbenga",
-    image: "/teams/pinagbenga.png",
-    score: 6,
-  },
-  {
     teamNumber: 3,
     teamName: "pintados",
     image: "/teams/pintados.png",

@@ -213,7 +213,7 @@ export function getFakeLeaderboardById() {
     startDate: new Date(new Date("12/10/24").setHours(8, 0, 0, 0)),
     endDate: new Date(new Date("12/10/24").setHours(21, 0, 0, 0)),
     isOverall: false,
-    isScored: true,
+    isScored: false,
   },
   {
     name: "Scrabble",
@@ -235,7 +235,7 @@ export function getFakeLeaderboardById() {
     startDate: new Date(new Date("12/10/24").setHours(8, 0, 0, 0)),
     endDate: new Date(new Date("12/10/24").setHours(21, 0, 0, 0)),
     isOverall: false,
-    isScored: true,
+    isScored: false,
   },
   {
     name: "Chess",
@@ -257,7 +257,7 @@ export function getFakeLeaderboardById() {
     startDate: new Date(new Date("12/10/24").setHours(8, 0, 0, 0)),
     endDate: new Date(new Date("12/10/24").setHours(20, 0, 0, 0)),
     isOverall: false,
-    isScored: true,
+    isScored: false,
   },
   {
     name: "Volleyball",
@@ -268,7 +268,7 @@ export function getFakeLeaderboardById() {
     startDate: new Date(new Date("12/9/24").setHours(13, 0, 0, 0)),
     endDate: new Date(new Date("12/9/24").setHours(18, 0, 0, 0)),
     isOverall: false,
-    isScored: true,
+    isScored: false,
   },
   {
     name: "Basketball",
