@@ -9,16 +9,43 @@ datasource db {
 }
 
 model Activity {
-  id             Int             @id @default(autoincrement())
-  name           String
+  id             Int    @id @default(autoincrement())
+  name           String @unique
   activityTypeId Int
+  parentId       Int?
+
+  // PARADE OF FESTIVALS (MR, MS, LIVELIEST DELEGATION, BEST FLOAT, BEST PERFORMANCE)
+
+  // TAWAG NG TANGHALAN (SOLO, DUET)
+  // SINAG MR AND MS (MR, MS, PHOTOGRAPHER, MAKEUP ARTIST, FASHION DESIGNER)
+  // LARO NG LAHI
+  // COSPLAY
+  // BATTLE OF THE BANDS
+  // SPOKEN POETRY
+  // KILLER KARAOKE
+  // MAPUA KALOKALIKE WITH TALENT
+  // INDAK MAPUA
+  // FOLK DANCE COMPE
+
+  // TABLE TENNIS
+  // BADMINTION
+  // VOLLEYBALL
+  // BASKETBALL
+  // CHESS, SCRABBLE
+  // ESPORTS
+
   activityType   ActivityType    @relation(fields: [activityTypeId], references: [id])
   activityFrames ActivityFrame[]
+
+  parent   Activity?  @relation(name: "Parent", fields: [parentId], references: [id])
+  children Activity[] @relation(name: "Parent")
+
+  // @@unique([name, activityTypeId])
 }
 
 model ActivityType {
   id   Int    @id @default(autoincrement())
-  name String
+  name String @unique
 
   // event, sport 
 
@@ -29,7 +56,7 @@ model Cluster {
   id             Int    @id @default(autoincrement())
   image          String
   num            Int?
-  name           String
+  name           String @unique
   altName        String // KADAYAWAN, MASKARA, ATI-ATIHAN 
   clusterGroupId Int
 
@@ -40,27 +67,31 @@ model Cluster {
 
   clusterGroup ClusterGroup @relation(fields: [clusterGroupId], references: [id])
 
-  teams Team[]
+  teams        Team[]
+  participants Participant[]
 }
 
 model ActivityFrame {
   id         Int @id @default(autoincrement())
-  activityId Int // refer to activityId.name for frontend pathing
+  activityId Int // refer to activityId.name for frontend pathing 
 
   startDateTime DateTime
   endDateTime   DateTime
-  isOverall     Boolean
-  isScored      Boolean
+
+  isOverall Boolean
+  isScored  Boolean
 
   activity Activity @relation(fields: [activityId], references: [id])
 
   teams        Team[]
   participants Participant[]
+
+  @@unique([activityId, startDateTime, endDateTime, isOverall, isScored])
 }
 
 model ClusterGroup {
   id   Int    @id @default(autoincrement())
-  name String
+  name String @unique
 
   // COLLEGE, SHS, JHS, EMPLOYEE
   clusters Cluster[]
@@ -85,18 +116,24 @@ model Participant {
   name            String
   altName         String
   activityFrameId Int
+  clusterId       Int
 
   activityFrame ActivityFrame @relation(fields: [activityFrameId], references: [id])
   teams         Team[]
   tallies       Tally[]
+
+  cluster Cluster @relation(fields: [clusterId], references: [id])
 }
 
 model Tally {
-  id            Int    @id @default(autoincrement())
+  id            Int  @id @default(autoincrement())
+  clusterId     Int
   teamId        Int?
   participantId Int?
-  score         Float?
-  rank          Int
+
+  total Float?
+  score Float?
+  rank  Int
 
   team        Team?        @relation(fields: [teamId], references: [id])
   participant Participant? @relation(fields: [participantId], references: [id])
