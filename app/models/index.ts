@@ -1,8 +1,6 @@
 // @ts-expect-error - no types, but it's a tiny function
-import { toZonedTime } from "date-fns-tz";
 import sortBy from "sort-by";
 import invariant from "tiny-invariant";
-import { PHT_TIMEZONE } from "~/constants";
 import { ActivityRecord, ActivityMutation, ActivityType } from "~/types";
 
 // TODO
@@ -85,16 +83,10 @@ export function getFakeLeaderboardById() {
     image: "/activities/parade-of-festivals.png",
     banner: "/banner/parade-of-festivals.png",
     url: "/a/parade-of-festivals",
-    startDate: toZonedTime(
-      new Date(new Date("12/9/24").setHours(8, 0, 0, 0)),
-      PHT_TIMEZONE
-    ),
-    endDate: toZonedTime(
-      new Date(new Date("12/9/24").setHours(11, 0, 0, 0)),
-      PHT_TIMEZONE
-    ),
+    startDate: new Date(new Date("12/8/24").setHours(8, 0, 0, 0)),
+    endDate: new Date(new Date("12/8/24").setHours(9, 0, 0, 0)),
     isOverall: true,
-    isScored: true,
+    isScored: false,
   },
   {
     name: "Laro ng Lahi",
@@ -102,14 +94,8 @@ export function getFakeLeaderboardById() {
     image: "/activities/laro-ng-lahi.png",
     banner: "/banner/laro-ng-lahi.png",
     url: "/a/laro-ng-lahi",
-    startDate: toZonedTime(
-      new Date(new Date("12/9/24").setHours(13, 0, 0, 0)),
-      PHT_TIMEZONE
-    ),
-    endDate: toZonedTime(
-      new Date(new Date("12/9/24").setHours(16, 0, 0, 0)),
-      PHT_TIMEZONE
-    ),
+    startDate: new Date(new Date("12/9/24").setHours(13, 0, 0, 0)),
+    endDate: new Date(new Date("12/9/24").setHours(16, 0, 0, 0)),
     isOverall: true,
     isScored: false,
   },
@@ -119,14 +105,8 @@ export function getFakeLeaderboardById() {
     image: "/activities/sinag.png",
     banner: "/banner/sinag.png",
     url: "/a/sinag",
-    startDate: toZonedTime(
-      new Date(new Date("12/9/24").setHours(16, 0, 0, 0)),
-      PHT_TIMEZONE
-    ),
-    endDate: toZonedTime(
-      new Date(new Date("12/9/24").setHours(20, 0, 0, 0)),
-      PHT_TIMEZONE
-    ),
+    startDate: new Date(new Date("12/9/24").setHours(16, 0, 0, 0)),
+    endDate: new Date(new Date("12/9/24").setHours(20, 0, 0, 0)),
     isOverall: true,
     isScored: false,
   },
@@ -136,14 +116,8 @@ export function getFakeLeaderboardById() {
     image: "/activities/cosplay.png",
     banner: "/banner/cosplay.png",
     url: "/a/cosplay",
-    startDate: toZonedTime(
-      new Date(new Date("12/10/24").setHours(9, 0, 0, 0)),
-      PHT_TIMEZONE
-    ),
-    endDate: toZonedTime(
-      new Date(new Date("12/10/24").setHours(12, 0, 0, 0)),
-      PHT_TIMEZONE
-    ),
+    startDate: new Date(new Date("12/10/24").setHours(9, 0, 0, 0)),
+    endDate: new Date(new Date("12/10/24").setHours(12, 0, 0, 0)),
     isOverall: true,
     isScored: false,
   },
@@ -153,14 +127,8 @@ export function getFakeLeaderboardById() {
     image: "/activities/battle-of-the-bands.png",
     banner: "/banner/battle-of-the-bands.png",
     url: "/a/battle-of-the-bands",
-    startDate: toZonedTime(
-      new Date(new Date("12/10/24").setHours(15, 0, 0, 0)),
-      PHT_TIMEZONE
-    ),
-    endDate: toZonedTime(
-      new Date(new Date("12/10/24").setHours(18, 0, 0, 0)),
-      PHT_TIMEZONE
-    ),
+    startDate: new Date(new Date("12/10/24").setHours(15, 0, 0, 0)),
+    endDate: new Date(new Date("12/10/24").setHours(18, 0, 0, 0)),
     isOverall: true,
     isScored: false,
   },
@@ -170,14 +138,8 @@ export function getFakeLeaderboardById() {
     image: "/activities/spoken-poetry.png",
     banner: "/banner/spoken-poetry.png",
     url: "/a/spoken-poetry",
-    startDate: toZonedTime(
-      new Date(new Date("12/11/24").setHours(9, 0, 0, 0)),
-      PHT_TIMEZONE
-    ),
-    endDate: toZonedTime(
-      new Date(new Date("12/11/24").setHours(12, 0, 0, 0)),
-      PHT_TIMEZONE
-    ),
+    startDate: new Date(new Date("12/11/24").setHours(9, 0, 0, 0)),
+    endDate: new Date(new Date("12/11/24").setHours(12, 0, 0, 0)),
     isOverall: true,
     isScored: false,
   },
@@ -187,14 +149,8 @@ export function getFakeLeaderboardById() {
     image: "/activities/killer-karaoke.png",
     banner: "/banner/killer-karaoke.png",
     url: "/a/killer-karaoke",
-    startDate: toZonedTime(
-      new Date(new Date("12/11/24").setHours(9, 0, 0, 0)),
-      PHT_TIMEZONE
-    ),
-    endDate: toZonedTime(
-      new Date(new Date("12/11/24").setHours(12, 0, 0, 0)),
-      PHT_TIMEZONE
-    ),
+    startDate: new Date(new Date("12/11/24").setHours(9, 0, 0, 0)),
+    endDate: new Date(new Date("12/11/24").setHours(12, 0, 0, 0)),
     isOverall: true,
     isScored: false,
   },
@@ -204,14 +160,8 @@ export function getFakeLeaderboardById() {
     image: "/activities/kaloka-like-with-talent.png",
     banner: "/banner/kaloka-like-with-talent.png",
     url: "/a/kaloka-like-with-talent",
-    startDate: toZonedTime(
-      new Date(new Date("12/11/24").setHours(15, 0, 0, 0)),
-      PHT_TIMEZONE
-    ),
-    endDate: toZonedTime(
-      new Date(new Date("12/11/24").setHours(17, 0, 0, 0)),
-      PHT_TIMEZONE
-    ),
+    startDate: new Date(new Date("12/11/24").setHours(15, 0, 0, 0)),
+    endDate: new Date(new Date("12/11/24").setHours(17, 0, 0, 0)),
     isOverall: true,
     isScored: false,
   },
@@ -221,14 +171,8 @@ export function getFakeLeaderboardById() {
     image: "/activities/indak-mapua.png",
     banner: "/banner/indak-mapua.png",
     url: "/a/indak-mapua",
-    startDate: toZonedTime(
-      new Date(new Date("12/11/24").setHours(17, 0, 0, 0)),
-      PHT_TIMEZONE
-    ),
-    endDate: toZonedTime(
-      new Date(new Date("12/11/24").setHours(19, 0, 0, 0)),
-      PHT_TIMEZONE
-    ),
+    startDate: new Date(new Date("12/11/24").setHours(17, 0, 0, 0)),
+    endDate: new Date(new Date("12/11/24").setHours(19, 0, 0, 0)),
     isOverall: true,
     isScored: false,
   },
@@ -238,14 +182,8 @@ export function getFakeLeaderboardById() {
     image: "/activities/folk-dance.png",
     banner: "/banner/folk-dance.png",
     url: "/a/folk-dance",
-    startDate: toZonedTime(
-      new Date(new Date("12/12/24").setHours(9, 0, 0, 0)),
-      PHT_TIMEZONE
-    ),
-    endDate: toZonedTime(
-      new Date(new Date("12/12/24").setHours(12, 0, 0, 0)),
-      PHT_TIMEZONE
-    ),
+    startDate: new Date(new Date("12/12/24").setHours(9, 0, 0, 0)),
+    endDate: new Date(new Date("12/12/24").setHours(12, 0, 0, 0)),
     isOverall: true,
     isScored: false,
   },
@@ -255,14 +193,8 @@ export function getFakeLeaderboardById() {
     image: "/activities/tawag-ng-tanghalan.png",
     banner: "/banner/tawag-ng-tanghalan.png",
     url: "/a/tawag-ng-tanghalan",
-    startDate: toZonedTime(
-      new Date(new Date("12/12/24").setHours(9, 0, 0, 0)),
-      PHT_TIMEZONE
-    ),
-    endDate: toZonedTime(
-      new Date(new Date("12/12/24").setHours(12, 0, 0, 0)),
-      PHT_TIMEZONE
-    ),
+    startDate: new Date(new Date("12/12/24").setHours(9, 0, 0, 0)),
+    endDate: new Date(new Date("12/12/24").setHours(12, 0, 0, 0)),
     isOverall: true,
     isScored: false,
   },
@@ -272,14 +204,8 @@ export function getFakeLeaderboardById() {
     image: "/activities/petsyonista.png",
     banner: "/banner/petsyonista.png",
     url: "/a/petsyonista",
-    startDate: toZonedTime(
-      new Date(new Date("12/13/24").setHours(9, 0, 0, 0)),
-      PHT_TIMEZONE
-    ),
-    endDate: toZonedTime(
-      new Date(new Date("12/13/24").setHours(11, 0, 0, 0)),
-      PHT_TIMEZONE
-    ),
+    startDate: new Date(new Date("12/13/24").setHours(9, 0, 0, 0)),
+    endDate: new Date(new Date("12/13/24").setHours(11, 0, 0, 0)),
     isOverall: false,
     isScored: false,
   },
@@ -293,14 +219,8 @@ export function getFakeLeaderboardById() {
     image: "/activities/table-tennis.png",
     banner: "/banner/table-tennis.png",
     url: "/a/table-tennis",
-    startDate: toZonedTime(
-      new Date(new Date("12/10/24").setHours(8, 0, 0, 0)),
-      PHT_TIMEZONE
-    ),
-    endDate: toZonedTime(
-      new Date(new Date("12/10/24").setHours(21, 0, 0, 0)),
-      PHT_TIMEZONE
-    ),
+    startDate: new Date(new Date("12/10/24").setHours(8, 0, 0, 0)),
+    endDate: new Date(new Date("12/10/24").setHours(21, 0, 0, 0)),
     isOverall: false,
     isScored: true,
   },
@@ -310,14 +230,8 @@ export function getFakeLeaderboardById() {
     image: "/activities/scrabble.png",
     banner: "/banner/scrabble.png",
     url: "/a/scrabble",
-    startDate: toZonedTime(
-      new Date(new Date("12/12/24").setHours(10, 0, 0, 0)),
-      PHT_TIMEZONE
-    ),
-    endDate: toZonedTime(
-      new Date(new Date("12/12/24").setHours(19, 0, 0, 0)),
-      PHT_TIMEZONE
-    ),
+    startDate: new Date(new Date("12/12/24").setHours(10, 0, 0, 0)),
+    endDate: new Date(new Date("12/12/24").setHours(19, 0, 0, 0)),
     isOverall: false,
     isScored: false,
   },
@@ -327,14 +241,8 @@ export function getFakeLeaderboardById() {
     image: "/activities/badminton.png",
     banner: "/banner/badminton.png",
     url: "/a/badminton",
-    startDate: toZonedTime(
-      new Date(new Date("12/10/24").setHours(8, 0, 0, 0)),
-      PHT_TIMEZONE
-    ),
-    endDate: toZonedTime(
-      new Date(new Date("12/10/24").setHours(21, 0, 0, 0)),
-      PHT_TIMEZONE
-    ),
+    startDate: new Date(new Date("12/10/24").setHours(8, 0, 0, 0)),
+    endDate: new Date(new Date("12/10/24").setHours(21, 0, 0, 0)),
     isOverall: false,
     isScored: true,
   },
@@ -344,16 +252,10 @@ export function getFakeLeaderboardById() {
     image: "/activities/chess.png",
     banner: "/banner/chess.png",
     url: "/a/chess",
-    startDate: toZonedTime(
-      new Date(new Date("12/12/24").setHours(10, 0, 0, 0)),
-      PHT_TIMEZONE
-    ),
-    endDate: toZonedTime(
-      new Date(new Date("12/12/24").setHours(19, 0, 0, 0)),
-      PHT_TIMEZONE
-    ),
+    startDate: new Date(new Date("12/12/24").setHours(10, 0, 0, 0)),
+    endDate: new Date(new Date("12/12/24").setHours(19, 0, 0, 0)),
     isOverall: false,
-    isScored: false,
+    isScored: true,
   },
   {
     name: "Mobile Legends",
@@ -361,14 +263,8 @@ export function getFakeLeaderboardById() {
     image: "/activities/mobile-legends.png",
     banner: "/banner/mobile-legends.png",
     url: "/a/mobile-legends",
-    startDate: toZonedTime(
-      new Date(new Date("12/10/24").setHours(8, 0, 0, 0)),
-      PHT_TIMEZONE
-    ),
-    endDate: toZonedTime(
-      new Date(new Date("12/10/24").setHours(20, 0, 0, 0)),
-      PHT_TIMEZONE
-    ),
+    startDate: new Date(new Date("12/10/24").setHours(8, 0, 0, 0)),
+    endDate: new Date(new Date("12/10/24").setHours(20, 0, 0, 0)),
     isOverall: false,
     isScored: true,
   },
@@ -378,14 +274,8 @@ export function getFakeLeaderboardById() {
     image: "/activities/volleyball.png",
     banner: "/banner/volleyball.png",
     url: "/a/volleyball",
-    startDate: toZonedTime(
-      new Date(new Date("12/9/24").setHours(13, 0, 0, 0)),
-      PHT_TIMEZONE
-    ),
-    endDate: toZonedTime(
-      new Date(new Date("12/9/24").setHours(18, 0, 0, 0)),
-      PHT_TIMEZONE
-    ),
+    startDate: new Date(new Date("12/9/24").setHours(13, 0, 0, 0)),
+    endDate: new Date(new Date("12/9/24").setHours(18, 0, 0, 0)),
     isOverall: false,
     isScored: true,
   },
@@ -395,14 +285,8 @@ export function getFakeLeaderboardById() {
     image: "/activities/basketball.png",
     banner: "/banner/basketball.png",
     url: "/a/basketball",
-    startDate: toZonedTime(
-      new Date(new Date("12/13/24").setHours(7, 30, 0, 0)),
-      PHT_TIMEZONE
-    ),
-    endDate: toZonedTime(
-      new Date(new Date("12/13/24").setHours(12, 0, 0, 0)),
-      PHT_TIMEZONE
-    ),
+    startDate: new Date(new Date("12/13/24").setHours(7, 30, 0, 0)),
+    endDate: new Date(new Date("12/13/24").setHours(12, 0, 0, 0)),
     isOverall: false,
     isScored: false,
   },
