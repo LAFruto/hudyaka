@@ -1,13 +1,15 @@
 import { LoaderFunctionArgs } from "@remix-run/node";
 import { useLoaderData } from "@remix-run/react";
-import invariant from "tiny-invariant";
 import ActivityBanner from "~/components/activity/ActivityBanner";
 import ActivityLeaderboard from "~/components/activity/ActivityLeaderboard";
 import ActivityLinks from "~/components/activity/ActivityLinks";
 import { getActivityById } from "~/models";
 
 export const loader = async ({ params }: LoaderFunctionArgs) => {
-  invariant(params.activityId, "Missing activityId param");
+  if (!params.activityId) {
+    throw new Response("Activity ID is required", { status: 400 });
+  }
+
   const event = await getActivityById(params.activityId);
   if (!event) {
     throw new Response("Not Found", { status: 404 });
