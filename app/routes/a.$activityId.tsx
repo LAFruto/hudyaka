@@ -3,8 +3,7 @@ import { useLoaderData } from "@remix-run/react";
 import ActivityBanner from "~/components/activity/ActivityBanner";
 import ActivityLeaderboard from "~/components/activity/ActivityLeaderboards";
 import ActivityLinks from "~/components/activity/ActivityLinks";
-import { RESULTS } from "~/constants";
-import { getActivityById } from "~/models";
+import { getActivityById, getLeaderboardById } from "~/models";
 
 export const loader = async ({ params }: LoaderFunctionArgs) => {
   if (!params.activityId) {
@@ -16,7 +15,9 @@ export const loader = async ({ params }: LoaderFunctionArgs) => {
     throw new Response("Not Found", { status: 404 });
   }
 
-  const result = RESULTS.find((r) => r.activity == params.activityId);
+  const result = await getLeaderboardById(event.name);
+  // const result = RESULTS.find((r) => r.activity == params.activityId);
+  // console.dir(event.isScored, result);
 
   return { event, result };
 };

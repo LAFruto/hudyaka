@@ -11,7 +11,12 @@ datasource db {
 model Activity {
   id             Int    @id @default(autoincrement())
   name           String @unique
+  altName        String
   activityTypeId Int
+  image          String
+  banner         String
+  url            String
+
   // parentId       Int?
 
   // PARADE OF FESTIVALS (MR, MS, LIVELIEST DELEGATION, BEST FLOAT, BEST PERFORMANCE)
@@ -34,8 +39,8 @@ model Activity {
   // CHESS, SCRABBLE
   // ESPORTS
 
-  startDateTime DateTime
-  endDateTime   DateTime
+  startDateTime DateTime @db.Timestamptz(0)
+  endDateTime   DateTime @db.Timestamptz(0)
 
   isOverall Boolean
   isScored  Boolean
@@ -55,7 +60,7 @@ model ActivityType {
   id   Int    @id @default(autoincrement())
   name String @unique
 
-  // event, sport 
+  // event, sport
 
   activities Activity[]
 }
@@ -75,7 +80,7 @@ model Cluster {
   image   String
   num     Int
   name    String @unique
-  altName String // KADAYAWAN, MASKARA, ATI-ATIHAN 
+  altName String // KADAYAWAN, MASKARA, ATI-ATIHAN
   // clusterGroupId Int
 
   // COLLEGE (CCIS, CHS, CAS, CEA, ATYCB)
@@ -114,7 +119,7 @@ model Team {
 model Participant {
   id         Int    @id @default(autoincrement())
   name       String
-  altName    String
+  altName    String?
   activityId Int
   clusterId  Int
 
@@ -128,6 +133,7 @@ model Participant {
 model Tally {
   id            Int  @id @default(autoincrement())
   clusterId     Int
+  activityId    Int
   teamId        Int?
   participantId Int?
   categoryId    Int?
@@ -138,4 +144,6 @@ model Tally {
 
   team        Team?        @relation(fields: [teamId], references: [id])
   participant Participant? @relation(fields: [participantId], references: [id])
+
+  @@unique([clusterId, activityId, categoryId])
 }

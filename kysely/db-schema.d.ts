@@ -16,14 +16,29 @@ export interface _ParticipantToTeam {
   B: number;
 }
 
+export interface _PrismaMigrations {
+  applied_steps_count: Generated<number>;
+  checksum: string;
+  finished_at: Timestamp | null;
+  id: string;
+  logs: string | null;
+  migration_name: string;
+  rolled_back_at: Timestamp | null;
+  started_at: Generated<Timestamp>;
+}
+
 export interface Activity {
   activityTypeId: number;
+  altName: string;
+  banner: string;
   endDateTime: Timestamp;
   id: Generated<number>;
+  image: string;
   isOverall: boolean;
   isScored: boolean;
   name: string;
   startDateTime: Timestamp;
+  url: string;
 }
 
 export interface ActivityType {
@@ -47,13 +62,14 @@ export interface Cluster {
 
 export interface Participant {
   activityId: number;
-  altName: string;
+  altName: string | null;
   clusterId: number;
   id: Generated<number>;
   name: string;
 }
 
 export interface Tally {
+  activityId: number;
   categoryId: number | null;
   clusterId: number;
   id: Generated<number>;
@@ -74,6 +90,7 @@ export interface Team {
 
 export interface DB {
   _ParticipantToTeam: _ParticipantToTeam;
+  _prisma_migrations: _PrismaMigrations;
   Activity: Activity;
   ActivityType: ActivityType;
   Category: Category;

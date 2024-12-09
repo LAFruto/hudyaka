@@ -10,7 +10,7 @@ const activities = [
     startDate: new Date(new Date("12/9/24").setHours(8, 0, 0, 0)),
     endDate: new Date(new Date("12/9/24").setHours(11, 0, 0, 0)),
     isOverall: true,
-    isScored: true,
+    isScored: false,
   },
   {
     name: "Laro ng Lahi",
@@ -219,13 +219,15 @@ const activities = [
 const activityTypes = [{ name: "sport" }, { name: "event" }];
 
 const categories = [
-  { name: "Mr Festival", event: "Parade of Festivals" },
-  { name: "Ms Festival", event: "Parade of Festivals" },
+  { name: "Festival King", event: "Parade of Festivals" },
+  { name: "Festival Queen", event: "Parade of Festivals" },
   { name: "Liveliest Delegation", event: "Parade of Festivals" },
-  { name: "Best Float", event: "Parade of Festivals" },
-  { name: "Best Performance", event: "Parade of Festivals" },
+  { name: "Best Float Design", event: "Parade of Festivals" },
+  { name: "Dance Showdown", event: "Parade of Festivals" },
+
   { name: "Solo", event: "Tawag ng Tanghalan" },
   { name: "Duet", event: "Tawag ng Tanghalan" },
+
   { name: "Mr Sinag", event: "Sinag" },
   { name: "Ms Sinag", event: "Sinag" },
   { name: "Photographer", event: "Sinag" },
@@ -308,7 +310,7 @@ const clusters = [
   },
   {
     name: "ATYCB",
-    altName: "Ati-atihan",
+    altName: "Ati Atihan",
     num: 2,
     image: "/teams/ati-atihan.png",
   },
@@ -316,19 +318,19 @@ const clusters = [
     name: "CAS",
     altName: "Sinulog",
     num: 3,
-    image: "teams/sinulog.png",
+    image: "/teams/sinulog.png",
   },
   {
     name: "CHS",
     altName: "Pintados",
     num: 5,
-    image: "teams/pintados.png",
+    image: "/teams/pintados.png",
   },
   {
     name: "High School",
     altName: "Masskara",
     num: 1,
-    image: "teams/masskara.png",
+    image: "/teams/masskara.png",
   },
 ];
 
@@ -349,6 +351,10 @@ const seed = async () => {
     await db.activity.upsert({
       create: {
         name: activity.name,
+        altName: activity.name.toLowerCase().replace(/\s+/g, "-"),
+        image: activity.image,
+        banner: activity.banner,
+        url: activity.url,
         isOverall: activity.isOverall,
         isScored: activity.isScored,
         startDateTime: activity.startDate,

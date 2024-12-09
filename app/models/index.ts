@@ -1,16 +1,96 @@
 // @ts-expect-error - no types, but it's a tiny function
 import sortBy from "sort-by";
-import { ActivityRecord, ActivityMutation, ActivityType } from "~/types";
+import { dbk } from "kysely/db";
+import { jsonArrayFrom, jsonObjectFrom } from "kysely/helpers/postgres";
+import { ActivityRecord, ActivityMutation, ActivityType, Result } from "~/types";
+import { sql } from "kysely";
 
-// TODO
 // Overall only aggregates event of type "event" not "sports"
 export async function getOverallLeaderboard() {
-  return;
+  const overall = await dbk
+    .selectFrom("Cluster as c")
+    .select((eb) => [
+      "c.altName as team",
+      "c.image",
+      jsonObjectFrom(
+        eb
+          .selectFrom("Tally as t")
+          .leftJoin("Activity as a", "a.id", "t.activityId")
+          .whereRef("t.clusterId", "=", "c.id")
+          .where("a.isOverall", "=", true)
+          .select((eb) => [eb.fn.coalesce(eb.fn.sum<number>("t.score"), sql`0`).as("score")])
+      ).as("overall"),
+    ])
+    .groupBy("c.id")
+    .execute();
+  let output: Result = { activity: "overall", categories: [{ category: null, scores: [] }] };
+  for (const o of overall) {
+    output.categories[0].scores.push({
+      team: o.team,
+      image: o.image,
+      score: o.overall!.score!,
+    });
+  }
+  // console.dir(output, { depth: null });
+  return output as Result;
 }
 
 // TODO
-export async function getLeaderboardById() {
-  return;
+export async function getLeaderboardById(activity: string) {
+  const leaderboard = await dbk
+    .selectFrom("Activity as a")
+    .where("a.name", "ilike", activity)
+    .select((eb) => [
+      "a.name as activity",
+      jsonArrayFrom(
+        eb
+          .selectFrom("Category as c")
+          .whereRef("c.activityId", "=", "a.id")
+          .select((eb) => [
+            "c.name as category",
+            jsonArrayFrom(
+              eb
+                .selectFrom("Tally as ta")
+                .innerJoin("Cluster as cl", "cl.id", "ta.clusterId")
+                .whereRef("ta.categoryId", "=", "c.id")
+                .select(["ta.rank as displayRank", "ta.score", "cl.altName as team", "cl.image"])
+                .orderBy("ta.rank asc")
+            ).as("scores"),
+          ])
+          .orderBy("c.name asc")
+      ).as("categories"),
+      jsonArrayFrom(
+        eb
+          .selectFrom("Tally as t")
+          .innerJoin("Cluster as clu", "clu.id", "t.clusterId")
+          .whereRef("t.activityId", "=", "a.id")
+          .where("t.categoryId", "is", null)
+          .select(["t.rank as displayRank", "t.score", "clu.altName as team", "clu.image"])
+          .orderBy("t.rank asc")
+      ).as("scores"),
+    ])
+    .executeTakeFirst();
+  if (!leaderboard) return undefined;
+
+  let output = undefined;
+  if (leaderboard.categories.length > 0) {
+    output = {
+      activity: leaderboard.activity,
+      categories: leaderboard.categories,
+    };
+  } else {
+    output = {
+      activity: leaderboard.activity,
+      categories: [
+        {
+          category: null,
+          scores: leaderboard.scores,
+        },
+      ],
+    };
+  }
+  // console.dir(output, { depth: null });
+  return output;
 }
 
 // TODO
@@ -24,9 +104,7 @@ const fakeActivities = {
   records: {} as Record<string, ActivityRecord>,
 
   async getAll(): Promise<ActivityRecord[]> {
-    return Object.keys(fakeActivities.records).map(
-      (key) => fakeActivities.records[key]
-    );
+    return Object.keys(fakeActivities.records).map((key) => fakeActivities.records[key]);
   },
 
   async get(id: string): Promise<ActivityRecord | null> {
@@ -49,14 +127,48 @@ const fakeActivities = {
 ////////////////////////////////////////////////////////////////////////////////
 // Handful of helper functions to be called from route loaders and actions
 export async function getActivitiesByType(type: ActivityType) {
-  await new Promise((resolve) => setTimeout(resolve, 500)); // Temp Load Simulation
-  const activities = await fakeActivities.getAll();
-  const filteredActivities = activities.filter((a) => a.type === type);
-  return filteredActivities.sort(sortBy("startDate"));
+  // await new Promise((resolve) => setTimeout(resolve, 500)); // Temp Load Simulation
+  // const activities = await fakeActivities.getAll();
+  const activities = await dbk
+    .selectFrom("Activity as a")
+    .innerJoin("ActivityType as at", "at.id", "a.activityTypeId")
+    .select([
+      "a.name",
+      "a.altName as id",
+      "a.startDateTime as startDate",
+      "a.endDateTime as endDate",
+      "a.image",
+      "a.banner",
+      "a.url",
+      "at.name as type",
+      "a.isOverall",
+      "a.isScored",
+    ])
+    .orderBy("startDate asc")
+    .execute();
+
+  const filteredActivities = activities.filter((a) => (a.type as unknown as ActivityType) === type);
+  return filteredActivities;
 }
 
 export async function getActivityById(id: string) {
-  return fakeActivities.get(id);
+  return await dbk
+    .selectFrom("Activity as a")
+    .innerJoin("ActivityType as at", "at.id", "a.activityTypeId")
+    .where("altName", "=", id)
+    .select([
+      "a.name",
+      "a.altName as id",
+      "a.startDateTime as startDate",
+      "a.endDateTime as endDate",
+      "a.image",
+      "a.banner",
+      "a.url",
+      "at.name as type",
+      "a.isOverall",
+      "a.isScored",
+    ])
+    .executeTakeFirst();
 }
 
 export async function getFakeOverallLeaderboard() {

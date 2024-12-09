@@ -5,8 +5,7 @@ import Hero from "~/components/home/Hero";
 import Leaderboard from "~/components/home/Leaderboard";
 import SportsCarousel from "~/components/home/Sports";
 import Footer from "~/components/layout/Footer";
-import { OVERALL } from "~/constants";
-import { getActivitiesByType } from "~/models";
+import { getActivitiesByType, getOverallLeaderboard } from "~/models";
 
 export const meta: MetaFunction = () => {
   return [
@@ -51,7 +50,7 @@ export const meta: MetaFunction = () => {
 export const loader = async () => {
   const events = await getActivitiesByType("event");
   const sports = await getActivitiesByType("sport");
-  const overall = OVERALL;
+  const overall = await getOverallLeaderboard();
 
   return {
     events: events,

@@ -3,7 +3,7 @@ export type ActivityType = "event" | "sport";
 export type ActivityMutation = {
   id?: string;
   name: string;
-  type: ActivityType;
+  type: string;
   image: string; // Image path in assets ex. /activities/cosplay.png, /activities/battle-of-the-bands.png
   banner: string; // for hero swiper
   url: string; // URL route ex. /cosplay, /battle-of-the-bands
@@ -80,7 +80,7 @@ export type Score = {
   team: string;
   altName?: string;
   image: string;
-  score: number;
+  score: number | null;
   displayRank?: number;
 };
 

@@ -61,9 +61,7 @@ export const attachRanks = (teams: TempTeam[]): TempTeamRank[] => {
   return rankedTeams;
 };
 
-export const getLeaderboardLayout = (
-  teams: TempTeam[]
-): [TempTeamRank[], TempTeamRank[]] => {
+export const getLeaderboardLayout = (teams: TempTeam[]): [TempTeamRank[], TempTeamRank[]] => {
   const rankedTeams = attachRanks(teams);
   // Sort teams by score in descending order
   const podium: TempTeamRank[] = [];
@@ -104,7 +102,7 @@ export const getLeaderboardLayout = (
 
 export const attachRanks2 = (scores: Score[]): ScoreRank[] => {
   // First, sort the teams by score in descending order
-  const sortedTeams = [...scores].sort((a, b) => b.score - a.score);
+  const sortedTeams = [...scores].sort((a, b) => b.score! - a.score!);
 
   let rank = 1;
   let lastScore: number | null = null;
@@ -132,9 +130,7 @@ export const attachRanks2 = (scores: Score[]): ScoreRank[] => {
 
 export const attachRanks3 = (scores: Score[]): ScoreRank[] => {
   // First, sort the teams by score in descending order
-  const sortedTeams = [...scores].sort(
-    (a, b) => a.displayRank! - b.displayRank!
-  );
+  const sortedTeams = [...scores].sort((a, b) => a.displayRank! - b.displayRank!);
 
   const rankedTeams: ScoreRank[] = [];
 
@@ -145,9 +141,7 @@ export const attachRanks3 = (scores: Score[]): ScoreRank[] => {
   return rankedTeams;
 };
 
-export const getLeaderboardLayout3 = (
-  scores: Score[]
-): [ScoreRank[], ScoreRank[]] => {
+export const getLeaderboardLayout3 = (scores: Score[]): [ScoreRank[], ScoreRank[]] => {
   const rankedTeams = attachRanks3(scores);
   // Sort teams by score in descending order
   const podium: ScoreRank[] = [];
@@ -181,14 +175,12 @@ export const getLeaderboardLayout3 = (
     list.push(...temp);
   }
 
-  const sortedList = [...list].sort((a, b) => b.score - a.score);
+  const sortedList = [...list].sort((a, b) => b.score! - a.score!);
 
   return [podium, sortedList];
 };
 
-export const getLeaderboardLayout2 = (
-  scores: Score[]
-): [ScoreRank[], ScoreRank[]] => {
+export const getLeaderboardLayout2 = (scores: Score[]): [ScoreRank[], ScoreRank[]] => {
   const rankedTeams = attachRanks2(scores);
   // Sort teams by score in descending order
   const podium: ScoreRank[] = [];
@@ -222,19 +214,15 @@ export const getLeaderboardLayout2 = (
     list.push(...temp);
   }
 
-  const sortedList = [...list].sort((a, b) => b.score - a.score);
+  const sortedList = [...list].sort((a, b) => b.score! - a.score!);
 
   return [podium, sortedList];
 };
 
-export function getEventStatus(
-  start: Date,
-  end: Date,
-  isScored: boolean
-): EventStatus {
+export function getEventStatus(start: Date, end: Date, isScored: boolean): EventStatus {
   const serverNow = new Date();
   const phNow = new Date(serverNow);
-  phNow.setHours(phNow.getHours() + TIMEZONE_OFFSET);
+  phNow.setHours(phNow.getHours());
   const startDate = new Date(start);
   const endDate = new Date(end);
 
@@ -245,9 +233,7 @@ export function getEventStatus(
   const oneDayMs = 24 * 60 * 60 * 1000; // Milliseconds in a day
 
   // Get calendar day differences, ignoring time
-  const daysUntilStart = Math.ceil(
-    (startDate.getTime() - phNow.getTime()) / oneDayMs
-  );
+  const daysUntilStart = Math.ceil((startDate.getTime() - phNow.getTime()) / oneDayMs);
 
   const timeUntilStart = startDate.getTime() - phNow.getTime();
   const timeUntilEnd = endDate.getTime() - phNow.getTime();
@@ -283,10 +269,7 @@ export function getEventStatus(
     } else {
       return {
         type: "upcoming",
-        message:
-          daysUntilStart === 1
-            ? "Starting Tomorrow!"
-            : `${months[startDate.getMonth()]} ${day}`,
+        message: daysUntilStart === 1 ? "Starting Tomorrow!" : `${months[startDate.getMonth()]} ${day}`,
         timeRange: timeRange,
       };
     }

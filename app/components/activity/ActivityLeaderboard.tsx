@@ -1,7 +1,7 @@
 import { attachRanks3 } from "~/lib/util";
 import { Category } from "~/types";
-import Medal from "../icons/Medal";
 import TeamScoreCard from "../TeamScoreCard";
+import Medal from "../icons/Medal";
 
 interface ActivityLeaderboardProps {
   category: Category;

@@ -4,7 +4,7 @@ import Ball from "../icons/Ball";
 import { cn } from "~/lib/util";
 
 interface ActivityBadgeProps {
-  type: ActivityType;
+  type: string;
 }
 
 const ActivityBadge = ({ type }: ActivityBadgeProps) => {
