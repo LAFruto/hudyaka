@@ -10,6 +10,8 @@
       }
     },
     "routeIdToServerBundleId": {
+      "routes/ncvj4fu3e3._index": "nodejs-eyJydW50aW1lIjoibm9kZWpzIn0",
+      "routes/a.upload._index": "nodejs-eyJydW50aW1lIjoibm9kZWpzIn0",
       "routes/a.$activityId": "nodejs-eyJydW50aW1lIjoibm9kZWpzIn0",
       "routes/a._index": "nodejs-eyJydW50aW1lIjoibm9kZWpzIn0",
       "routes/images": "nodejs-eyJydW50aW1lIjoibm9kZWpzIn0",
@@ -22,6 +24,24 @@
         "file": "app/root.tsx",
         "config": {}
       },
+      "routes/ncvj4fu3e3._index": {
+        "file": "app/routes/ncvj4fu3e3._index.tsx",
+        "id": "routes/ncvj4fu3e3._index",
+        "index": true,
+        "parentId": "routes/ncvj4fu3e3",
+        "config": {
+          "runtime": "nodejs"
+        }
+      },
+      "routes/a.upload._index": {
+        "file": "app/routes/a.upload._index.tsx",
+        "id": "routes/a.upload._index",
+        "index": true,
+        "parentId": "routes/a.upload",
+        "config": {
+          "runtime": "nodejs"
+        }
+      },
       "routes/a.$activityId": {
         "file": "app/routes/a.$activityId.tsx",
         "id": "routes/a.$activityId",
@@ -30,6 +50,20 @@
         "config": {
           "runtime": "nodejs"
         }
+      },
+      "routes/ncvj4fu3e3": {
+        "file": "app/routes/ncvj4fu3e3.tsx",
+        "id": "routes/ncvj4fu3e3",
+        "path": "ncvj4fu3e3",
+        "parentId": "root",
+        "config": {}
+      },
+      "routes/a.upload": {
+        "file": "app/routes/a.upload.tsx",
+        "id": "routes/a.upload",
+        "path": "upload",
+        "parentId": "routes/a",
+        "config": {}
       },
       "routes/a._index": {
         "file": "app/routes/a._index.tsx",
@@ -88,10 +122,34 @@
         "id": "root",
         "file": "root.tsx"
       },
+      "routes/ncvj4fu3e3._index": {
+        "file": "routes/ncvj4fu3e3._index.tsx",
+        "id": "routes/ncvj4fu3e3._index",
+        "index": true,
+        "parentId": "routes/ncvj4fu3e3"
+      },
+      "routes/a.upload._index": {
+        "file": "routes/a.upload._index.tsx",
+        "id": "routes/a.upload._index",
+        "index": true,
+        "parentId": "routes/a.upload"
+      },
       "routes/a.$activityId": {
         "file": "routes/a.$activityId.tsx",
         "id": "routes/a.$activityId",
         "path": ":activityId",
+        "parentId": "routes/a"
+      },
+      "routes/ncvj4fu3e3": {
+        "file": "routes/ncvj4fu3e3.tsx",
+        "id": "routes/ncvj4fu3e3",
+        "path": "ncvj4fu3e3",
+        "parentId": "root"
+      },
+      "routes/a.upload": {
+        "file": "routes/a.upload.tsx",
+        "id": "routes/a.upload",
+        "path": "upload",
         "parentId": "routes/a"
       },
       "routes/a._index": {

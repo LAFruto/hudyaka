@@ -9,7 +9,7 @@ export const OVERALL: Result = {
     {
       category: null,
       scores: [
-        { team: "Masskara", image: "/teams/masskara.png", score: 370 },
+        { team: "Masskara", image: "/teams/masskara.png", score: 290 },
         { team: "Ati Atihan", image: "/teams/ati-atihan.png", score: 170 },
         { team: "Sinulog", image: "/teams/sinulog.png", score: 140 },
         { team: "Kadayawan", image: "/teams/kadayawan.png", score: 340 },
