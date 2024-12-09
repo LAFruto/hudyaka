@@ -22,6 +22,7 @@ export async function action({ request }: ActionFunctionArgs) {
     console.log(output);
     return output;
   } catch (e) {
+    console.log(e);
     return "Invalid File Sent";
   }
   // process the file
@@ -68,6 +69,7 @@ async function test(workbook: ExcelJS.Workbook, activity: string | null, categor
           break;
         case "pet":
         case "character":
+        case "candidate number":
           altI = index;
           break;
         case "activity":
@@ -226,7 +228,11 @@ async function test(workbook: ExcelJS.Workbook, activity: string | null, categor
             : undefined;
         if (part == undefined) break;
         output[j - (headerRowNumber + 1)].participant = part;
+      }
+    }
 
+    if (altI != undefined) {
+      for (let j = headerRowNumber + 1; j <= rowCount; j++) {
         const altType = worksheet.getCell(j, altI).type;
         const alt =
           altType === ExcelJS.ValueType.String ||
@@ -239,18 +245,18 @@ async function test(workbook: ExcelJS.Workbook, activity: string | null, categor
     }
     outputsArr.push(output);
   }
-  // console.log("everything is goods", outputsArr);
+  console.log("everything is goods", outputsArr);
   // Put to db
   for (const row of outputsArr) {
     for (const cell of row) {
       let partId,
         teamId = undefined;
 
-      if (cell.participant != undefined && cell.alt != undefined) {
+      if (cell.participant != undefined) {
         const participant = await dbk
           .selectFrom("Participant as p")
           .where("p.name", "=", cell.participant)
-          .where("p.altName", "=", cell.alt)
+          .$if(cell.alt != undefined, (qb) => qb.where("p.altName", "=", cell.alt!))
           .select("p.id")
           .executeTakeFirst();
         if (participant) {

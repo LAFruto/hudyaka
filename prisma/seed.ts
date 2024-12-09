@@ -231,7 +231,7 @@ const categories = [
   { name: "Mr Sinag", event: "Sinag" },
   { name: "Ms Sinag", event: "Sinag" },
   { name: "Photographer", event: "Sinag" },
-  { name: "Make-up Artist", event: "Sinag" },
+  { name: "Hair and Make-up Artist", event: "Sinag" },
   { name: "Fashion Designer", event: "Sinag" },
 
   { name: "Employee Mixed Doubles", event: "Badminton" },
