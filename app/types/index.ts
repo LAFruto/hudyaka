@@ -81,6 +81,7 @@ export type Score = {
   altName?: string;
   image: string;
   score: number;
+  displayRank?: number;
 };
 
 export type ScoreRank = Score & {

@@ -130,6 +130,62 @@ export const attachRanks2 = (scores: Score[]): ScoreRank[] => {
   return rankedTeams;
 };
 
+export const attachRanks3 = (scores: Score[]): ScoreRank[] => {
+  // First, sort the teams by score in descending order
+  const sortedTeams = [...scores].sort(
+    (a, b) => a.displayRank! - b.displayRank!
+  );
+
+  const rankedTeams: ScoreRank[] = [];
+
+  for (const team of sortedTeams) {
+    rankedTeams.push({ ...team, rank: team.displayRank! });
+  }
+
+  return rankedTeams;
+};
+
+export const getLeaderboardLayout3 = (
+  scores: Score[]
+): [ScoreRank[], ScoreRank[]] => {
+  const rankedTeams = attachRanks3(scores);
+  // Sort teams by score in descending order
+  const podium: ScoreRank[] = [];
+  const list: ScoreRank[] = [];
+
+  let temp: ScoreRank[] = [];
+  let podiumFull = false; // Flag to indicate if the podium is full
+
+  for (const team of rankedTeams) {
+    if (!podiumFull) {
+      // Accumulate teams with the same score
+      if (temp.length === 0 || team.score === temp[0].score) {
+        temp.push(team);
+      } else {
+        // When score changes, check if we can add the accumulated teams to the podium
+        if (podium.length + temp.length <= 3) {
+          podium.push(...temp);
+        } else {
+          // If adding this group exceeds the podium limit, move the extra teams to the list
+          list.push(...temp);
+          podiumFull = true; // Set the flag to true to indicate that podium is full
+        }
+        temp = [team]; // Start a new group for the next score
+      }
+    } else {
+      list.push(team);
+    }
+  }
+
+  if (temp.length > 0) {
+    list.push(...temp);
+  }
+
+  const sortedList = [...list].sort((a, b) => b.score - a.score);
+
+  return [podium, sortedList];
+};
+
 export const getLeaderboardLayout2 = (
   scores: Score[]
 ): [ScoreRank[], ScoreRank[]] => {
@@ -196,19 +252,8 @@ export function getEventStatus(
   const timeUntilStart = startDate.getTime() - phNow.getTime();
   const timeUntilEnd = endDate.getTime() - phNow.getTime();
 
-  const formatTo12Hour = (date) => {
-    // Add +8 hours offset
-    const offsetDate = new Date(date.getTime() + 8 * 60 * 60 * 1000); // Apply +8 timezone offset
-    const timeString = offsetDate.toTimeString().split(" ")[0]; // Extract "HH:MM:SS" part
-    const [hours, minutes] = timeString.split(":");
-    let hour = parseInt(hours, 10);
-    const period = hour >= 12 ? "PM" : "AM";
-    hour = hour % 12 || 12; // Convert 24-hour to 12-hour format
-    return `${hour}:${minutes} ${period}`;
-  };
-
   // Format time range as "4:00 PM - 5:00 PM" with +8 timezone offset
-  const timeRange = `${formatTo12Hour(startDate)} - ${formatTo12Hour(endDate)}`;
+  const timeRange = ""; //TODO;
 
   const months = [
     "January",

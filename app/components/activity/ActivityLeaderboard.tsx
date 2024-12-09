@@ -1,4 +1,4 @@
-import { getLeaderboardLayout2 } from "~/lib/util";
+import { attachRanks3 } from "~/lib/util";
 import { Category } from "~/types";
 import Medal from "../icons/Medal";
 import TeamScoreCard from "../TeamScoreCard";
@@ -8,7 +8,7 @@ interface ActivityLeaderboardProps {
 }
 
 const ActivityLeaderboard = ({ category }: ActivityLeaderboardProps) => {
-  const [podiumTeams, listTeams] = getLeaderboardLayout2(category.scores);
+  const teams = attachRanks3(category.scores);
 
   return (
     <section className="max-container padding-container lg:px-[250px] flex flex-col w-full mt-4 mb-20">
@@ -23,7 +23,7 @@ const ActivityLeaderboard = ({ category }: ActivityLeaderboardProps) => {
         </div>
       </div>
       <div className="flex flex-col gap-4">
-        {[...podiumTeams, ...listTeams].map((team, index) => (
+        {teams.map((team, index) => (
           <TeamScoreCard key={index} team={team} />
         ))}
       </div>
