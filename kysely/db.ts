@@ -1,7 +1,9 @@
 import { Kysely, PostgresDialect } from "kysely";
-import { Pool } from "@neondatabase/serverless";
+import { Pool, neonConfig } from "@neondatabase/serverless";
 import { DB } from "./db-schema";
 import pg from "pg";
+import ws from "ws";
+neonConfig.webSocketConstructor = ws;
 
 export const pool = new pg.Pool({
   connectionString: process.env.KYSELY_URL,
