@@ -1,9 +1,9 @@
 import { cn, getListColor } from "~/lib/util";
-import { TempTeamRank } from "~/types";
+import { ScoreRank } from "~/types";
 import { Image } from "./Image";
 
 interface TeamScoreCardProps {
-  team: TempTeamRank;
+  team: ScoreRank;
 }
 
 const TeamScoreCard = ({ team }: TeamScoreCardProps) => {
@@ -22,17 +22,17 @@ const TeamScoreCard = ({ team }: TeamScoreCardProps) => {
           height={1024}
           width={1024}
           fill
-          aria-label={team.teamName}
+          aria-label={team.team}
           className="object-contain h-full w-full overflow-hidden rounded-full"
         />
       </div>
       <div className="flex flex-col justify-center">
         <p className="uppercase text-xl font-bold text-white text-nowrap">
-          {team.teamName}
+          {team.team}
         </p>
         <div className="mr-auto rounded-full bg-white mt-4">
           <p className="text-lg md:text-xl px-4 tracking-wider font-bold text-red-700">
-            {/* {team.score} */}0
+            {team.score}
           </p>
         </div>
       </div>

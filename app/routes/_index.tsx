@@ -5,6 +5,7 @@ import Hero from "~/components/home/Hero";
 import Leaderboard from "~/components/home/Leaderboard";
 import SportsCarousel from "~/components/home/Sports";
 import Footer from "~/components/layout/Footer";
+import { OVERALL } from "~/constants";
 import { getActivitiesByType } from "~/models";
 
 export const meta: MetaFunction = () => {
@@ -50,20 +51,22 @@ export const meta: MetaFunction = () => {
 export const loader = async () => {
   const events = await getActivitiesByType("event");
   const sports = await getActivitiesByType("sport");
+  const overall = OVERALL;
 
   return {
     events: events,
     sports: sports,
+    overall: overall,
   };
 };
 
 export default function Index() {
-  const { events, sports } = useLoaderData<typeof loader>();
+  const { events, sports, overall } = useLoaderData<typeof loader>();
 
   return (
     <>
       <Hero activities={[...events, ...sports]} />
-      <Leaderboard />
+      <Leaderboard result={overall} />
       <EventCarousel events={events} />
       <SportsCarousel sports={sports} />
       <Footer />

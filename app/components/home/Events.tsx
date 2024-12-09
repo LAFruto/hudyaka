@@ -110,7 +110,7 @@ const Events = ({ events }: EventsProps) => {
                       </div>
                     </div>
                   ) : (
-                    <div className="flex items-center justify-between px-2 lg:px-6 py-1.5 w-full text-white bg-blue-800  md:text-lg truncate text-nowrap font-semibold rounded-full cursor-pointer group">
+                    <div className="flex items-center justify-between px-4 lg:px-6 py-1.5 w-full text-white bg-blue-800  md:text-lg truncate text-nowrap font-semibold rounded-full cursor-pointer group">
                       <div className="h-4 sm:h-6 overflow-hidden mr-2">
                         <div className="transform transition-transform duration-300 ease-in-out group-hover:-translate-y-1/2">
                           <p className="text-xs text-nowrap sm:text-base h-4 sm:h-6">

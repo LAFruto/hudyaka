@@ -1,50 +1,17 @@
-import { cn, getLeaderboardLayout } from "~/lib/util";
-import { TempTeam } from "~/types";
-import TeamScoreCard from "../TeamScoreCard";
+import { cn, getLeaderboardLayout2 } from "~/lib/util";
+import { Result } from "~/types";
 import Medal from "../icons/Medal";
+import TeamScoreCard from "../TeamScoreCard";
 import ScoreMedal from "./ScoreMedal";
 
-const teams: TempTeam[] = [
-  {
-    teamNumber: 1,
-    teamName: "kadayawan",
-    image: "/teams/kadayawan.png",
-    score: 7,
-  },
-  {
-    teamNumber: 3,
-    teamName: "pintados",
-    image: "/teams/pintados.png",
-    score: 5,
-  },
-  {
-    teamNumber: 4,
-    teamName: "sinulog",
-    image: "/teams/sinulog.png",
-    score: 4,
-  },
-  {
-    teamNumber: 5,
-    teamName: "ati-atihan",
-    image: "/teams/ati-atihan.png",
-    score: 3,
-  },
-  {
-    teamNumber: 6,
-    teamName: "masskara",
-    image: "/teams/masskara.png",
-    score: 2,
-  },
-  {
-    teamNumber: 7,
-    teamName: "dinagyang",
-    image: "/teams/dinagyang.png",
-    score: 1,
-  },
-];
+interface LeaderboardProps {
+  result: Result;
+}
 
-const Leaderboard = () => {
-  const [podiumTeams, listTeams] = getLeaderboardLayout(teams);
+const Leaderboard = ({ result }: LeaderboardProps) => {
+  const [podiumTeams, listTeams] = getLeaderboardLayout2(
+    result.categories[0].scores
+  );
 
   return (
     <section className="max-container padding-container flex flex-col w-full lg:grid lg:grid-cols-3 pt-20 pb-40 lg:pb-64">

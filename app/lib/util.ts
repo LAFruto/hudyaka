@@ -1,7 +1,7 @@
 import { ClassValue, clsx } from "clsx";
 import { twMerge } from "tailwind-merge";
 import { TIMEZONE_OFFSET } from "~/constants";
-import { EventStatus, TempTeam, TempTeamRank } from "~/types";
+import { EventStatus, Score, ScoreRank, TempTeam, TempTeamRank } from "~/types";
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
@@ -102,6 +102,75 @@ export const getLeaderboardLayout = (
   return [podium, sortedList];
 };
 
+export const attachRanks2 = (scores: Score[]): ScoreRank[] => {
+  // First, sort the teams by score in descending order
+  const sortedTeams = [...scores].sort((a, b) => b.score - a.score);
+
+  let rank = 1;
+  let lastScore: number | null = null;
+  const rankedTeams: ScoreRank[] = [];
+
+  // Loop through the sorted teams to assign ranks
+  for (let i = 0; i < sortedTeams.length; i++) {
+    const team = sortedTeams[i];
+
+    // If the score is the same as the last team's score, assign the same rank
+    if (team.score === lastScore) {
+      rankedTeams.push({ ...team, rank: rank });
+    } else {
+      // Otherwise, increment the rank and assign it to the team
+      rank = i + 1; // Rank is based on the index + 1 (for 1-based ranking)
+      rankedTeams.push({ ...team, rank: rank });
+    }
+
+    // Update the last score
+    lastScore = team.score;
+  }
+
+  return rankedTeams;
+};
+
+export const getLeaderboardLayout2 = (
+  scores: Score[]
+): [ScoreRank[], ScoreRank[]] => {
+  const rankedTeams = attachRanks2(scores);
+  // Sort teams by score in descending order
+  const podium: ScoreRank[] = [];
+  const list: ScoreRank[] = [];
+
+  let temp: ScoreRank[] = [];
+  let podiumFull = false; // Flag to indicate if the podium is full
+
+  for (const team of rankedTeams) {
+    if (!podiumFull) {
+      // Accumulate teams with the same score
+      if (temp.length === 0 || team.score === temp[0].score) {
+        temp.push(team);
+      } else {
+        // When score changes, check if we can add the accumulated teams to the podium
+        if (podium.length + temp.length <= 3) {
+          podium.push(...temp);
+        } else {
+          // If adding this group exceeds the podium limit, move the extra teams to the list
+          list.push(...temp);
+          podiumFull = true; // Set the flag to true to indicate that podium is full
+        }
+        temp = [team]; // Start a new group for the next score
+      }
+    } else {
+      list.push(team);
+    }
+  }
+
+  if (temp.length > 0) {
+    list.push(...temp);
+  }
+
+  const sortedList = [...list].sort((a, b) => b.score - a.score);
+
+  return [podium, sortedList];
+};
+
 export function getEventStatus(
   start: Date,
   end: Date,
@@ -127,16 +196,19 @@ export function getEventStatus(
   const timeUntilStart = startDate.getTime() - phNow.getTime();
   const timeUntilEnd = endDate.getTime() - phNow.getTime();
 
-  // Format time range as "4:00 PM - 5:00 PM"
-  const timeRange = `${startDate.toLocaleTimeString("en-US", {
-    hour: "2-digit",
-    minute: "2-digit",
-    hour12: true,
-  })} - ${endDate.toLocaleTimeString("en-US", {
-    hour: "2-digit",
-    minute: "2-digit",
-    hour12: true,
-  })}`;
+  const formatTo12Hour = (date) => {
+    // Add +8 hours offset
+    const offsetDate = new Date(date.getTime() + 8 * 60 * 60 * 1000); // Apply +8 timezone offset
+    const timeString = offsetDate.toTimeString().split(" ")[0]; // Extract "HH:MM:SS" part
+    const [hours, minutes] = timeString.split(":");
+    let hour = parseInt(hours, 10);
+    const period = hour >= 12 ? "PM" : "AM";
+    hour = hour % 12 || 12; // Convert 24-hour to 12-hour format
+    return `${hour}:${minutes} ${period}`;
+  };
+
+  // Format time range as "4:00 PM - 5:00 PM" with +8 timezone offset
+  const timeRange = `${formatTo12Hour(startDate)} - ${formatTo12Hour(endDate)}`;
 
   const months = [
     "January",
@@ -175,15 +247,22 @@ export function getEventStatus(
     }
   }
 
-  // Check if the event is ongoing
-  if (timeUntilEnd > 0 || !isScored) {
+  if (timeUntilEnd > 0) {
     return {
       type: "ongoing",
       message: "Now Happening!",
     };
   }
 
-  // Event has finished
+  // Event has finished but not scored
+  if (!isScored) {
+    return {
+      type: "ongoing",
+      message: "Waiting for results",
+    };
+  }
+
+  // Event has finished and scored
   return {
     type: "finished",
     message: "Results are out!",

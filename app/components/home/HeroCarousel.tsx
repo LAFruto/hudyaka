@@ -64,7 +64,7 @@ const HeroCarousel = ({ activities }: HeroCarouselProps) => {
     .filter((item) => item.status.type === "finished")
     .slice(-2);
 
-  const HERO_CAROUSEL = [...countdown, ...ongoing, ...finished];
+  const HERO_CAROUSEL = [...ongoing, ...countdown, ...finished];
 
   return (
     <div className="relative overflow-hidden h-full">

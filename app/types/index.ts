@@ -64,3 +64,25 @@ export type TempTeamRank = TempTeam & {
 
 // POLISH
 export type MedalColor = "blue" | "yellow" | "red" | "light-blue";
+
+// Frontend Result Convert
+export type Result = {
+  activity: string;
+  categories: Category[];
+};
+
+export type Category = {
+  category: string | null;
+  scores: Score[];
+};
+
+export type Score = {
+  team: string;
+  altName?: string;
+  image: string;
+  score: number;
+};
+
+export type ScoreRank = Score & {
+  rank: number;
+};

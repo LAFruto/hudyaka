@@ -49,7 +49,7 @@ const ActivityBanner = ({ activity }: ActivityBannerProps) => {
               </div>
             </div>
           </Link>
-          <div className="text-white z-20 flex gap-2">
+          <div className="text-white z-20   flex gap-2">
             <span className="pointer-events-auto">
               {activity.isOverall && <HoverMedal />}
             </span>
@@ -80,22 +80,22 @@ const ActivityBanner = ({ activity }: ActivityBannerProps) => {
                   timeUntilStart={status.timeUntilStart}
                   className="text-lg md:text-xl"
                 />
-                <p className="inline-flex items-center bg-red-800  text-white rounded-md px-4 py-1">
+                {/* <p className="inline-flex items-center bg-red-800  text-white rounded-md px-4 py-1">
                   <Clock className="w-4 h-4 mr-2" />
                   {status.timeRange}
-                </p>
+                </p> */}
               </div>
             ) : status.type === "upcoming" ? (
               <div className="flex flex-col w-full justify-center rounded-lg items-center gap-2 text-white lg:px-4 py-1.5 font-semibold mt-4">
                 <p className="text-lg lg:text-xl">{status.message}</p>
-                <p className="inline-flex items-center bg-red-800 text-white rounded-md px-4 py-1">
+                {/* <p className="inline-flex items-center bg-red-800 text-white rounded-md px-4 py-1">
                   <Clock className="w-4 h-4 mr-2" />
                   {status.timeRange}
-                </p>
+                </p> */}
               </div>
             ) : (
               <div className="flex items-center justify-center">
-                <p className="inline-flex   rounded-lg items-center gap-2 bg-red-800 text-white lg:px-4 py-1.5 text-lg md:text-xl font-semibold mt-4 ">
+                <p className="inline-flex px-4  rounded-lg items-center gap-2 bg-red-800 text-white lg:px-4 py-1.5 text-lg md:text-xl font-semibold mt-4 ">
                   {status.message}
                 </p>
               </div>

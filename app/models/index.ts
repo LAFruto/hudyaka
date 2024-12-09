@@ -77,7 +77,7 @@ export function getFakeLeaderboardById() {
     startDate: new Date(new Date("12/9/24").setHours(8, 0, 0, 0)),
     endDate: new Date(new Date("12/9/24").setHours(11, 0, 0, 0)),
     isOverall: true,
-    isScored: false,
+    isScored: true,
   },
   {
     name: "Laro ng Lahi",
