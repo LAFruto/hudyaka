@@ -28,8 +28,6 @@ export const loader = async ({ params }: LoaderFunctionArgs) => {
 const Event = () => {
   const { event, teams, participants } = useLoaderData<typeof loader>();
 
-  // console.log();
-
   return (
     <>
       <ActivityBanner activity={event} />

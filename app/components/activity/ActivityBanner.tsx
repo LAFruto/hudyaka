@@ -1,13 +1,12 @@
+import { Link } from "@remix-run/react";
+import { useCurrentTime } from "~/hooks/useCurrentTime";
+import { getEventStatus } from "~/lib/util";
 import { ActivityRecord } from "~/types";
+import { CountdownTimer } from "../CountdownTimer";
 import HoverMedal from "../HoverMedal";
 import { Image } from "../Image";
 import Arrow from "../icons/Arrow";
 import ActivityBadge from "./ActivityBadge";
-import { Link } from "@remix-run/react";
-import { getEventStatus } from "~/lib/util";
-import { CountdownTimer } from "../CountdownTimer";
-import { useCurrentTime } from "~/hooks/useCurrentTime";
-import Clock from "../icons/Clock";
 
 interface ActivityBannerProps {
   activity: ActivityRecord;

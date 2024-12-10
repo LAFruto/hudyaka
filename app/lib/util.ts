@@ -32,6 +32,34 @@ export const getListColor = (position: number): string => {
   }
 };
 
+export const attachRanksOverall = (scores: Score[]): ScoreRank[] => {
+  // First, sort the teams by score in descending order
+  const sortedTeams = [...scores].sort((a, b) => b.score! - a.score!);
+
+  let rank = 1;
+  let lastScore: number | null = null;
+  const rankedTeams: ScoreRank[] = [];
+
+  // Loop through the sorted teams to assign ranks
+  for (let i = 0; i < sortedTeams.length; i++) {
+    const team = sortedTeams[i];
+
+    // If the score is the same as the last team's score, assign the same rank
+    if (team.score === lastScore) {
+      rankedTeams.push({ ...team, rank: rank });
+    } else {
+      // Otherwise, increment the rank and assign it to the team
+      rank = i + 1; // Rank is based on the index + 1 (for 1-based ranking)
+      rankedTeams.push({ ...team, rank: rank });
+    }
+
+    // Update the last score
+    lastScore = team.score!;
+  }
+
+  return rankedTeams;
+};
+
 export const attachRanks = (scores: Score[]): ScoreRank[] => {
   // First, sort the teams by score in descending order
   const sortedTeams = [...scores].sort(
@@ -50,7 +78,13 @@ export const attachRanks = (scores: Score[]): ScoreRank[] => {
 export const getLeaderboardLayout = (
   scores: Score[]
 ): [ScoreRank[], ScoreRank[]] => {
-  const rankedTeams = attachRanks(scores);
+  let rankedTeams: ScoreRank[] = [];
+  if (!scores[0].displayRank) {
+    rankedTeams = attachRanksOverall(scores);
+  } else {
+    rankedTeams = attachRanks(scores);
+  }
+
   // Sort teams by score in descending order
   const podium: ScoreRank[] = [];
   const list: ScoreRank[] = [];
