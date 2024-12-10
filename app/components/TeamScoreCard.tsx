@@ -35,11 +35,11 @@ const TeamScoreCard = ({ team, type }: TeamScoreCardProps) => {
           <p className="uppercase text-xl font-bold text-white text-nowrap">
             {team.team}
           </p>
-          {/* {team.participant && (
+          {team.participant && (
             <p className="text-md text-white tracking-wider font-semibold ">
               {toCapitalCase(team.participant)}
             </p>
-          )} */}
+          )}
         </div>
 
         <div className="flex items-center">
