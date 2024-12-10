@@ -11,11 +11,11 @@ const TeamScoreCard = ({ team, type }: TeamScoreCardProps) => {
   return (
     <div
       className={cn(
-        "flex gap-4 px-6 py-5 rounded-lg w-full",
+        "flex gap-4 px-6 py-4 lg:py-5 rounded-lg w-full",
         getListColor(team.rank)
       )}
     >
-      <div className="w-24 h-24 flex-shrink-0 md:w-20 md:h-20 text-lg outline outline-white outline-4 rounded-full relative justify-center flex items-center">
+      <div className="w-12 h-12 lg:w-16 lg:h-16  text-lg flex-shrink-0 outline outline-white outline-4 rounded-full relative justify-center flex items-center">
         <div className="absolute z-20 w-6 h-6 rounded-full bg-red-500 bottom-0 translate-y-3">
           <p className="flex h-full items-center justify-center text-sm font-bold text-white">
             {team.rank}
