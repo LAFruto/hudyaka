@@ -1,6 +1,5 @@
 import { ClassValue, clsx } from "clsx";
 import { twMerge } from "tailwind-merge";
-import { TIMEZONE_OFFSET } from "~/constants";
 import { EventStatus, Score, ScoreRank, TempTeam, TempTeamRank } from "~/types";
 
 export function cn(...inputs: ClassValue[]) {
@@ -61,7 +60,9 @@ export const attachRanks = (teams: TempTeam[]): TempTeamRank[] => {
   return rankedTeams;
 };
 
-export const getLeaderboardLayout = (teams: TempTeam[]): [TempTeamRank[], TempTeamRank[]] => {
+export const getLeaderboardLayout = (
+  teams: TempTeam[]
+): [TempTeamRank[], TempTeamRank[]] => {
   const rankedTeams = attachRanks(teams);
   // Sort teams by score in descending order
   const podium: TempTeamRank[] = [];
@@ -130,7 +131,9 @@ export const attachRanks2 = (scores: Score[]): ScoreRank[] => {
 
 export const attachRanks3 = (scores: Score[]): ScoreRank[] => {
   // First, sort the teams by score in descending order
-  const sortedTeams = [...scores].sort((a, b) => a.displayRank! - b.displayRank!);
+  const sortedTeams = [...scores].sort(
+    (a, b) => a.displayRank! - b.displayRank!
+  );
 
   const rankedTeams: ScoreRank[] = [];
 
@@ -141,7 +144,9 @@ export const attachRanks3 = (scores: Score[]): ScoreRank[] => {
   return rankedTeams;
 };
 
-export const getLeaderboardLayout3 = (scores: Score[]): [ScoreRank[], ScoreRank[]] => {
+export const getLeaderboardLayout3 = (
+  scores: Score[]
+): [ScoreRank[], ScoreRank[]] => {
   const rankedTeams = attachRanks3(scores);
   // Sort teams by score in descending order
   const podium: ScoreRank[] = [];
@@ -180,7 +185,9 @@ export const getLeaderboardLayout3 = (scores: Score[]): [ScoreRank[], ScoreRank[
   return [podium, sortedList];
 };
 
-export const getLeaderboardLayout2 = (scores: Score[]): [ScoreRank[], ScoreRank[]] => {
+export const getLeaderboardLayout2 = (
+  scores: Score[]
+): [ScoreRank[], ScoreRank[]] => {
   const rankedTeams = attachRanks2(scores);
   // Sort teams by score in descending order
   const podium: ScoreRank[] = [];
@@ -219,7 +226,11 @@ export const getLeaderboardLayout2 = (scores: Score[]): [ScoreRank[], ScoreRank[
   return [podium, sortedList];
 };
 
-export function getEventStatus(start: Date, end: Date, isScored: boolean): EventStatus {
+export function getEventStatus(
+  start: Date,
+  end: Date,
+  isScored: boolean
+): EventStatus {
   const serverNow = new Date();
   const phNow = new Date(serverNow);
   phNow.setHours(phNow.getHours());
@@ -233,7 +244,9 @@ export function getEventStatus(start: Date, end: Date, isScored: boolean): Event
   const oneDayMs = 24 * 60 * 60 * 1000; // Milliseconds in a day
 
   // Get calendar day differences, ignoring time
-  const daysUntilStart = Math.ceil((startDate.getTime() - phNow.getTime()) / oneDayMs);
+  const daysUntilStart = Math.ceil(
+    (startDate.getTime() - phNow.getTime()) / oneDayMs
+  );
 
   const timeUntilStart = startDate.getTime() - phNow.getTime();
   const timeUntilEnd = endDate.getTime() - phNow.getTime();
@@ -269,7 +282,10 @@ export function getEventStatus(start: Date, end: Date, isScored: boolean): Event
     } else {
       return {
         type: "upcoming",
-        message: daysUntilStart === 1 ? "Starting Tomorrow!" : `${months[startDate.getMonth()]} ${day}`,
+        message:
+          daysUntilStart === 1
+            ? "Starting Tomorrow!"
+            : `${months[startDate.getMonth()]} ${day}`,
         timeRange: timeRange,
       };
     }
@@ -295,4 +311,12 @@ export function getEventStatus(start: Date, end: Date, isScored: boolean): Event
     type: "finished",
     message: "Results are out!",
   };
+}
+
+export function toCapitalCase(str: string) {
+  return str
+    .toLowerCase()
+    .split(" ")
+    .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+    .join(" ");
 }

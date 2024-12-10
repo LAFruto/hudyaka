@@ -2,7 +2,7 @@ import { Result } from "~/types";
 import ActivityLeaderboard from "./ActivityLeaderboard";
 
 interface ActivityLeaderboardsProps {
-  result?: Result;
+  result: Result;
 }
 
 const ActivityLeaderboards = ({ result }: ActivityLeaderboardsProps) => {

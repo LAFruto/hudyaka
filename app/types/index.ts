@@ -77,13 +77,15 @@ export type Category = {
 };
 
 export type Score = {
-  team: string;
-  altName?: string;
+  score?: number | null; // Allow null as well as undefined
   image: string;
-  score: number | null;
   displayRank?: number;
+  team: string;
+  participant?: string | null; // Allow null as a possible value
 };
 
 export type ScoreRank = Score & {
   rank: number;
 };
+
+export type ResultType = "team" | "participant";

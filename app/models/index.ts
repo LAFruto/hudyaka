@@ -1,8 +1,11 @@
-// @ts-expect-error - no types, but it's a tiny function
-import sortBy from "sort-by";
 import { dbk } from "kysely/db";
 import { jsonArrayFrom, jsonObjectFrom } from "kysely/helpers/postgres";
-import { ActivityRecord, ActivityMutation, ActivityType, Result } from "~/types";
+import {
+  ActivityRecord,
+  ActivityMutation,
+  ActivityType,
+  Result,
+} from "~/types";
 import { sql } from "kysely";
 
 // Overall only aggregates event of type "event" not "sports"
@@ -19,7 +22,9 @@ export async function getOverallLeaderboard() {
           .whereRef("t.clusterId", "=", "c.id")
           .where("a.isOverall", "=", true)
           .where("a.altName", "!=", "cosplay")
-          .select((eb) => [eb.fn.coalesce(eb.fn.sum<number>("t.score"), sql`0`).as("score")])
+          .select((eb) => [
+            eb.fn.coalesce(eb.fn.sum<number>("t.score"), sql`0`).as("score"),
+          ])
       ).as("general"),
       jsonObjectFrom(
         eb
@@ -32,13 +37,20 @@ export async function getOverallLeaderboard() {
     ])
     .groupBy("c.id")
     .execute();
-  let output: Result = { activity: "overall", categories: [{ category: null, scores: [] }] };
+  const output: Result = {
+    activity: "overall",
+    categories: [{ category: null, scores: [] }],
+  };
   for (const o of overall) {
     output.categories[0].scores.push({
       team: o.team,
       image: o.image,
-      score: o.cosplay!.score != null ? o.general!.score! + o.cosplay!.score : o.general!.score!,
+      score:
+        o.cosplay!.score != null
+          ? o.general!.score! + o.cosplay!.score
+          : o.general!.score!,
     });
+    ``;
   }
   // console.dir(overall, { depth: null });
   return output as Result;
@@ -82,7 +94,13 @@ export async function getLeaderboardById(activity: string) {
           .leftJoin("Participant as pa", "pa.id", "t.participantId")
           .whereRef("t.activityId", "=", "a.id")
           .where("t.categoryId", "is", null)
-          .select(["t.rank as displayRank", "t.score", "clu.altName as team", "clu.image", "pa.name as participant"])
+          .select([
+            "t.rank as displayRank",
+            "t.score",
+            "clu.altName as team",
+            "clu.image",
+            "pa.name as participant",
+          ])
           .orderBy("t.rank asc")
       ).as("scores"),
     ])
@@ -107,7 +125,7 @@ export async function getLeaderboardById(activity: string) {
     };
   }
 
-  if (output.activity == "sinag") {
+  if (output.activity == "Sinag") {
     output = { teamLeaderboard: output, participantLeaderboard: null };
   } else if (output.categories[0].scores[0].participant != null) {
     output = { teamLeaderboard: null, participantLeaderboard: output };
@@ -171,7 +189,9 @@ const fakeActivities = {
   records: {} as Record<string, ActivityRecord>,
 
   async getAll(): Promise<ActivityRecord[]> {
-    return Object.keys(fakeActivities.records).map((key) => fakeActivities.records[key]);
+    return Object.keys(fakeActivities.records).map(
+      (key) => fakeActivities.records[key]
+    );
   },
 
   async get(id: string): Promise<ActivityRecord | null> {
@@ -214,7 +234,9 @@ export async function getActivitiesByType(type: ActivityType) {
     .orderBy("startDate asc")
     .execute();
 
-  const filteredActivities = activities.filter((a) => (a.type as unknown as ActivityType) === type);
+  const filteredActivities = activities.filter(
+    (a) => (a.type as unknown as ActivityType) === type
+  );
   return filteredActivities;
 }
 

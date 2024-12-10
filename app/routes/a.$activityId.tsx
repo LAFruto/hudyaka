@@ -1,8 +1,9 @@
 import { LoaderFunctionArgs } from "@remix-run/node";
 import { useLoaderData } from "@remix-run/react";
 import ActivityBanner from "~/components/activity/ActivityBanner";
-import ActivityLeaderboard from "~/components/activity/ActivityLeaderboards";
+import ActivityLeaderboards from "~/components/activity/ActivityLeaderboards";
 import ActivityLinks from "~/components/activity/ActivityLinks";
+import ParticipantLeaderBoards from "~/components/activity/ParticipantLeaderboards";
 import { getActivityById, getLeaderboardById } from "~/models";
 
 export const loader = async ({ params }: LoaderFunctionArgs) => {
@@ -16,19 +17,28 @@ export const loader = async ({ params }: LoaderFunctionArgs) => {
   }
 
   const result = await getLeaderboardById(event.name);
-  // const result = RESULTS.find((r) => r.activity == params.activityId);
-  // console.dir(event.isScored, result);
 
-  return { event, result };
+  return {
+    event,
+    teams: result?.teamLeaderboard,
+    participants: result?.participantLeaderboard,
+  };
 };
 
 const Event = () => {
-  const { event, result } = useLoaderData<typeof loader>();
+  const { event, teams, participants } = useLoaderData<typeof loader>();
+
+  // console.log();
 
   return (
     <>
       <ActivityBanner activity={event} />
-      {event.isScored && <ActivityLeaderboard result={result} />}
+      {/* TEAM BREAKDOWN */}
+      {event.isScored && teams && <ActivityLeaderboards result={teams} />}
+      {/* PARTICIPANT BREAKDOWN */}
+      {event.isScored && participants && (
+        <ParticipantLeaderBoards result={participants} />
+      )}
       <ActivityLinks />
     </>
   );

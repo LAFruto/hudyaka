@@ -55,12 +55,12 @@ const Leaderboard = ({ result }: LeaderboardProps) => {
       </div>
       <div className="flex flex-col gap-4 lg:hidden">
         {[...podiumTeams, ...listTeams].map((team, index) => (
-          <TeamScoreCard key={index} team={team} />
+          <TeamScoreCard key={index} team={team} type="team" />
         ))}
       </div>
       <div className="hidden flex-col gap-4 lg:mt-28 lg:flex">
         {listTeams.map((team, index) => (
-          <TeamScoreCard key={index} team={team} />
+          <TeamScoreCard key={index} team={team} type="team" />
         ))}
       </div>
     </section>
