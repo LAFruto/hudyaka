@@ -283,7 +283,8 @@ async function test(workbook: ExcelJS.Workbook, activity: string | null, categor
         .selectFrom("Tally as t")
         .where("t.clusterId", "=", cell.clusterId)
         .where("t.activityId", "=", cell.actId)
-        .$if(cell.catId != undefined, (qb) => qb.where("categoryId", "=", cell.catId!))
+        .$if(cell.catId != undefined, (qb) => qb.where("t.categoryId", "=", cell.catId!))
+        .$if(partId != undefined, (qb) => qb.where("t.participantId", "=", partId!))
         .executeTakeFirst();
       if (exist) return "Entry Already Exist!";
 

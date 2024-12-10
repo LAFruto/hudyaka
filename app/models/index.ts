@@ -18,8 +18,17 @@ export async function getOverallLeaderboard() {
           .leftJoin("Activity as a", "a.id", "t.activityId")
           .whereRef("t.clusterId", "=", "c.id")
           .where("a.isOverall", "=", true)
+          .where("a.altName", "!=", "cosplay")
           .select((eb) => [eb.fn.coalesce(eb.fn.sum<number>("t.score"), sql`0`).as("score")])
-      ).as("overall"),
+      ).as("general"),
+      jsonObjectFrom(
+        eb
+          .selectFrom("Tally as ta")
+          .leftJoin("Activity as ac", "ac.id", "ta.activityId")
+          .whereRef("ta.clusterId", "=", "c.id")
+          .where("ac.altName", "=", "cosplay")
+          .select((eb) => eb.fn.max("ta.score").as("score"))
+      ).as("cosplay"),
     ])
     .groupBy("c.id")
     .execute();
@@ -28,10 +37,10 @@ export async function getOverallLeaderboard() {
     output.categories[0].scores.push({
       team: o.team,
       image: o.image,
-      score: o.overall!.score!,
+      score: o.cosplay!.score != null ? o.general!.score! + o.cosplay!.score : o.general!.score!,
     });
   }
-  // console.dir(output, { depth: null });
+  // console.dir(overall, { depth: null });
   return output as Result;
 }
 

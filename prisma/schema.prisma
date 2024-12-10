@@ -145,5 +145,5 @@ model Tally {
   team        Team?        @relation(fields: [teamId], references: [id])
   participant Participant? @relation(fields: [participantId], references: [id])
 
-  @@unique([clusterId, activityId, categoryId])
+  @@unique([clusterId, activityId, categoryId, participantId])
 }
