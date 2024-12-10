@@ -17,9 +17,7 @@ export async function getOverallLeaderboard() {
           .whereRef("t.clusterId", "=", "c.id")
           .where("a.isOverall", "=", true)
           .where("a.altName", "!=", "cosplay")
-          .select((eb) => [
-            eb.fn.coalesce(eb.fn.sum<number>("t.score"), sql`0`).as("score"),
-          ])
+          .select((eb) => [eb.fn.coalesce(eb.fn.sum<number>("t.score"), sql`0`).as("score")])
       ).as("general"),
       jsonObjectFrom(
         eb
@@ -40,10 +38,7 @@ export async function getOverallLeaderboard() {
     output.categories[0].scores.push({
       team: o.team,
       image: o.image,
-      score:
-        o.cosplay!.score != null
-          ? o.general!.score! + o.cosplay!.score
-          : o.general!.score!,
+      score: o.cosplay!.score != null ? o.general!.score! + o.cosplay!.score : o.general!.score!,
     });
     ``;
   }
@@ -89,13 +84,7 @@ export async function getLeaderboardById(activity: string) {
           .leftJoin("Participant as pa", "pa.id", "t.participantId")
           .whereRef("t.activityId", "=", "a.id")
           .where("t.categoryId", "is", null)
-          .select([
-            "t.rank as displayRank",
-            "t.score",
-            "clu.altName as team",
-            "clu.image",
-            "pa.name as participant",
-          ])
+          .select(["t.rank as displayRank", "t.score", "clu.altName as team", "clu.image", "pa.name as participant"])
           .orderBy("t.rank asc")
       ).as("scores"),
     ])
@@ -135,11 +124,11 @@ export async function getLeaderboardById(activity: string) {
             aggregate.push(scores[i]);
           }
         }
-
+        output.categories[0].category = "Participant";
         output = {
           teamResult: {
             activity: output.activity,
-            categories: [{ category: null, scores: aggregate }] as Category[],
+            categories: [{ category: "Team", scores: aggregate }] as Category[],
           },
           participantResult: output,
         };
@@ -152,7 +141,7 @@ export async function getLeaderboardById(activity: string) {
   } else {
     output = { teamResult: output, participantResult: null };
   }
-  // console.dir(output, { depth: null });
+  console.dir(output, { depth: null });
   return output;
 }
 
@@ -221,9 +210,7 @@ export async function getActivitiesByType(type: ActivityType) {
     .orderBy("startDate asc")
     .execute();
 
-  const filteredActivities = activities.filter(
-    (a) => (a.type as unknown as ActivityType) === type
-  );
+  const filteredActivities = activities.filter((a) => (a.type as unknown as ActivityType) === type);
   return filteredActivities;
 }
 

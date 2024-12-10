@@ -17,9 +17,7 @@ const ParticipantLeaderboard = ({ category }: ParticipantLeaderboardProps) => {
           <div className="w-[40px] h-[40px]">
             <Medal />
           </div>
-          {category.category && (
-            <p className="text-4xl font-semibold text-white">Individual</p>
-          )}
+          {category.category && <p className="text-4xl font-semibold text-white">{category.category}</p>}
         </div>
       </div>
       <div className="flex flex-col gap-4">
