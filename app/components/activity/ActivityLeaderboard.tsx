@@ -17,10 +17,12 @@ const ActivityLeaderboard = ({ category }: ActivityLeaderboardProps) => {
           <div className="w-[40px] h-[40px]">
             <Medal />
           </div>
-          {category.category && (
+          {category.category ? (
             <p className="text-4xl font-semibold text-white">
               {category.category}
             </p>
+          ) : (
+            <p className="text-4xl font-semibold text-white">Leaderboard</p>
           )}
         </div>
       </div>
