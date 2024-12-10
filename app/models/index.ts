@@ -61,8 +61,15 @@ export async function getLeaderboardById(activity: string) {
               eb
                 .selectFrom("Tally as ta")
                 .innerJoin("Cluster as cl", "cl.id", "ta.clusterId")
+                .leftJoin("Participant as p", "p.id", "ta.participantId")
                 .whereRef("ta.categoryId", "=", "c.id")
-                .select(["ta.rank as displayRank", "ta.score", "cl.altName as team", "cl.image"])
+                .select([
+                  "ta.rank as displayRank",
+                  "ta.score",
+                  "cl.altName as team",
+                  "cl.image",
+                  "p.name as participant",
+                ])
                 .orderBy("ta.rank asc")
             ).as("scores"),
           ])
@@ -72,9 +79,10 @@ export async function getLeaderboardById(activity: string) {
         eb
           .selectFrom("Tally as t")
           .innerJoin("Cluster as clu", "clu.id", "t.clusterId")
+          .leftJoin("Participant as pa", "pa.id", "t.participantId")
           .whereRef("t.activityId", "=", "a.id")
           .where("t.categoryId", "is", null)
-          .select(["t.rank as displayRank", "t.score", "clu.altName as team", "clu.image"])
+          .select(["t.rank as displayRank", "t.score", "clu.altName as team", "clu.image", "pa.name as participant"])
           .orderBy("t.rank asc")
       ).as("scores"),
     ])
@@ -98,8 +106,58 @@ export async function getLeaderboardById(activity: string) {
       ],
     };
   }
-  // console.dir(output, { depth: null });
+
+  if (output.activity == "sinag") {
+    output = { teamLeaderboard: output, participantLeaderboard: null };
+  } else if (output.categories[0].scores[0].participant != null) {
+    output = { teamLeaderboard: null, participantLeaderboard: output };
+  } else {
+    output = { teamResult: output, participantResult: null };
+  }
+  console.dir(output, { depth: null });
   return output;
+}
+
+export async function getOverallLeaderboardBreakdown() {
+  const activity = await dbk
+    .selectFrom("Activity as a")
+    .leftJoin("Category as c", "c.activityId", "a.id")
+    .where("c.activityId", "is", null)
+    .where("a.isOverall", "=", true)
+    .where("a.altName", "!=", "cosplay")
+    .select((eb) => [
+      "a.name as activity",
+      jsonArrayFrom(
+        eb
+          .selectFrom("Tally as t")
+          .innerJoin("Cluster as cl", "cl.id", "t.clusterId")
+          .whereRef("t.activityId", "=", "a.id")
+          .select(["t.rank as displayRank", "t.score", "cl.altName as team"])
+          .orderBy("cl.num asc")
+      ).as("scores"),
+    ])
+    .execute();
+
+  const category = await dbk
+    .selectFrom("Category as c")
+    .leftJoin("Activity as a", "a.id", "c.activityId")
+    .where("a.isOverall", "=", true)
+    .select((eb) => [
+      "c.name as category",
+      "a.name as activity",
+      jsonArrayFrom(
+        eb
+          .selectFrom("Tally as t")
+          .innerJoin("Cluster as cl", "cl.id", "t.clusterId")
+          .whereRef("t.categoryId", "=", "c.id")
+          .select(["t.rank as displayRank", "t.score", "cl.altName as team"])
+          .orderBy("cl.num asc")
+      ).as("scores"),
+    ])
+    .execute();
+
+  const output = { activities: activity, categories: category };
+  console.dir(output, { depth: null });
 }
 
 // TODO
