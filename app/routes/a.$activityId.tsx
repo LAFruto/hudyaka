@@ -20,8 +20,8 @@ export const loader = async ({ params }: LoaderFunctionArgs) => {
 
   return {
     event,
-    teams: result?.teamLeaderboard,
-    participants: result?.participantLeaderboard,
+    teams: result?.teamResult,
+    participants: result?.participantResult,
   };
 };
 
