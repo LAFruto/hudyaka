@@ -1,6 +1,6 @@
 import { ClassValue, clsx } from "clsx";
 import { twMerge } from "tailwind-merge";
-import { EventStatus, Score, ScoreRank, TempTeam, TempTeamRank } from "~/types";
+import { EventStatus, Score, ScoreRank } from "~/types";
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
@@ -32,104 +32,7 @@ export const getListColor = (position: number): string => {
   }
 };
 
-export const attachRanks = (teams: TempTeam[]): TempTeamRank[] => {
-  // First, sort the teams by score in descending order
-  const sortedTeams = [...teams].sort((a, b) => b.score - a.score);
-
-  let rank = 1;
-  let lastScore: number | null = null;
-  const rankedTeams: TempTeamRank[] = [];
-
-  // Loop through the sorted teams to assign ranks
-  for (let i = 0; i < sortedTeams.length; i++) {
-    const team = sortedTeams[i];
-
-    // If the score is the same as the last team's score, assign the same rank
-    if (team.score === lastScore) {
-      rankedTeams.push({ ...team, rank: rank });
-    } else {
-      // Otherwise, increment the rank and assign it to the team
-      rank = i + 1; // Rank is based on the index + 1 (for 1-based ranking)
-      rankedTeams.push({ ...team, rank: rank });
-    }
-
-    // Update the last score
-    lastScore = team.score;
-  }
-
-  return rankedTeams;
-};
-
-export const getLeaderboardLayout = (
-  teams: TempTeam[]
-): [TempTeamRank[], TempTeamRank[]] => {
-  const rankedTeams = attachRanks(teams);
-  // Sort teams by score in descending order
-  const podium: TempTeamRank[] = [];
-  const list: TempTeamRank[] = [];
-
-  let temp: TempTeamRank[] = [];
-  let podiumFull = false; // Flag to indicate if the podium is full
-
-  for (const team of rankedTeams) {
-    if (!podiumFull) {
-      // Accumulate teams with the same score
-      if (temp.length === 0 || team.score === temp[0].score) {
-        temp.push(team);
-      } else {
-        // When score changes, check if we can add the accumulated teams to the podium
-        if (podium.length + temp.length <= 3) {
-          podium.push(...temp);
-        } else {
-          // If adding this group exceeds the podium limit, move the extra teams to the list
-          list.push(...temp);
-          podiumFull = true; // Set the flag to true to indicate that podium is full
-        }
-        temp = [team]; // Start a new group for the next score
-      }
-    } else {
-      list.push(team);
-    }
-  }
-
-  if (temp.length > 0) {
-    list.push(...temp);
-  }
-
-  const sortedList = [...list].sort((a, b) => b.score - a.score);
-
-  return [podium, sortedList];
-};
-
-export const attachRanks2 = (scores: Score[]): ScoreRank[] => {
-  // First, sort the teams by score in descending order
-  const sortedTeams = [...scores].sort((a, b) => b.score! - a.score!);
-
-  let rank = 1;
-  let lastScore: number | null = null;
-  const rankedTeams: ScoreRank[] = [];
-
-  // Loop through the sorted teams to assign ranks
-  for (let i = 0; i < sortedTeams.length; i++) {
-    const team = sortedTeams[i];
-
-    // If the score is the same as the last team's score, assign the same rank
-    if (team.score === lastScore) {
-      rankedTeams.push({ ...team, rank: rank });
-    } else {
-      // Otherwise, increment the rank and assign it to the team
-      rank = i + 1; // Rank is based on the index + 1 (for 1-based ranking)
-      rankedTeams.push({ ...team, rank: rank });
-    }
-
-    // Update the last score
-    lastScore = team.score;
-  }
-
-  return rankedTeams;
-};
-
-export const attachRanks3 = (scores: Score[]): ScoreRank[] => {
+export const attachRanks = (scores: Score[]): ScoreRank[] => {
   // First, sort the teams by score in descending order
   const sortedTeams = [...scores].sort(
     (a, b) => a.displayRank! - b.displayRank!
@@ -144,51 +47,10 @@ export const attachRanks3 = (scores: Score[]): ScoreRank[] => {
   return rankedTeams;
 };
 
-export const getLeaderboardLayout3 = (
+export const getLeaderboardLayout = (
   scores: Score[]
 ): [ScoreRank[], ScoreRank[]] => {
-  const rankedTeams = attachRanks3(scores);
-  // Sort teams by score in descending order
-  const podium: ScoreRank[] = [];
-  const list: ScoreRank[] = [];
-
-  let temp: ScoreRank[] = [];
-  let podiumFull = false; // Flag to indicate if the podium is full
-
-  for (const team of rankedTeams) {
-    if (!podiumFull) {
-      // Accumulate teams with the same score
-      if (temp.length === 0 || team.score === temp[0].score) {
-        temp.push(team);
-      } else {
-        // When score changes, check if we can add the accumulated teams to the podium
-        if (podium.length + temp.length <= 3) {
-          podium.push(...temp);
-        } else {
-          // If adding this group exceeds the podium limit, move the extra teams to the list
-          list.push(...temp);
-          podiumFull = true; // Set the flag to true to indicate that podium is full
-        }
-        temp = [team]; // Start a new group for the next score
-      }
-    } else {
-      list.push(team);
-    }
-  }
-
-  if (temp.length > 0) {
-    list.push(...temp);
-  }
-
-  const sortedList = [...list].sort((a, b) => b.score! - a.score!);
-
-  return [podium, sortedList];
-};
-
-export const getLeaderboardLayout2 = (
-  scores: Score[]
-): [ScoreRank[], ScoreRank[]] => {
-  const rankedTeams = attachRanks2(scores);
+  const rankedTeams = attachRanks(scores);
   // Sort teams by score in descending order
   const podium: ScoreRank[] = [];
   const list: ScoreRank[] = [];

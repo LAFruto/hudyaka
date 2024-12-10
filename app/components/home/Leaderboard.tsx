@@ -1,4 +1,4 @@
-import { cn, getLeaderboardLayout2 } from "~/lib/util";
+import { cn, getLeaderboardLayout } from "~/lib/util";
 import { Result } from "~/types";
 import Medal from "../icons/Medal";
 import TeamScoreCard from "../TeamScoreCard";
@@ -9,7 +9,7 @@ interface LeaderboardProps {
 }
 
 const Leaderboard = ({ result }: LeaderboardProps) => {
-  const [podiumTeams, listTeams] = getLeaderboardLayout2(
+  const [podiumTeams, listTeams] = getLeaderboardLayout(
     result.categories[0].scores
   );
 

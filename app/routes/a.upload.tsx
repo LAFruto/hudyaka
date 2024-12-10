@@ -28,7 +28,11 @@ export async function action({ request }: ActionFunctionArgs) {
   // process the file
 }
 
-async function test(workbook: ExcelJS.Workbook, activity: string | null, category: string | null) {
+async function test(
+  workbook: ExcelJS.Workbook,
+  activity: string | null,
+  category: string | null
+) {
   // Var
   const sheetCount = workbook.worksheets.length;
   const headerRowNumber = 1;
@@ -100,7 +104,11 @@ async function test(workbook: ExcelJS.Workbook, activity: string | null, categor
           ? worksheet.getCell(headerRowNumber + 1, actI).text
           : undefined;
       if (!act) return "No Activity was given";
-      const q = await dbk.selectFrom("Activity as a").where("a.name", "ilike", act).select("a.id").executeTakeFirst();
+      const q = await dbk
+        .selectFrom("Activity as a")
+        .where("a.name", "ilike", act)
+        .select("a.id")
+        .executeTakeFirst();
       if (!q) return "Invalid Activity";
       actId = q.id;
     } else {
@@ -126,7 +134,11 @@ async function test(workbook: ExcelJS.Workbook, activity: string | null, categor
       if (cat) {
         const q = await dbk
           .selectFrom("Category as c")
-          .where("c.name", "ilike", worksheet.getCell(headerRowNumber + 1, catI).text)
+          .where(
+            "c.name",
+            "ilike",
+            worksheet.getCell(headerRowNumber + 1, catI).text
+          )
           .select("c.id")
           .executeTakeFirst();
         if (!q) return "Invalid Category";
@@ -150,7 +162,11 @@ async function test(workbook: ExcelJS.Workbook, activity: string | null, categor
         // Will stop when there is no value after the current row
         if (team == undefined) break;
 
-        const id = await dbk.selectFrom("Cluster as t").where("t.altName", "=", team).select("t.id").executeTakeFirst();
+        const id = await dbk
+          .selectFrom("Cluster as t")
+          .where("t.altName", "=", team)
+          .select("t.id")
+          .executeTakeFirst();
         if (!id) {
           return "Invalid Cluster Name: " + team;
         } else {
@@ -166,7 +182,8 @@ async function test(workbook: ExcelJS.Workbook, activity: string | null, categor
             : rankType === ExcelJS.ValueType.Number
             ? worksheet.getCell(j, rankI).text
             : undefined;
-        if (rank == undefined) return "Invalid Rank Value: " + worksheet.getCell(j, rankI).value;
+        if (rank == undefined)
+          return "Invalid Rank Value: " + worksheet.getCell(j, rankI).value;
         const val = Number(rank);
         // adds rank to temp
         if (Number.isInteger(val)) temp[j - (headerRowNumber + 1)].rank = val;
@@ -256,7 +273,9 @@ async function test(workbook: ExcelJS.Workbook, activity: string | null, categor
         const participant = await dbk
           .selectFrom("Participant as p")
           .where("p.name", "=", cell.participant)
-          .$if(cell.alt != undefined, (qb) => qb.where("p.altName", "=", cell.alt!))
+          .$if(cell.alt != undefined, (qb) =>
+            qb.where("p.altName", "=", cell.alt!)
+          )
           .select("p.id")
           .executeTakeFirst();
         if (participant) {
@@ -283,8 +302,12 @@ async function test(workbook: ExcelJS.Workbook, activity: string | null, categor
         .selectFrom("Tally as t")
         .where("t.clusterId", "=", cell.clusterId)
         .where("t.activityId", "=", cell.actId)
-        .$if(cell.catId != undefined, (qb) => qb.where("t.categoryId", "=", cell.catId!))
-        .$if(partId != undefined, (qb) => qb.where("t.participantId", "=", partId!))
+        .$if(cell.catId != undefined, (qb) =>
+          qb.where("t.categoryId", "=", cell.catId!)
+        )
+        .$if(partId != undefined, (qb) =>
+          qb.where("t.participantId", "=", partId!)
+        )
         .executeTakeFirst();
       if (exist) return "Entry Already Exist!";
 
@@ -305,7 +328,11 @@ async function test(workbook: ExcelJS.Workbook, activity: string | null, categor
           console.log(error);
         });
     }
-    await dbk.updateTable("Activity").where("id", "=", row[0].actId).set({ isScored: true }).execute();
+    await dbk
+      .updateTable("Activity")
+      .where("id", "=", row[0].actId)
+      .set({ isScored: true })
+      .execute();
   }
 
   return success;
@@ -324,4 +351,6 @@ export type ImportParams = {
   rank: number;
 };
 
-async function importData() {}
+export default function importData() {
+  return null;
+}

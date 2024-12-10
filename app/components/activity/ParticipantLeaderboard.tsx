@@ -1,4 +1,4 @@
-import { attachRanks3 } from "~/lib/util";
+import { attachRanks } from "~/lib/util";
 import { Category } from "~/types";
 import TeamScoreCard from "../TeamScoreCard";
 import Medal from "../icons/Medal";
@@ -8,7 +8,7 @@ interface ParticipantLeaderboardProps {
 }
 
 const ParticipantLeaderboard = ({ category }: ParticipantLeaderboardProps) => {
-  const teams = attachRanks3(category.scores);
+  const teams = attachRanks(category.scores);
 
   return (
     <section className="max-container padding-container lg:px-[250px] flex flex-col w-full mt-4 mb-20">
