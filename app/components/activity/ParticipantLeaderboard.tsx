@@ -18,7 +18,9 @@ const ParticipantLeaderboard = ({ category }: ParticipantLeaderboardProps) => {
             <Medal />
           </div>
           {category.category && (
-            <p className="text-xl lg:text-4xl font-semibold text-white">{}</p>
+            <p className="text-xl lg:text-4xl font-semibold text-white">
+              {category.category}
+            </p>
           )}
         </div>
       </div>
