@@ -1,15 +1,13 @@
-import { attachRanks } from "~/lib/util";
-import { Category } from "~/types";
-import TeamScoreCard from "../TeamScoreCard";
+import { Category, ScoreType } from "~/types";
 import Medal from "../icons/Medal";
+import ScoreCard from "../ScoreCard";
 
 interface ActivityLeaderboardProps {
   category: Category;
+  type?: ScoreType;
 }
 
-const ActivityLeaderboard = ({ category }: ActivityLeaderboardProps) => {
-  const teams = attachRanks(category.scores);
-
+const ActivityLeaderboard = ({ category, type }: ActivityLeaderboardProps) => {
   return (
     <section className="max-container padding-container lg:px-[250px] flex flex-col w-full mt-4 mb-12 lg:mb-20">
       <div className="h-full mb-0">
@@ -27,8 +25,8 @@ const ActivityLeaderboard = ({ category }: ActivityLeaderboardProps) => {
         </div>
       </div>
       <div className="flex flex-col gap-2 lg:gap-4">
-        {teams.map((team, index) => (
-          <TeamScoreCard key={index} team={team} type="team" />
+        {category.scores.map((score, index) => (
+          <ScoreCard key={index} score={score} type={type} />
         ))}
       </div>
     </section>

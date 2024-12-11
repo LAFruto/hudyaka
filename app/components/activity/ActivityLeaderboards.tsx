@@ -1,16 +1,20 @@
-import { Result } from "~/types";
+import { Leaderboard, ScoreType } from "~/types";
 import ActivityLeaderboard from "./ActivityLeaderboard";
 
 interface ActivityLeaderboardsProps {
-  result: Result;
+  leaderboards: Leaderboard;
+  type?: ScoreType;
 }
 
-const ActivityLeaderboards = ({ result }: ActivityLeaderboardsProps) => {
+const ActivityLeaderboards = ({
+  leaderboards,
+  type = "team",
+}: ActivityLeaderboardsProps) => {
   return (
     <>
-      {result &&
-        result.categories.map((category, index) => (
-          <ActivityLeaderboard category={category} key={index} />
+      {leaderboards &&
+        leaderboards.categories.map((category, index) => (
+          <ActivityLeaderboard category={category} type={type} key={index} />
         ))}
     </>
   );

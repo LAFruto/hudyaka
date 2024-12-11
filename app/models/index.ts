@@ -1,10 +1,10 @@
 import { dbk } from "kysely/db";
 import { jsonArrayFrom, jsonObjectFrom } from "kysely/helpers/postgres";
-import { ActivityType, Result, Category } from "~/types";
+import { ActivityType, Category, Leaderboard } from "~/types";
 import { sql } from "kysely";
 
 // Overall only aggregates event of type "event" not "sports"
-export async function getOverallLeaderboard() {
+export async function getOverall() {
   const overall = await dbk
     .selectFrom("Cluster as c")
     .select((eb) => [
@@ -32,7 +32,7 @@ export async function getOverallLeaderboard() {
     ])
     .groupBy("c.id")
     .execute();
-  const output: Result = {
+  const output: Leaderboard = {
     activity: "overall",
     categories: [{ category: null, scores: [] }],
   };
@@ -40,18 +40,17 @@ export async function getOverallLeaderboard() {
     output.categories[0].scores.push({
       team: o.team,
       image: o.image,
+      rank: null,
       score:
         o.cosplay!.score != null
           ? o.general!.score! + o.cosplay!.score
           : o.general!.score!,
     });
-    ``;
   }
   // console.dir(overall, { depth: null });
-  return output as Result;
+  return output as Leaderboard;
 }
 
-// TODO
 export async function getLeaderboardById(activity: string) {
   const leaderboard = await dbk
     .selectFrom("Activity as a")
@@ -71,7 +70,7 @@ export async function getLeaderboardById(activity: string) {
                 .leftJoin("Participant as p", "p.id", "ta.participantId")
                 .whereRef("ta.categoryId", "=", "c.id")
                 .select([
-                  "ta.rank as displayRank",
+                  "ta.rank as rank",
                   "ta.score",
                   "cl.altName as team",
                   "cl.image",
@@ -90,7 +89,7 @@ export async function getLeaderboardById(activity: string) {
           .whereRef("t.activityId", "=", "a.id")
           .where("t.categoryId", "is", null)
           .select([
-            "t.rank as displayRank",
+            "t.rank as rank",
             "t.score",
             "clu.altName as team",
             "clu.image",
@@ -152,7 +151,7 @@ export async function getLeaderboardById(activity: string) {
   } else {
     output = { teamResult: output, participantResult: null };
   }
-  console.dir(output, { depth: null });
+  // console.dir(output, { depth: null });
   return output;
 }
 
@@ -198,11 +197,7 @@ export async function getOverallLeaderboardBreakdown() {
   console.dir(output, { depth: null });
 }
 
-////////////////////////////////////////////////////////////////////////////////
-// Handful of helper functions to be called from route loaders and actions
 export async function getActivitiesByType(type: ActivityType) {
-  // await new Promise((resolve) => setTimeout(resolve, 500)); // Temp Load Simulation
-  // const activities = await fakeActivities.getAll();
   const activities = await dbk
     .selectFrom("Activity as a")
     .innerJoin("ActivityType as at", "at.id", "a.activityTypeId")
@@ -224,6 +219,7 @@ export async function getActivitiesByType(type: ActivityType) {
   const filteredActivities = activities.filter(
     (a) => (a.type as unknown as ActivityType) === type
   );
+
   return filteredActivities;
 }
 
@@ -245,4 +241,21 @@ export async function getActivityById(id: string) {
       "a.isScored",
     ])
     .executeTakeFirst();
+}
+
+// Upload Form
+export async function getActivities() {
+  return dbk
+    .selectFrom("Activity as a")
+    .select(["a.id", "a.name"])
+    .orderBy("a.id")
+    .execute();
+}
+
+export async function getCategories() {
+  return dbk
+    .selectFrom("Category as c")
+    .select(["c.id", "c.name", "c.activityId"])
+    .orderBy("activityId")
+    .execute();
 }

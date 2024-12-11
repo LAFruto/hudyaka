@@ -2,10 +2,10 @@ import type { MetaFunction } from "@remix-run/node";
 import { useLoaderData } from "@remix-run/react";
 import EventCarousel from "~/components/home/Events";
 import Hero from "~/components/home/Hero";
-import Leaderboard from "~/components/home/Leaderboard";
+import Overall from "~/components/home/Overall";
 import SportsCarousel from "~/components/home/Sports";
 import Footer from "~/components/layout/Footer";
-import { getActivitiesByType, getOverallLeaderboard } from "~/models";
+import { getActivitiesByType, getOverall } from "~/models";
 
 export const meta: MetaFunction = () => {
   return [
@@ -50,12 +50,12 @@ export const meta: MetaFunction = () => {
 export const loader = async () => {
   const events = await getActivitiesByType("event");
   const sports = await getActivitiesByType("sport");
-  const overall = await getOverallLeaderboard();
+  const overall = await getOverall();
 
   return {
     events: events,
     sports: sports,
-    overall: overall,
+    overall: overall.categories[0].scores,
   };
 };
 
@@ -65,7 +65,7 @@ export default function Index() {
   return (
     <>
       <Hero activities={[...events, ...sports]} />
-      <Leaderboard result={overall} />
+      <Overall scores={overall} />
       <EventCarousel events={events} />
       <SportsCarousel sports={sports} />
       <Footer />

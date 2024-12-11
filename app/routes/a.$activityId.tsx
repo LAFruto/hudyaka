@@ -3,7 +3,6 @@ import { useLoaderData } from "@remix-run/react";
 import ActivityBanner from "~/components/activity/ActivityBanner";
 import ActivityLeaderboards from "~/components/activity/ActivityLeaderboards";
 import ActivityLinks from "~/components/activity/ActivityLinks";
-import ParticipantLeaderBoards from "~/components/activity/ParticipantLeaderboards";
 import { getActivityById, getLeaderboardById } from "~/models";
 
 export const loader = async ({ params }: LoaderFunctionArgs) => {
@@ -32,10 +31,10 @@ const Event = () => {
     <>
       <ActivityBanner activity={event} />
       {/* TEAM BREAKDOWN */}
-      {event.isScored && teams && <ActivityLeaderboards result={teams} />}
+      {event.isScored && teams && <ActivityLeaderboards leaderboards={teams} />}
       {/* PARTICIPANT BREAKDOWN */}
       {event.isScored && participants && (
-        <ParticipantLeaderBoards result={participants} />
+        <ActivityLeaderboards leaderboards={participants} type="participant" />
       )}
       <ActivityLinks />
     </>

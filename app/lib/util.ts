@@ -1,95 +1,24 @@
 import { ClassValue, clsx } from "clsx";
 import { twMerge } from "tailwind-merge";
-import { EventStatus, Score, ScoreRank } from "~/types";
+import { EventStatus, Score } from "~/types";
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }
 
-export const getPodiumColor = (position: number): string => {
-  switch (position) {
-    case 1:
-      return "outline-yellow-600"; // First
-    case 2:
-      return "outline-blue-900"; // Second
-    case 3:
-      return "outline-red-700"; // Third
-    default:
-      return "outline-blue-500"; // Fourth Below...
-  }
-};
+export const getLeaderboardLayout = (teams: Score[]): [Score[], Score[]] => {
+  let rankedTeams: Score[] = [];
 
-export const getListColor = (position: number): string => {
-  switch (position) {
-    case 1:
-      return "bg-yellow-600"; // First
-    case 2:
-      return "bg-blue-900"; // Second
-    case 3:
-      return "bg-red-700"; // Third
-    default:
-      return "bg-blue-500"; // Fourth Below...
-  }
-};
-
-export const attachRanksOverall = (scores: Score[]): ScoreRank[] => {
-  // First, sort the teams by score in descending order
-  const sortedTeams = [...scores].sort((a, b) => b.score! - a.score!);
-
-  let rank = 1;
-  let lastScore: number | null = null;
-  const rankedTeams: ScoreRank[] = [];
-
-  // Loop through the sorted teams to assign ranks
-  for (let i = 0; i < sortedTeams.length; i++) {
-    const team = sortedTeams[i];
-
-    // If the score is the same as the last team's score, assign the same rank
-    if (team.score === lastScore) {
-      rankedTeams.push({ ...team, rank: rank });
-    } else {
-      // Otherwise, increment the rank and assign it to the team
-      rank = i + 1; // Rank is based on the index + 1 (for 1-based ranking)
-      rankedTeams.push({ ...team, rank: rank });
-    }
-
-    // Update the last score
-    lastScore = team.score!;
-  }
-
-  return rankedTeams;
-};
-
-export const attachRanks = (scores: Score[]): ScoreRank[] => {
-  // First, sort the teams by score in descending order
-  const sortedTeams = [...scores].sort(
-    (a, b) => a.displayRank! - b.displayRank!
-  );
-
-  const rankedTeams: ScoreRank[] = [];
-
-  for (const team of sortedTeams) {
-    rankedTeams.push({ ...team, rank: team.displayRank! });
-  }
-
-  return rankedTeams;
-};
-
-export const getLeaderboardLayout = (
-  scores: Score[]
-): [ScoreRank[], ScoreRank[]] => {
-  let rankedTeams: ScoreRank[] = [];
-  if (!scores[0].displayRank) {
-    rankedTeams = attachRanksOverall(scores);
+  if (!teams[0].rank) {
+    rankedTeams = attachRanks(teams); // If no ranks, attach ranks
   } else {
-    rankedTeams = attachRanks(scores);
+    rankedTeams = teams;
   }
 
-  // Sort teams by score in descending order
-  const podium: ScoreRank[] = [];
-  const list: ScoreRank[] = [];
+  const podium: Score[] = [];
+  const list: Score[] = [];
 
-  let temp: ScoreRank[] = [];
+  let temp: Score[] = [];
   let podiumFull = false; // Flag to indicate if the podium is full
 
   for (const team of rankedTeams) {
@@ -120,6 +49,34 @@ export const getLeaderboardLayout = (
   const sortedList = [...list].sort((a, b) => b.score! - a.score!);
 
   return [podium, sortedList];
+};
+
+export const attachRanks = (scores: Score[]): Score[] => {
+  // First, sort the teams by score in descending order
+  const sortedScores = [...scores].sort((a, b) => b.score! - a.score!);
+
+  let rank = 1;
+  let lastScore: number | null = null;
+  const rankedScores: Score[] = [];
+
+  // Loop through the sorted teams to assign ranks
+  for (let i = 0; i < sortedScores.length; i++) {
+    const team = sortedScores[i];
+
+    // If the score is the same as the last team's score, assign the same rank
+    if (team.score === lastScore) {
+      rankedScores.push({ ...team, rank: rank });
+    } else {
+      // Otherwise, increment the rank and assign it to the team
+      rank = i + 1; // Rank is based on the index + 1 (for 1-based ranking)
+      rankedScores.push({ ...team, rank: rank });
+    }
+
+    // Update the last score
+    lastScore = team.score!;
+  }
+
+  return rankedScores;
 };
 
 export function getEventStatus(
@@ -208,6 +165,32 @@ export function getEventStatus(
     message: "Results are out!",
   };
 }
+
+export const getPodiumColor = (position: number): string => {
+  switch (position) {
+    case 1:
+      return "outline-yellow-600"; // First
+    case 2:
+      return "outline-blue-900"; // Second
+    case 3:
+      return "outline-red-700"; // Third
+    default:
+      return "outline-blue-500"; // Fourth Below...
+  }
+};
+
+export const getListColor = (position: number): string => {
+  switch (position) {
+    case 1:
+      return "bg-yellow-600"; // First
+    case 2:
+      return "bg-blue-900"; // Second
+    case 3:
+      return "bg-red-700"; // Third
+    default:
+      return "bg-blue-500"; // Fourth Below...
+  }
+};
 
 export function toCapitalCase(str: string) {
   return str

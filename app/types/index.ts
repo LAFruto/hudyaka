@@ -1,3 +1,5 @@
+import { getActivities, getCategories } from "~/models";
+
 export type ActivityType = "event" | "sport";
 
 export type ActivityMutation = {
@@ -15,19 +17,6 @@ export type ActivityMutation = {
 
 export type ActivityRecord = ActivityMutation & {
   id: string;
-};
-
-export type ScoreMutation = {
-  id?: string;
-  score: number;
-  activity: ActivityRecord; //
-  team: Team;
-  participant?: Person; // optional: Person involved in the activity
-};
-
-export type ScoreRecord = ScoreMutation & {
-  id: string;
-  createdAt: Date;
 };
 
 export type Team = {
@@ -54,7 +43,7 @@ export type EventStatus =
 export type MedalColor = "blue" | "yellow" | "red" | "light-blue";
 
 // Frontend Result Convert
-export type Result = {
+export type Leaderboard = {
   activity: string;
   categories: Category[];
 };
@@ -67,13 +56,27 @@ export type Category = {
 export type Score = {
   score?: number | null; // Allow null as well as undefined
   image: string;
-  displayRank?: number;
   team: string;
   participant?: string | null; // Allow null as a possible value
+  rank?: number | null;
 };
 
-export type ScoreRank = Score & {
+export type ScoreType = "team" | "participant";
+
+// Form
+export type ActivityDB = Awaited<ReturnType<typeof getActivities>>;
+export type CategoryDB = Awaited<ReturnType<typeof getCategories>>;
+
+// Import
+export type ImportParams = {
+  clusterId: number;
+  actId: number;
+  catId?: number;
+  team?: string;
+  teamNum?: number;
+  participant?: string;
+  alt?: string;
+  total?: number;
+  score?: number;
   rank: number;
 };
-
-export type ResultType = "team" | "participant";

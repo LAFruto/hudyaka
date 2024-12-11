@@ -41,3 +41,7 @@ export const loader: LoaderFunction = async ({ request }) => {
     return new Response("Error processing image", { status: 500 });
   }
 };
+
+export const Image = () => {
+  return;
+};

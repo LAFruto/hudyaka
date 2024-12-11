@@ -1,43 +1,19 @@
-import { ActionFunctionArgs } from "@remix-run/node";
 import ExcelJS from "exceljs";
 import { dbk } from "kysely/db";
+import { ImportParams } from "~/types";
 
-export async function action({ request }: ActionFunctionArgs) {
-  // Params
-  const url = new URL(request.url);
-  const category = url.searchParams.get("category");
-  const activity = url.searchParams.get("activity");
-  const formData = await request.formData();
-  const file = formData.get("excel");
-  if (!file) return "No File Sent";
-  // Dont know how to do file type checking here
+export async function importExcel(params: {
+  workbook: ExcelJS.Workbook;
+  activity?: string | undefined;
+  category?: string | undefined;
+}) {
+  const { workbook, activity, category } = params;
 
-  // Data Mapping
-  try {
-    const workbook = new ExcelJS.Workbook();
-    const buffer = await (file as File).arrayBuffer();
-    await workbook.xlsx.load(buffer);
-
-    const output = await test(workbook, activity, category);
-    console.log(output);
-    return output;
-  } catch (e) {
-    console.log(e);
-    return "Invalid File Sent";
-  }
-  // process the file
-}
-
-async function test(
-  workbook: ExcelJS.Workbook,
-  activity: string | null,
-  category: string | null
-) {
   // Var
   const sheetCount = workbook.worksheets.length;
   const headerRowNumber = 1;
   const success = "Data Has Been Uploaded Successfully";
-  let outputsArr: ImportParams[][] = [];
+  const outputsArr: ImportParams[][] = [];
 
   for (let i = 0; i < sheetCount; i++) {
     const worksheet = workbook.worksheets[i];
@@ -87,13 +63,13 @@ async function test(
 
     let actId,
       catId = undefined;
-    if (activity != null) {
+    if (activity != undefined) {
       const q = await dbk
         .selectFrom("Activity as a")
         .where("a.name", "ilike", activity)
         .select("a.id")
         .executeTakeFirst();
-      if (!q) return "Invalid Activity";
+      if (!q) throw Error("Invalid Activity");
       actId = q.id;
     } else if (actI != undefined) {
       const actType = worksheet.getCell(headerRowNumber + 1, actI).type;
@@ -103,7 +79,7 @@ async function test(
         actType === ExcelJS.ValueType.SharedString
           ? worksheet.getCell(headerRowNumber + 1, actI).text
           : undefined;
-      if (!act) return "No Activity was given";
+      if (!act) throw Error("No Activity Given");
       const q = await dbk
         .selectFrom("Activity as a")
         .where("a.name", "ilike", act)
@@ -115,13 +91,13 @@ async function test(
       return "No Activity Specified";
     }
 
-    if (category != null) {
+    if (category != undefined) {
       const q = await dbk
         .selectFrom("Category as c")
         .where("c.name", "ilike", category)
         .select("c.id")
         .executeTakeFirst();
-      if (!q) return "Invalid Category";
+      if (!q) throw Error("Invalid Category");
       catId = q.id;
     } else if (catI != undefined) {
       const catType = worksheet.getCell(headerRowNumber + 1, catI).type;
@@ -141,13 +117,13 @@ async function test(
           )
           .select("c.id")
           .executeTakeFirst();
-        if (!q) return "Invalid Category";
+        if (!q) throw Error("Invalid Category");
         catId = q.id;
       }
     }
 
-    let temp: any[] = [];
-    let output: ImportParams[] = [];
+    const temp: any[] = [];
+    const output: ImportParams[] = [];
 
     if (teamI != undefined && rankI != undefined) {
       for (let j = headerRowNumber + 1; j <= rowCount; j++) {
@@ -183,11 +159,13 @@ async function test(
             ? worksheet.getCell(j, rankI).text
             : undefined;
         if (rank == undefined)
-          return "Invalid Rank Value: " + worksheet.getCell(j, rankI).value;
+          throw Error(
+            "Invalid Rank Value: " + worksheet.getCell(j, rankI).value
+          );
         const val = Number(rank);
         // adds rank to temp
         if (Number.isInteger(val)) temp[j - (headerRowNumber + 1)].rank = val;
-        else return "Rank should be an Integer";
+        else throw Error("Invalid Category");
       }
     }
 
@@ -266,8 +244,8 @@ async function test(
   // Put to db
   for (const row of outputsArr) {
     for (const cell of row) {
-      let partId,
-        teamId = undefined;
+      let partId = undefined;
+      const teamId = undefined;
 
       if (cell.participant != undefined) {
         const participant = await dbk
@@ -291,7 +269,7 @@ async function test(
             })
             .returning("id")
             .executeTakeFirst();
-          if (!p) return "Invalid Participant Details";
+          if (!p) throw new Error("Invalid Participant Details");
           partId = p.id;
         }
       }
@@ -309,7 +287,7 @@ async function test(
           qb.where("t.participantId", "=", partId!)
         )
         .executeTakeFirst();
-      if (exist) return "Entry Already Exist!";
+      if (exist) throw new Error("Entry Already Exist!");
 
       await dbk
         .insertInto("Tally")
@@ -336,21 +314,4 @@ async function test(
   }
 
   return success;
-}
-
-export type ImportParams = {
-  clusterId: number;
-  actId: number;
-  catId?: number;
-  team?: string;
-  teamNum?: number;
-  participant?: string;
-  alt?: string;
-  total?: number;
-  score?: number;
-  rank: number;
-};
-
-export default function importData() {
-  return null;
 }

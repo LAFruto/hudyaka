@@ -1,17 +1,15 @@
 import { cn, getLeaderboardLayout } from "~/lib/util";
-import { Result } from "~/types";
+import { Score } from "~/types";
 import Medal from "../icons/Medal";
-import TeamScoreCard from "../TeamScoreCard";
+import ScoreCard from "../ScoreCard";
 import ScoreMedal from "./ScoreMedal";
 
-interface LeaderboardProps {
-  result: Result;
+interface OverallProps {
+  scores: Score[];
 }
 
-const Leaderboard = ({ result }: LeaderboardProps) => {
-  const [podiumTeams, listTeams] = getLeaderboardLayout(
-    result.categories[0].scores
-  );
+const Overall = ({ scores }: OverallProps) => {
+  const [podiumTeams, listTeams] = getLeaderboardLayout(scores);
 
   return (
     <section className="max-container padding-container flex flex-col w-full lg:grid lg:grid-cols-3 pt-20 pb-40 lg:pb-64">
@@ -47,24 +45,24 @@ const Leaderboard = ({ result }: LeaderboardProps) => {
                     : team.rank === 3 && "mt-28"
                 )}
               >
-                <ScoreMedal team={team} />
+                <ScoreMedal score={team} />
               </div>
             </div>
           ))}
         </div>
       </div>
       <div className="flex flex-col gap-4 lg:hidden">
-        {[...podiumTeams, ...listTeams].map((team, index) => (
-          <TeamScoreCard key={index} team={team} type="team" />
+        {[...podiumTeams, ...listTeams].map((score, index) => (
+          <ScoreCard key={index} score={score} />
         ))}
       </div>
       <div className="hidden flex-col gap-4 lg:mt-28 lg:flex">
-        {listTeams.map((team, index) => (
-          <TeamScoreCard key={index} team={team} type="team" />
+        {listTeams.map((score, index) => (
+          <ScoreCard key={index} score={score} />
         ))}
       </div>
     </section>
   );
 };
 
-export default Leaderboard;
+export default Overall;
