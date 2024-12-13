@@ -24,7 +24,7 @@ export const loader = async ({ params }: LoaderFunctionArgs) => {
   };
 };
 
-const Event = () => {
+const Activity = () => {
   const { event, teams, participants } = useLoaderData<typeof loader>();
 
   return (

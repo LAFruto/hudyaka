@@ -14,35 +14,6 @@
     }
   }
 
-  ::selection {
-    background: rgba(var(--tw-clr-primary-300) / 0.3);
-  }
-
-  .cursor-newtab {
-    cursor: url('/images/new-tab.png') 10 10, pointer;
-  }
-
-  /* #region  /**=========== Default Typography =========== */
-  h1,
-  .h1 {
-    @apply md:text-7xl text-6xl text-center lg:text-start uppercase;
-  }
-
-  h2,
-  .h2 {
-    @apply font-primary text-xl font-bold md:text-3xl;
-  }
-
-  h3,
-  .h3 {
-    @apply font-primary text-lg font-bold md:text-2xl;
-  }
-
-  h4,
-  .h4 {
-    @apply font-primary text-base font-bold md:text-lg;
-  }
-
   body,
   .body {
     @apply font-primary text-sm md:text-base;
@@ -59,6 +30,8 @@
   }
 }
 
+
+/* animation */
 @keyframes progress {
   0% {
     width: 20%;
@@ -68,9 +41,6 @@
   }
 }
 
-.animate-progress {
-  animation: progress 5s linear;
-}
 
 @keyframes wipeUp {
   from {

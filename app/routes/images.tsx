@@ -1,7 +1,7 @@
-import sharp from "sharp";
-import path from "path";
-import fs from "fs/promises";
 import { LoaderFunction } from "@remix-run/node";
+import fs from "fs/promises";
+import path from "path";
+import sharp from "sharp";
 
 export const loader: LoaderFunction = async ({ request }) => {
   const url = new URL(request.url);
@@ -42,6 +42,6 @@ export const loader: LoaderFunction = async ({ request }) => {
   }
 };
 
-export const Image = () => {
+export default function Images() {
   return;
-};
+}
