@@ -1,6 +1,6 @@
 import { cn, getListColor, toCapitalCase } from "~/lib/util";
-import { Image } from "./Image";
 import { Score, ScoreType } from "~/types";
+import { Image } from "./Image";
 
 interface ScoreCardProps {
   score: Score;

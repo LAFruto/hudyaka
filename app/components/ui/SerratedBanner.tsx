@@ -1,8 +1,8 @@
 import { cn } from "~/lib/util";
-import { ScoreRank } from "~/types";
+import { Score } from "~/types";
 
 interface SerratedBannerProps {
-  team: ScoreRank;
+  team: Score;
 }
 
 const SerratedBanner = ({ team }: SerratedBannerProps) => {

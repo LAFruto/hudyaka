@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 
 export function useCurrentTime() {
   const [currentTime, setCurrentTime] = useState(new Date());
@@ -10,5 +10,6 @@ export function useCurrentTime() {
 
     return () => clearInterval(timer);
   }, []);
+
   return currentTime;
 }
