@@ -41,4 +41,4 @@ const Activity = () => {
   );
 };
 
-export default Event;
+export default Activity;
