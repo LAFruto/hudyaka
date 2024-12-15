@@ -122,6 +122,7 @@ export async function importExcel(params: {
       }
     }
 
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const temp: any[] = [];
     const output: ImportParams[] = [];
 
@@ -144,7 +145,7 @@ export async function importExcel(params: {
           .select("t.id")
           .executeTakeFirst();
         if (!id) {
-          return "Invalid Cluster Name: " + team;
+          return "Invalid Cluster Name: " + team  ;
         } else {
           // Add Id to temp
           temp[j - (headerRowNumber + 1)] = new Object();

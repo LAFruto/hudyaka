@@ -1,5 +1,5 @@
-import fs from "fs/promises";
 import { existsSync } from "fs";
+import fs from "fs/promises";
 
 // Credit to chrishoermann for the class template
 

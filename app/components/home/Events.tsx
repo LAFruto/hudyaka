@@ -1,4 +1,5 @@
 import { Link } from "@remix-run/react";
+import { useCurrentTime } from "~/hooks/useCurrentTime";
 import { cn, getEventStatus } from "~/lib/util";
 import { ActivityRecord } from "../../types";
 import { CountdownTimer } from "../CountdownTimer";
@@ -6,7 +7,6 @@ import HoverMedal from "../HoverMedal";
 import Arrow from "../icons/Arrow";
 import Festival from "../icons/Festival";
 import { Image } from "../Image";
-import { useCurrentTime } from "~/hooks/useCurrentTime";
 interface EventsProps {
   events: ActivityRecord[];
 }

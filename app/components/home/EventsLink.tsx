@@ -1,7 +1,7 @@
 import { Link } from "@remix-run/react";
+import { cn } from "~/lib/util";
 import Arrow from "../icons/Arrow";
 import Festival from "../icons/Festival";
-import { cn } from "~/lib/util";
 
 interface EventsLinkProps {
   className?: string;

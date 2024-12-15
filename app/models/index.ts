@@ -1,7 +1,7 @@
+import { sql } from "kysely";
 import { dbk } from "kysely/db";
 import { jsonArrayFrom, jsonObjectFrom } from "kysely/helpers/postgres";
 import { ActivityType, Category, Leaderboard } from "~/types";
-import { sql } from "kysely";
 
 // Overall only aggregates event of type "event" not "sports"
 export async function getOverall() {

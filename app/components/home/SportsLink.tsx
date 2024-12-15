@@ -1,7 +1,7 @@
 import { Link } from "@remix-run/react";
+import { cn } from "~/lib/util";
 import Arrow from "../icons/Arrow";
 import Ball from "../icons/Ball";
-import { cn } from "~/lib/util";
 
 interface SportsLinkProps {
   className?: string;

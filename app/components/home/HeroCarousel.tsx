@@ -4,13 +4,13 @@ import Autoplay from "embla-carousel-autoplay";
 import Fade from "embla-carousel-fade";
 import useEmblaCarousel from "embla-carousel-react";
 import { useCallback, useEffect } from "react";
+import { useCurrentTime } from "~/hooks/useCurrentTime";
 import { getEventStatus } from "~/lib/util";
 import { ActivityRecord } from "~/types";
+import { CountdownTimer } from "../CountdownTimer";
 import { Image } from "../Image";
 import Arrow from "../icons/Arrow";
 import { DotButton, useDotButton } from "../ui/EmblaCarouselDotButton";
-import { CountdownTimer } from "../CountdownTimer";
-import { useCurrentTime } from "~/hooks/useCurrentTime";
 
 const OPTIONS: EmblaOptionsType = { loop: true };
 const AUTOPLAY_DELAY = 5000;

@@ -1,7 +1,6 @@
-import { ActivityType } from "~/types";
-import Festival from "../icons/Festival";
-import Ball from "../icons/Ball";
 import { cn } from "~/lib/util";
+import Ball from "../icons/Ball";
+import Festival from "../icons/Festival";
 
 interface ActivityBadgeProps {
   type: string;

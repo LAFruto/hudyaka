@@ -11,9 +11,9 @@ import {
 import { Analytics } from "@vercel/analytics/remix";
 import { SpeedInsights } from "@vercel/speed-insights/remix";
 
+import { Image } from "./components/Image";
 import Pattern from "./components/ui/Pattern";
 import "./styles/tailwind.css";
-import { Image } from "./components/Image";
 
 export const links: LinksFunction = () => [
   { rel: "preconnect", href: "https://fonts.googleapis.com" },
@@ -53,6 +53,7 @@ export default function App() {
   return <Outlet />;
 }
 
+// 404
 export function ErrorBoundary() {
   const error = useRouteError();
 
@@ -69,7 +70,7 @@ export function ErrorBoundary() {
           />
         </div>
         <div className="text-center p-8 rounded-lg bg-red-800 shadow-md relative z-30">
-          <h1 className="text-4xl font-bold text-white mb-4">Error 404</h1>
+          <p className="text-4xl font-bold text-white mb-4">Error 404</p>
           <a href="/" className="text-white hover:underline">
             Go back to homepage
           </a>
@@ -78,7 +79,6 @@ export function ErrorBoundary() {
     );
   }
 
-  // Handle other types of errors
   return (
     <div className="flex flex-col items-center justify-center min-h-screen">
       <div className=" h-[250px]">
@@ -91,9 +91,9 @@ export function ErrorBoundary() {
         />
       </div>
       <div className="text-center p-8 rounded-lg bg-red-800 shadow-md relative z-30">
-        <h1 className="text-4xl font-bold text-white mb-4">
+        <p className="text-4xl font-bold text-white mb-4">
           Something went Wrong!
-        </h1>
+        </p>
         <a href="/" className="text-white hover:underline">
           Go back to homepage
         </a>
